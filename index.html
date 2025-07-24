@@ -8,27 +8,27 @@
   <style>
     body {
       margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #0060ff url('https://segimob.com.br/wp-content/uploads/2024/01/bg-segimob-v1.webp') no-repeat center center;
+      padding: 0;
+      font-family: "Arial", sans-serif;
+      background: #0066ff url('https://static.vecteezy.com/system/resources/previews/012/660/601/non_2x/abstract-blue-background-with-waves-free-vector.jpg') no-repeat center center fixed;
       background-size: cover;
-      padding: 60px 20px;
     }
 
     .form-container {
-      background: #fff;
-      max-width: 900px;
-      margin: auto;
-      padding: 50px 40px;
-      border-radius: 14px;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-      border: 1px solid #e0e0e0;
+      max-width: 800px;
+      background: #ffffff;
+      margin: 60px auto;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
     }
 
     h2 {
       text-align: center;
-      font-size: 24px;
-      margin-bottom: 8px;
       color: #000;
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 0;
     }
 
     h2 span {
@@ -36,55 +36,54 @@
       font-weight: bold;
     }
 
-    p.subheading {
+    .subheading {
       text-align: center;
       color: #0073ff;
-      margin-bottom: 32px;
       font-size: 14px;
+      margin-top: 4px;
+      margin-bottom: 32px;
     }
 
     form {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 20px 30px;
-    }
-
-    label {
-      font-weight: 600;
-      font-size: 14px;
-      margin-bottom: 6px;
-      display: block;
-    }
-
-    input, select {
-      width: 100%;
-      padding: 12px;
-      font-size: 14px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
+      gap: 20px;
     }
 
     .full-width {
       grid-column: 1 / -1;
     }
 
+    label {
+      display: block;
+      font-weight: 600;
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 12px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+
     .submit-button {
       grid-column: 1 / -1;
-      background-color: #0073ff;
+      background: #0073ff;
       color: white;
-      padding: 14px;
       border: none;
-      border-radius: 6px;
+      padding: 14px;
+      font-size: 16px;
       font-weight: bold;
-      font-size: 15px;
+      border-radius: 6px;
       cursor: pointer;
-      width: 180px;
-      margin: 0 auto;
-      display: block;
+      transition: background 0.2s;
     }
 
     .submit-button:hover {
-      background-color: #005fd1;
+      background: #005dd1;
     }
 
     .thank-you {
@@ -92,19 +91,18 @@
       text-align: center;
       color: green;
       font-weight: bold;
-      margin-top: 30px;
-      font-size: 16px;
+      margin-top: 24px;
     }
 
     .calendly-inline-widget {
-      width: 100%;
+      width: 100% !important;
       min-height: 630px;
     }
 
     #status {
       grid-column: 1 / -1;
       font-size: 13px;
-      margin-top: 10px;
+      margin-top: 8px;
     }
 
     #status.error {
@@ -116,8 +114,14 @@
         grid-template-columns: 1fr;
       }
 
+      .form-container {
+        margin: 30px 16px;
+        padding: 30px 20px;
+      }
+
       .submit-button {
-        width: 100%;
+        font-size: 14px;
+        padding: 12px;
       }
     }
   </style>
@@ -126,7 +130,188 @@
   <div class="form-container">
     <h2><span>sempre</span>juntos</h2>
     <p class="subheading">Fale com a gente</p>
-    <!-- Formulário e scripts mantidos exatamente como estavam -->
+
+    <form id="leadForm" action="https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST">
+      <input type="hidden" name="oid" value="00DHa000003AAMB" />
+
+      <div class="full-width">
+        <label for="cnpj">CNPJ:</label>
+        <input type="text" id="cnpj" name="cnpj" required />
+      </div>
+
+      <div>
+        <label>Razão Social:</label>
+        <input type="text" id="razao_social" name="company" required />
+      </div>
+      <div>
+        <label>Nome Fantasia:</label>
+        <input type="text" id="fantasia" name="fantasy" />
+      </div>
+
+      <div>
+        <label>Telefone:</label>
+        <input type="text" id="phone" name="phone" />
+      </div>
+      <div>
+        <label>E-mail:</label>
+        <input type="email" id="email" name="email" required />
+      </div>
+
+      <div class="full-width">
+        <label>Endereço:</label>
+        <input type="text" id="endereco" name="address" />
+      </div>
+
+      <div>
+        <label>Nome:</label>
+        <input type="text" name="first_name" required />
+      </div>
+      <div>
+        <label>Sobrenome:</label>
+        <input type="text" name="last_name" required />
+      </div>
+
+      <div class="full-width">
+        <label>Especialista no ramo imobiliário:</label>
+        <select name="especialista_imob">
+          <option>Sim</option>
+          <option>Não</option>
+        </select>
+      </div>
+
+      <div class="full-width">
+        <label>Produção – Incêndio:</label>
+        <select name="producao_incendio">
+          <option>1 a 5 milhões</option>
+          <option>5 a 10 milhões</option>
+          <option>10 a 20 milhões</option>
+          <option>20 a 50 milhões</option>
+          <option>50 a 100 milhões</option>
+          <option>Acima de 100 milhões</option>
+        </select>
+      </div>
+
+      <div class="full-width">
+        <label>Produção – Fiança:</label>
+        <select name="producao_fianca">
+          <option>1 a 5 milhões</option>
+          <option>5 a 10 milhões</option>
+          <option>10 a 20 milhões</option>
+          <option>20 a 50 milhões</option>
+          <option>50 a 100 milhões</option>
+          <option>Acima de 100 milhões</option>
+        </select>
+      </div>
+
+      <div class="full-width">
+        <label>Produção – Título de Capitalização:</label>
+        <select name="producao_titulo">
+          <option>1 a 5 milhões</option>
+          <option>5 a 10 milhões</option>
+          <option>10 a 20 milhões</option>
+          <option>20 a 50 milhões</option>
+          <option>50 a 100 milhões</option>
+          <option>Acima de 100 milhões</option>
+        </select>
+      </div>
+
+      <div class="full-width">
+        <label>Região (Sucursal):</label>
+        <select name="sucursal" required>
+          <option value="">Selecione uma região</option>
+          <option>São Paulo – SP</option>
+        </select>
+      </div>
+
+      <div class="full-width">
+        <label>Número da SUSEP:</label>
+        <input type="text" name="numero_susep" placeholder="Ex.: 123456789" />
+      </div>
+
+      <div class="full-width">
+        <label>Deseja agendar uma reunião agora?</label>
+        <select id="agendar" name="agendar" required>
+          <option value="">Selecione</option>
+          <option>Sim</option>
+          <option>Não</option>
+        </select>
+      </div>
+
+      <input type="submit" class="submit-button" value="ENVIAR" />
+      <div id="status"></div>
+
+      <div id="calendlyContainer" class="full-width" style="display: none;">
+        <div class="calendly-inline-widget" data-url="https://calendly.com/henrique-cscorp?locale=pt"></div>
+      </div>
+    </form>
+
+    <div id="thanksMessage" class="thank-you">Obrigado! Nossa equipe comercial entrará em contato com você em breve.</div>
   </div>
+
+  <script>
+    document.getElementById('agendar').addEventListener('change', e => {
+      document.getElementById('calendlyContainer').style.display = e.target.value === 'Sim' ? 'block' : 'none';
+    });
+
+    document.getElementById('leadForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      fetch(this.action, { method: 'POST', body: new FormData(this), mode: 'no-cors' });
+      this.style.display = 'none';
+      document.getElementById('calendlyContainer').style.display = 'none';
+      document.getElementById('thanksMessage').style.display = 'block';
+    });
+
+    function jsonp(url) {
+      return new Promise((resolve, reject) => {
+        const callbackName = 'jsonp_' + Math.random().toString(36).substr(2, 5);
+        window[callbackName] = data => {
+          delete window[callbackName];
+          document.body.removeChild(script);
+          resolve(data);
+        };
+        const script = document.createElement('script');
+        script.src = url + '?callback=' + callbackName;
+        script.onerror = () => reject('Erro de rede');
+        document.body.appendChild(script);
+      });
+    }
+
+    document.getElementById('cnpj').addEventListener('blur', async () => {
+      const raw = document.getElementById('cnpj').value.replace(/\D/g, '');
+      const status = document.getElementById('status');
+      status.textContent = ''; status.className = '';
+      if (raw.length !== 14) {
+        status.textContent = 'CNPJ inválido';
+        status.className = 'error';
+        return;
+      }
+      status.textContent = 'Consultando...';
+      try {
+        const data = await jsonp('https://www.receitaws.com.br/v1/cnpj/' + raw);
+        if (data.status === 'ERROR' || data.erro) {
+          status.textContent = data.message || 'CNPJ não encontrado';
+          status.className = 'error';
+          return;
+        }
+        document.getElementById('razao_social').value = data.nome || '';
+        document.getElementById('fantasia').value = data.fantasia || '';
+        document.getElementById('email').value = data.email || '';
+        document.getElementById('phone').value = data.telefone || '';
+        document.getElementById('endereco').value = [
+          data.logradouro,
+          data.numero,
+          data.complemento,
+          data.bairro,
+          data.municipio,
+          data.uf
+        ].filter(Boolean).join(', ');
+        status.textContent = 'Dados preenchidos com sucesso';
+      } catch (err) {
+        console.error(err);
+        status.textContent = 'Erro ao consultar';
+        status.className = 'error';
+      }
+    });
+  </script>
 </body>
 </html>
