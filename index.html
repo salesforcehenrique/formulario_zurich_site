@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <title>Formulário de Cadastro</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
   <style>
     body {
       margin: 0;
@@ -100,7 +99,8 @@
       color: red;
     }
 
-    .calendly-inline-widget {
+    .calendly-inline-widget,
+    .google-calendar-frame {
       width: 100% !important;
       height: 1000px !important;
       min-height: 700px;
@@ -157,7 +157,7 @@
       <div id="status"></div>
 
       <div id="calendlyContainer" class="form-group full" style="display:none;">
-        <div class="calendly-inline-widget" data-url="https://calendly.com/henrique-cscorp?locale=pt"></div>
+        <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ0rW-27jpjR58SLdtmXIkAskIH-0s0ln9XkST6o4SL-11ygRsoDP54DZJEldP4HJJ10ySH2jAnr?gv=true" class="google-calendar-frame"></iframe>
       </div>
     </form>
 
