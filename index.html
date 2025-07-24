@@ -1,4 +1,4 @@
-'<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8" />
@@ -6,75 +6,152 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 
-   <style>
+  <style>
     body {
-      background: linear-gradient(to bottom, #ffffff 30%, #0073ff 30%);
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', sans-serif;
+      background: #0073ff;
       margin: 0;
-      padding: 40px;
+      padding: 60px 15px;
     }
+
     .form-container {
-      background-color: white;
-      border-radius: 10px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-      max-width: 800px;
+      background: #ffffff;
+      max-width: 640px;
       margin: 0 auto;
-      padding: 40px;
+      padding: 40px 32px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
     }
-    h2 { color: #1a1a1a; text-align: center; }
-    h2 span { color: #0073ff; }
-    p.subheading {
+
+    h2 {
       text-align: center;
-      color: #0073ff;
-      font-weight: 500;
+      color: #1a1a1a;
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 4px;
     }
+
+    h2::before {
+      content: "sempre";
+      color: #0073ff;
+      font-weight: 700;
+      display: inline;
+    }
+
+    h2::after {
+      content: "juntos";
+      font-weight: 400;
+      color: #1a1a1a;
+      margin-left: 2px;
+    }
+
+    .subheading {
+      text-align: center;
+      font-size: 14px;
+      font-weight: 500;
+      color: #0073ff;
+      text-decoration: underline;
+      margin-bottom: 28px;
+      cursor: pointer;
+    }
+
     form {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px 20px;
     }
+
     label {
-      font-weight: bold;
+      font-size: 14px;
       margin-bottom: 5px;
       display: block;
+      color: #000;
     }
-    input, select {
+
+    input,
+    select {
       width: 100%;
-      padding: 10px;
+      height: 44px;
+      padding: 0 12px;
+      border-radius: 8px;
       border: 1px solid #ccc;
-      border-radius: 6px;
-      box-sizing: border-box;
+      font-size: 14px;
+      background-color: #fff;
     }
+
+    input::placeholder {
+      color: #999;
+      font-size: 13px;
+    }
+
     .full-width {
       grid-column: 1 / -1;
     }
+
     .submit-button {
+      grid-column: 1 / -1;
       background-color: #0073ff;
       color: white;
-      font-weight: bold;
       border: none;
-      padding: 15px;
-      border-radius: 6px;
+      height: 48px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 15px;
       cursor: pointer;
-      grid-column: 2;
+      transition: background-color 0.2s ease;
+      display: block;
+      margin: 8px auto 0;
+      width: 100%;
+      max-width: 180px;
     }
+
     .submit-button:hover {
       background-color: #005fd1;
     }
+
     .thank-you {
-      text-align: center;
-      margin-top: 30px;
-      color: green;
-      font-size: 18px;
       display: none;
+      text-align: center;
+      color: green;
+      font-weight: bold;
+      margin-top: 24px;
+      font-size: 16px;
+    }
+
+    .calendly-inline-widget {
+      width: 100%;
+      min-height: 630px;
+      height: calc(100vh - 300px);
+      overflow: hidden;
+    }
+
+    #status {
+      grid-column: 1 / -1;
+      font-size: 13px;
+      margin-top: 10px;
+      color: green;
+    }
+
+    #status.error {
+      color: red;
+    }
+
+    @media (max-width: 768px) {
+      form {
+        grid-template-columns: 1fr;
+      }
+
+      .form-container {
+        padding: 32px 20px;
+      }
     }
   </style>
-
 </head>
 <body>
   <div class="form-container">
-    <h2>Formulário de Cadastro</h2>
-    <p class="subheading">Vamos crescer juntos?</p>
+    <h2></h2>
+    <p class="subheading">Fale com a gente</p>
+
     <form id="leadForm" action="https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST">
       <input type="hidden" name="oid" value="00DHa000003AAMB" />
 
@@ -82,7 +159,7 @@
       <div><label>Razão Social:</label><input type="text" id="razao_social" name="company" required /></div>
       <div><label>Nome Fantasia:</label><input type="text" id="fantasia" name="fantasy" /></div>
       <div><label>Telefone:</label><input type="text" id="phone" name="phone" /></div>
-      <div><label>E‑mail:</label><input type="email" id="email" name="email" required /></div>
+      <div><label>E-mail:</label><input type="email" id="email" name="email" required /></div>
       <div class="full-width"><label>Endereço:</label><input type="text" id="endereco" name="address" /></div>
       <div><label>Nome:</label><input type="text" name="first_name" required /></div>
       <div><label>Sobrenome:</label><input type="text" name="last_name" required /></div>
@@ -103,7 +180,7 @@
       <div class="full-width"><label>Região (Sucursal):</label>
         <select name="sucursal" required><option value="">Selecione uma região</option><option>São Paulo – SP</option></select>
       </div>
-      <div class="full-width"><label>Número da SUSEP:</label><input type="text" name="numero_susep" /></div>
+      <div class="full-width"><label>Número da SUSEP:</label><input type="text" name="numero_susep" placeholder="Ex: 123456789" /></div>
 
       <div class="full-width"><label>Deseja agendar uma reunião agora?</label>
         <select id="agendar" name="agendar" required><option value="">Selecione</option><option>Sim</option><option>Não</option></select>
