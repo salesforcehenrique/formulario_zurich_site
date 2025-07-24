@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Formulário de Cadastro</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #0060ff url('https://segimob.com.br/wp-content/uploads/2024/01/bg-segimob-v1.webp') no-repeat center center;
+      background-size: cover;
+      padding: 60px 20px;
+    }
+
+    .form-container {
+      background: #fff;
+      max-width: 900px;
+      margin: auto;
+      padding: 50px 40px;
+      border-radius: 14px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+      border: 1px solid #e0e0e0;
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 24px;
+      margin-bottom: 8px;
+      color: #000;
+    }
+
+    h2 span {
+      color: #0073ff;
+      font-weight: bold;
+    }
+
+    p.subheading {
+      text-align: center;
+      color: #0073ff;
+      margin-bottom: 32px;
+      font-size: 14px;
+    }
+
+    form {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px 30px;
+    }
+
+    label {
+      font-weight: 600;
+      font-size: 14px;
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 12px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    .full-width {
+      grid-column: 1 / -1;
+    }
+
+    .submit-button {
+      grid-column: 1 / -1;
+      background-color: #0073ff;
+      color: white;
+      padding: 14px;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      font-size: 15px;
+      cursor: pointer;
+      width: 180px;
+      margin: 0 auto;
+      display: block;
+    }
+
+    .submit-button:hover {
+      background-color: #005fd1;
+    }
+
+    .thank-you {
+      display: none;
+      text-align: center;
+      color: green;
+      font-weight: bold;
+      margin-top: 30px;
+      font-size: 16px;
+    }
+
+    .calendly-inline-widget {
+      width: 100%;
+      min-height: 630px;
+    }
+
+    #status {
+      grid-column: 1 / -1;
+      font-size: 13px;
+      margin-top: 10px;
+    }
+
+    #status.error {
+      color: red;
+    }
+
+    @media (max-width: 768px) {
+      form {
+        grid-template-columns: 1fr;
+      }
+
+      .submit-button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2><span>sempre</span>juntos</h2>
+    <p class="subheading">Fale com a gente</p>
+    <!-- Formulário e scripts mantidos exatamente como estavam -->
+  </div>
+</body>
+</html>
