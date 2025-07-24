@@ -8,57 +8,44 @@
   <style>
     body {
       margin: 0;
-      padding: 0;
-      font-family: "Arial", sans-serif;
+      font-family: Arial, sans-serif;
       background: #0066ff url('https://static.vecteezy.com/system/resources/previews/012/660/601/non_2x/abstract-blue-background-with-waves-free-vector.jpg') no-repeat center center fixed;
       background-size: cover;
     }
 
     .form-container {
-      max-width: 800px;
-      background: #ffffff;
+      max-width: 900px;
       margin: 60px auto;
-      padding: 40px;
+      background: white;
       border-radius: 12px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+      padding: 40px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
     }
 
     h2 {
       text-align: center;
+      font-size: 26px;
       color: #000;
-      font-size: 24px;
-      font-weight: bold;
-      margin-bottom: 0;
-    }
-
-    h2 span {
-      color: #0073ff;
-      font-weight: bold;
     }
 
     .subheading {
       text-align: center;
+      font-size: 15px;
       color: #0073ff;
-      font-size: 14px;
-      margin-top: 4px;
-      margin-bottom: 32px;
+      margin-bottom: 30px;
     }
 
     form {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      display: flex;
+      flex-wrap: wrap;
       gap: 20px;
-    }
-
-    .full-width {
-      grid-column: 1 / -1;
     }
 
     label {
       display: block;
       font-weight: 600;
       font-size: 14px;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
     }
 
     input, select {
@@ -69,21 +56,39 @@
       font-size: 14px;
     }
 
+    .form-group {
+      flex: 1 1 45%;
+      min-width: 200px;
+    }
+
+    .form-group.full {
+      flex: 1 1 100%;
+    }
+
     .submit-button {
-      grid-column: 1 / -1;
       background: #0073ff;
       color: white;
       border: none;
-      padding: 14px;
+      padding: 14px 28px;
       font-size: 16px;
-      font-weight: bold;
       border-radius: 6px;
       cursor: pointer;
-      transition: background 0.2s;
+      margin: 0 auto;
+      display: block;
     }
 
     .submit-button:hover {
       background: #005dd1;
+    }
+
+    #status {
+      margin-top: 12px;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    #status.error {
+      color: red;
     }
 
     .thank-you {
@@ -92,158 +97,53 @@
       color: green;
       font-weight: bold;
       margin-top: 24px;
+      font-size: 16px;
     }
 
     .calendly-inline-widget {
-      width: 100% !important;
-      min-height: 630px;
-    }
-
-    #status {
-      grid-column: 1 / -1;
-      font-size: 13px;
-      margin-top: 8px;
-    }
-
-    #status.error {
-      color: red;
+      width: 100%;
+      height: 800px;
+      border: none;
     }
 
     @media (max-width: 768px) {
-      form {
-        grid-template-columns: 1fr;
-      }
-
-      .form-container {
-        margin: 30px 16px;
-        padding: 30px 20px;
-      }
-
-      .submit-button {
-        font-size: 14px;
-        padding: 12px;
+      .form-group {
+        flex: 1 1 100%;
       }
     }
   </style>
 </head>
 <body>
   <div class="form-container">
-    <h2><span>sempre</span>juntos</h2>
+    <h2><span style="color:#0073ff;">sempre</span>juntos</h2>
     <p class="subheading">Fale com a gente</p>
 
     <form id="leadForm" action="https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST">
       <input type="hidden" name="oid" value="00DHa000003AAMB" />
 
-      <div class="full-width">
-        <label for="cnpj">CNPJ:</label>
-        <input type="text" id="cnpj" name="cnpj" required />
-      </div>
+      <div class="form-group"><label>CNPJ:</label><input type="text" id="cnpj" name="cnpj" required></div>
+      <div class="form-group"><label>Razão Social:</label><input type="text" id="razao_social" name="company" required></div>
+      <div class="form-group"><label>Nome Fantasia:</label><input type="text" id="fantasia" name="fantasy"></div>
+      <div class="form-group"><label>Telefone:</label><input type="text" id="phone" name="phone"></div>
+      <div class="form-group"><label>E-mail:</label><input type="email" id="email" name="email" required></div>
+      <div class="form-group full"><label>Endereço:</label><input type="text" id="endereco" name="address"></div>
+      <div class="form-group"><label>Nome:</label><input type="text" name="first_name" required></div>
+      <div class="form-group"><label>Sobrenome:</label><input type="text" name="last_name" required></div>
+      <div class="form-group full"><label>Especialista no ramo imobiliário:</label><select name="especialista_imob"><option>Sim</option><option>Não</option></select></div>
+      <div class="form-group full"><label>Produção – Incêndio:</label><select name="producao_incendio"><option>1 a 5 milhões</option></select></div>
+      <div class="form-group full"><label>Produção – Fiança:</label><select name="producao_fianca"><option>1 a 5 milhões</option></select></div>
+      <div class="form-group full"><label>Produção – Título de Capitalização:</label><select name="producao_titulo"><option>1 a 5 milhões</option></select></div>
+      <div class="form-group full"><label>Região (Sucursal):</label><select name="sucursal"><option value="">Selecione uma região</option><option>São Paulo – SP</option></select></div>
+      <div class="form-group full"><label>Número da SUSEP:</label><input type="text" name="numero_susep" placeholder="Ex.: 123456789"></div>
+      <div class="form-group full"><label>Deseja agendar uma reunião agora?</label><select id="agendar" name="agendar" required><option value="">Selecione</option><option>Sim</option><option>Não</option></select></div>
 
-      <div>
-        <label>Razão Social:</label>
-        <input type="text" id="razao_social" name="company" required />
-      </div>
-      <div>
-        <label>Nome Fantasia:</label>
-        <input type="text" id="fantasia" name="fantasy" />
-      </div>
-
-      <div>
-        <label>Telefone:</label>
-        <input type="text" id="phone" name="phone" />
-      </div>
-      <div>
-        <label>E-mail:</label>
-        <input type="email" id="email" name="email" required />
-      </div>
-
-      <div class="full-width">
-        <label>Endereço:</label>
-        <input type="text" id="endereco" name="address" />
-      </div>
-
-      <div>
-        <label>Nome:</label>
-        <input type="text" name="first_name" required />
-      </div>
-      <div>
-        <label>Sobrenome:</label>
-        <input type="text" name="last_name" required />
-      </div>
-
-      <div class="full-width">
-        <label>Especialista no ramo imobiliário:</label>
-        <select name="especialista_imob">
-          <option>Sim</option>
-          <option>Não</option>
-        </select>
-      </div>
-
-      <div class="full-width">
-        <label>Produção – Incêndio:</label>
-        <select name="producao_incendio">
-          <option>1 a 5 milhões</option>
-          <option>5 a 10 milhões</option>
-          <option>10 a 20 milhões</option>
-          <option>20 a 50 milhões</option>
-          <option>50 a 100 milhões</option>
-          <option>Acima de 100 milhões</option>
-        </select>
-      </div>
-
-      <div class="full-width">
-        <label>Produção – Fiança:</label>
-        <select name="producao_fianca">
-          <option>1 a 5 milhões</option>
-          <option>5 a 10 milhões</option>
-          <option>10 a 20 milhões</option>
-          <option>20 a 50 milhões</option>
-          <option>50 a 100 milhões</option>
-          <option>Acima de 100 milhões</option>
-        </select>
-      </div>
-
-      <div class="full-width">
-        <label>Produção – Título de Capitalização:</label>
-        <select name="producao_titulo">
-          <option>1 a 5 milhões</option>
-          <option>5 a 10 milhões</option>
-          <option>10 a 20 milhões</option>
-          <option>20 a 50 milhões</option>
-          <option>50 a 100 milhões</option>
-          <option>Acima de 100 milhões</option>
-        </select>
-      </div>
-
-      <div class="full-width">
-        <label>Região (Sucursal):</label>
-        <select name="sucursal" required>
-          <option value="">Selecione uma região</option>
-          <option>São Paulo – SP</option>
-        </select>
-      </div>
-
-      <div class="full-width">
-        <label>Número da SUSEP:</label>
-        <input type="text" name="numero_susep" placeholder="Ex.: 123456789" />
-      </div>
-
-      <div class="full-width">
-        <label>Deseja agendar uma reunião agora?</label>
-        <select id="agendar" name="agendar" required>
-          <option value="">Selecione</option>
-          <option>Sim</option>
-          <option>Não</option>
-        </select>
-      </div>
-
-      <input type="submit" class="submit-button" value="ENVIAR" />
+      <button type="submit" class="submit-button">ENVIAR</button>
       <div id="status"></div>
-
-      <div id="calendlyContainer" class="full-width" style="display: none;">
-        <div class="calendly-inline-widget" data-url="https://calendly.com/henrique-cscorp?locale=pt"></div>
-      </div>
     </form>
+
+    <div id="calendlyContainer" style="display:none;margin-top:30px;">
+      <div class="calendly-inline-widget" data-url="https://calendly.com/henrique-cscorp?locale=pt"></div>
+    </div>
 
     <div id="thanksMessage" class="thank-you">Obrigado! Nossa equipe comercial entrará em contato com você em breve.</div>
   </div>
@@ -253,12 +153,12 @@
       document.getElementById('calendlyContainer').style.display = e.target.value === 'Sim' ? 'block' : 'none';
     });
 
-    document.getElementById('leadForm').addEventListener('submit', function (e) {
+    document.getElementById('leadForm').addEventListener('submit', function(e){
       e.preventDefault();
-      fetch(this.action, { method: 'POST', body: new FormData(this), mode: 'no-cors' });
-      this.style.display = 'none';
-      document.getElementById('calendlyContainer').style.display = 'none';
-      document.getElementById('thanksMessage').style.display = 'block';
+      fetch(this.action, { method:'POST', body: new FormData(this), mode:'no-cors' });
+      this.style.display='none';
+      document.getElementById('calendlyContainer').style.display='none';
+      document.getElementById('thanksMessage').style.display='block';
     });
 
     function jsonp(url) {
@@ -277,7 +177,7 @@
     }
 
     document.getElementById('cnpj').addEventListener('blur', async () => {
-      const raw = document.getElementById('cnpj').value.replace(/\D/g, '');
+      const raw = document.getElementById('cnpj').value.replace(/\D/g,'');
       const status = document.getElementById('status');
       status.textContent = ''; status.className = '';
       if (raw.length !== 14) {
@@ -297,16 +197,9 @@
         document.getElementById('fantasia').value = data.fantasia || '';
         document.getElementById('email').value = data.email || '';
         document.getElementById('phone').value = data.telefone || '';
-        document.getElementById('endereco').value = [
-          data.logradouro,
-          data.numero,
-          data.complemento,
-          data.bairro,
-          data.municipio,
-          data.uf
-        ].filter(Boolean).join(', ');
+        document.getElementById('endereco').value = [data.logradouro, data.numero, data.complemento, data.bairro, data.municipio, data.uf].filter(Boolean).join(', ');
         status.textContent = 'Dados preenchidos com sucesso';
-      } catch (err) {
+      } catch(err) {
         console.error(err);
         status.textContent = 'Erro ao consultar';
         status.className = 'error';
