@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Formulário Zurich</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, #ffffff 30%, #0073ff 30%);
+    }
+    .form-container {
+      background: white;
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+    h2 {
+      text-align: center;
+      color: #1a1a1a;
+    }
+    h2 span {
+      color: #0073ff;
+    }
+    p.subheading {
+      text-align: center;
+      color: #0073ff;
+      font-weight: 500;
+    }
+    form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 5px;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+    .full-width {
+      grid-column: 1 / -1;
+    }
+    .submit-button {
+      background-color: #0073ff;
+      color: white;
+      border: none;
+      padding: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 6px;
+      grid-column: 1 / -1;
+    }
+    .submit-button:hover {
+      background-color: #005fd1;
+    }
+    .thank-you {
+      text-align: center;
+      margin-top: 30px;
+      color: green;
+      font-size: 18px;
+      display: none;
+    }
+    @media (max-width: 768px) {
+      form {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2><span>sempre</span>juntos<br>Vamos crescer juntos?</h2>
+    <p class="subheading">Fale com a gente</p>
+
+    <form id="leadForm" action="https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST">
+      <input type="hidden" name="oid" value="00DHa000003AAMB">
+      <div class="full-width"><label>CNPJ:</label><input type="text" name="cnpj" required></div>
+      <div><label>Razão Social:</label><input type="text" name="company" required></div>
+      <div><label>Nome Fantasia:</label><input type="text" name="fantasy"></div>
+      <div><label>Telefone:</label><input type="text" name="phone"></div>
+      <div><label>E-mail:</label><input type="email" name="email" required></div>
+      <div class="full-width"><label>Endereço:</label><input type="text" name="address"></div>
+      <div><label>Nome:</label><input type="text" name="first_name" required></div>
+      <div><label>Sobrenome:</label><input type="text" name="last_name" required></div>
+      <div class="full-width"><label>Região (Sucursal):</label>
+        <select name="sucursal" required>
+          <option value="">Selecione uma região</option>
+          <option value="São Paulo - SP">São Paulo - SP</option>
+        </select>
+      </div>
+      <div class="full-width"><label>Deseja agendar uma reunião agora?</label>
+        <select name="agendar" required>
+          <option value="">Selecione</option>
+          <option value="Sim">Sim</option>
+          <option value="Não">Não</option>
+        </select>
+      </div>
+      <input type="submit" class="submit-button" value="ENVIAR">
+    </form>
+
+    <div id="thanksMessage" class="thank-you">Obrigado! Nossa equipe comercial entrará em contato com você em breve.</div>
+  </div>
+
+  <script>
+    document.getElementById("leadForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      fetch(this.action, { method: "POST", body: formData, mode: "no-cors" });
+      this.style.display = "none";
+      document.getElementById("thanksMessage").style.display = "block";
+    });
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const cnpjField = document.querySelector('input[name="cnpj"]');
+      const nomeField = document.querySelector('input[name="company"]');
+      const fantasiaField = document.querySelector('input[name="fantasy"]');
+      const emailField = document.querySelector('input[name="email"]');
+      const telefoneField = document.querySelector('input[name="phone"]');
+      const enderecoField = document.querySelector('input[name="address"]');
+
+      cnpjField.addEventListener("blur", async () => {
+        const raw = cnpjField.value.replace(/\D/g, "");
+        if (raw.length !== 14) {
+          alert("CNPJ inválido. Verifique.");
+          return;
+        }
+        try {
+          const res = await fetch(`https://formulario-zurich-node.onrender.com/cnpj/${raw}`, { mode: "cors" });
+          if (!res.ok) throw new Error("Erro na resposta da API");
+          const data = await res.json();
+          if (data.status === "ERROR") {
+            alert(data.message || "Erro ao consultar o CNPJ");
+            return;
+          }
+          nomeField.value = data.nome || "";
+          fantasiaField.value = data.fantasia || "";
+          emailField.value = data.email || "";
+          telefoneField.value = data.telefone || "";
+          enderecoField.value = [data.logradouro, data.numero, data.complemento, data.bairro, data.municipio, data.uf].filter(Boolean).join(", ");
+        } catch (err) {
+          console.error(err);
+          alert("Erro ao consultar o CNPJ. Tente novamente mais tarde.");
+        }
+      });
+    });
+  </script>
+</body>
+</html>
