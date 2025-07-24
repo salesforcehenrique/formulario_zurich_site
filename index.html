@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Formulário Zurich</title>
+  <style>
+    body { font-family: Arial; padding: 40px; background: #f0f4f8; }
+    .form-container { max-width: 800px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+    input, select { width: 100%; padding: 10px; margin: 8px 0; border-radius: 5px; border: 1px solid #ccc; }
+    label { font-weight: bold; }
+    .submit-button { background: #0073ff; color: white; border: none; padding: 15px; cursor: pointer; width: 100%; border-radius: 5px; font-weight: bold; }
+    .submit-button:hover { background: #005fd1; }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Formulário de Cadastro</h2>
+    <form id="leadForm" action="https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST">
+      <input type="hidden" name="oid" value="00DHa000003AAMB">
+      <label>CNPJ:</label>
+      <input type="text" name="cnpj" required>
+      <label>Razão Social:</label>
+      <input type="text" name="company" required>
+      <label>Nome Fantasia:</label>
+      <input type="text" name="fantasy">
+      <label>Telefone:</label>
+      <input type="text" name="phone">
+      <label>E-mail:</label>
+      <input type="email" name="email" required>
+      <label>Endereço:</label>
+      <input type="text" name="address">
+      <label>Nome:</label>
+      <input type="text" name="first_name" required>
+      <label>Sobrenome:</label>
+      <input type="text" name="last_name" required>
+      <label>Sucursal:</label>
+      <select name="sucursal" required><option value="">Selecione</option><option value="São Paulo - SP">São Paulo - SP</option></select>
+      <label>Deseja agendar uma reunião agora?</label>
+      <select name="agendar" id="agendar" required><option value="">Selecione</option><option value="Sim">Sim</option><option value="Não">Não</option></select>
+      <input type="submit" class="submit-button" value="ENVIAR">
+    </form>
+    <div id="thanksMessage" style="display:none; margin-top:20px; color:green;">Obrigado! Nossa equipe comercial entrará em contato com você em breve.</div>
+  </div>
+
+  <script>
+    document.getElementById("leadForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      fetch(this.action, { method: "POST", body: formData, mode: "no-cors" });
+      this.style.display = "none";
+      document.getElementById("thanksMessage").style.display = "block";
+    });
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const cnpjField = document.querySelector('input[name="cnpj"]');
+      const nomeField = document.querySelector('input[name="company"]');
+      const fantasiaField = document.querySelector('input[name="fantasy"]');
+      const emailField = document.querySelector('input[name="email"]');
+      const telefoneField = document.querySelector('input[name="phone"]');
+      const enderecoField = document.querySelector('input[name="address"]');
+
+      cnpjField.addEventListener("blur", async () => {
+        const raw = cnpjField.value.replace(/\D/g, "");
+        if (raw.length !== 14) {
+          alert("CNPJ inválido. Verifique.");
+          return;
+        }
+        try {
+          const res = await fetch(`https://formulario-zurich-node.onrender.com/cnpj/${raw}`, { mode: "cors" });
+          if (!res.ok) throw new Error("Erro na resposta da API");
+          const data = await res.json();
+          if (data.status === "ERROR") {
+            alert(data.message || "Erro ao consultar o CNPJ");
+            return;
+          }
+          nomeField.value = data.nome || "";
+          fantasiaField.value = data.fantasia || "";
+          emailField.value = data.email || "";
+          telefoneField.value = data.telefone || "";
+          enderecoField.value = [data.logradouro, data.numero, data.complemento, data.bairro, data.municipio, data.uf].filter(Boolean).join(", ");
+        } catch (err) {
+          console.error(err);
+          alert("Erro ao consultar o CNPJ. Tente novamente mais tarde.");
+        }
+      });
+    });
+  </script>
+</body>
+</html>
