@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8">
-
   <meta charset="UTF-8" />
   <title>Formulário de Cadastro</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -123,13 +121,15 @@
   <div class="form-container">
     <h2><span style="color:#0073ff;font-weight:bold;">sempre</span>juntos</h2>
     <p class="subheading">Fale com a gente</p>
+
     <form id="leadForm" action="https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST">
       <input type="hidden" name="oid" value="00DHa000003AAMB" />
       <input type="hidden" name="retURL" value="https://salesforcehenrique.github.io/formulario_zurich_site/" />
       <input type="hidden" name="debug" value="1" />
-      <input type="hidden" name="debugEmail" value="seu-email@dominio.com" />
+      <input type="hidden" name="debugEmail" value="henrique@cscorp.tec.br" />
       <input type="hidden" name="ValidationNeeded__c" value="false" />
       <input type="hidden" name="LeadSource" value="Website" />
+      <input type="hidden" id="company" name="company" value="" />
 
       <div class="form-group full"><label>CNPJ:</label><input type="text" id="cnpj" name="CNPJ_SegImob__c" required /></div>
       <div class="form-group"><label>Razão Social:</label><input type="text" id="razao_social" name="Razao_Social__c" required /></div>
@@ -173,5 +173,41 @@
 
     <div id="thanksMessage" class="thank-you">Obrigado! Nossa equipe comercial entrará em contato com você em breve.</div>
   </div>
+
+  <script>
+    async function buscarCNPJ(cnpj) {
+      const sanitized = cnpj.replace(/\D/g, '');
+      if (sanitized.length !== 14) return;
+
+      try {
+        const response = await fetch(`https://www.receitaws.com.br/v1/cnpj/${sanitized}`);
+        const data = await response.json();
+        if (data.status === 'ERROR') throw new Error(data.message);
+
+        document.getElementById('razao_social').value = data.nome || '';
+        document.getElementById('fantasia').value = data.fantasia || '';
+        document.getElementById('endereco').value = `${data.logradouro || ''}, ${data.numero || ''} - ${data.bairro || ''}, ${data.municipio || ''} - ${data.uf || ''}, ${data.cep || ''}`;
+        document.getElementById('company').value = data.nome || '';
+      } catch (error) {
+        console.warn('Erro ao buscar CNPJ:', error.message);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('cnpj').addEventListener('blur', function () {
+        buscarCNPJ(this.value);
+      });
+
+      document.getElementById("agendar").addEventListener("change", function () {
+        document.getElementById("calendlyContainer").style.display = this.value === "true" ? "block" : "none";
+      });
+
+      document.getElementById("leadForm").addEventListener("submit", function () {
+        const statusEl = document.getElementById("status");
+        statusEl.innerText = "Enviando...";
+        statusEl.classList.remove("error");
+      });
+    });
+  </script>
 </body>
 </html>
