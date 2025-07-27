@@ -99,7 +99,6 @@
       color: red;
     }
 
-    .calendly-inline-widget,
     .google-calendar-frame {
       width: 100% !important;
       height: 1000px !important;
@@ -124,9 +123,10 @@
     <p class="subheading">Fale com a gente</p>
     <form id="leadForm" action="https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST">
       <input type="hidden" name="oid" value="00DHa000003AAMB" />
+      <input type="hidden" name="retURL" value="https://salesforcehenrique.github.io/formulario_zurich_site/" />
 
-      <div class="form-group full"><label>CNPJ:</label><input type="text" id="cnpj" name="cnpj" required /></div>
-      <div class="form-group"><label>Razão Social:</label><input type="text" id="razao_social" name="company" required /></div>
+      <div class="form-group full"><label for="00N6A00000NUFGn">CNPJ:</label><input type="text" id="cnpj" name="00N6A00000NUFGn" required /></div>
+      <div class="form-group"><label for="00N6A00000NUFGx">Razão Social:</label><input type="text" id="razao_social" name="00N6A00000NUFGx" required /></div>
       <div class="form-group"><label>Nome Fantasia:</label><input type="text" id="fantasia" name="fantasy" /></div>
       <div class="form-group"><label>Telefone:</label><input type="text" id="phone" name="phone" /></div>
       <div class="form-group"><label>E-mail:</label><input type="email" id="email" name="email" required /></div>
