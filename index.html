@@ -12,6 +12,7 @@
       background-size: cover;
       padding: 50px 20px;
     }
+
     .form-container {
       max-width: 900px;
       margin: auto;
@@ -20,27 +21,99 @@
       padding: 40px;
       box-shadow: 0 8px 20px rgba(0,0,0,0.2);
     }
-    h2 { text-align: center; font-size: 26px; color: #000; margin-bottom: 6px; }
-    .subheading { text-align: center; font-size: 15px; color: #0073ff; margin-bottom: 30px; }
-    form { display: flex; flex-wrap: wrap; gap: 20px; }
-    .form-group { flex: 1 1 45%; display: flex; flex-direction: column; }
-    .form-group.full { flex: 1 1 100%; }
-    label { font-weight: 600; font-size: 14px; margin-bottom: 5px; }
-    input, select { padding: 12px; border-radius: 6px; border: 1px solid #ccc; font-size: 14px; }
+
+    h2 {
+      text-align: center;
+      font-size: 26px;
+      color: #000;
+      margin-bottom: 6px;
+    }
+
+    .subheading {
+      text-align: center;
+      font-size: 15px;
+      color: #0073ff;
+      margin-bottom: 30px;
+    }
+
+    form {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .form-group {
+      flex: 1 1 45%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group.full {
+      flex: 1 1 100%;
+    }
+
+    label {
+      font-weight: 600;
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+
+    input, select {
+      padding: 12px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+
     .submit-button {
-      background: #0073ff; color: white; padding: 14px; font-size: 16px; font-weight: bold;
-      border: none; border-radius: 6px; cursor: pointer; width: 200px; margin: 20px auto 0;
+      background: #0073ff;
+      color: white;
+      padding: 14px;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      width: 200px;
+      margin: 20px auto 0;
     }
-    .submit-button:hover { background: #005dd1; }
-    .thank-you { display: none; text-align: center; color: green; margin-top: 20px; }
-    #status { font-size: 14px; text-align: center; margin-top: 10px; }
-    #status.error { color: red; }
+
+    .submit-button:hover {
+      background: #005dd1;
+    }
+
+    .thank-you {
+      display: none;
+      text-align: center;
+      color: green;
+      margin-top: 20px;
+    }
+
+    #status {
+      font-size: 14px;
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    #status.error {
+      color: red;
+    }
+
     .google-calendar-frame {
-      width: 100% !important; height: 1000px !important; min-height: 700px; border: none;
+      width: 100% !important;
+      height: 1000px !important;
+      min-height: 700px;
+      border: none;
     }
+
     @media (max-width: 768px) {
-      .form-group { flex: 1 1 100%; }
-      .submit-button { width: 100%; }
+      .form-group {
+        flex: 1 1 100%;
+      }
+
+      .submit-button {
+        width: 100%;
+      }
     }
   </style>
 </head>
@@ -50,15 +123,16 @@
     <p class="subheading">Fale com a gente</p>
 
     <form id="leadForm" action="https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST">
-      <!-- Hidden inputs originais -->
+      <!-- Campos ocultos necessários -->
       <input type="hidden" name="oid" value="00DHa000003AAMB" />
       <input type="hidden" name="retURL" value="https://salesforcehenrique.github.io/formulario_zurich_site/" />
       <input type="hidden" name="debug" value="1" />
-      <input type="hidden" name="debugEmail" value="seu-email@dominio.com" />
+      <input type="hidden" name="debugEmail" value="henrique@cscorp.tec.br" />
       <input type="hidden" name="ValidationNeeded__c" value="false" />
       <input type="hidden" name="LeadSource" value="Website" />
+      <input type="hidden" name="company" value="Zurich Website" />
 
-      <!-- Campos visíveis conforme original -->
+      <!-- Campos visíveis -->
       <div class="form-group full"><label>CNPJ:</label><input type="text" name="CNPJ_SegImob__c" required /></div>
       <div class="form-group"><label>Razão Social:</label><input type="text" name="Razao_Social__c" required /></div>
       <div class="form-group"><label>Nome Fantasia:</label><input type="text" name="Nome_Fantasia__c" /></div>
@@ -67,18 +141,29 @@
       <div class="form-group full"><label>Endereço:</label><input type="text" name="Street" /></div>
       <div class="form-group"><label>Nome:</label><input type="text" name="first_name" required /></div>
       <div class="form-group"><label>Sobrenome:</label><input type="text" name="last_name" required /></div>
-
       <div class="form-group"><label>Especialista no ramo imobiliário:</label>
         <select name="Corretora_especialista__c"><option value="">Selecione</option><option>Sim</option><option>Não</option></select>
       </div>
       <div class="form-group"><label>Produção – Incêndio:</label>
-        <select name="Fatura_Mensal_Incendio__c"><option value="1000000">1 a 5 milhões</option><option value="5000000">5 a 10 milhões</option><option value="10000000">Acima de 10 milhões</option></select>
+        <select name="Fatura_Mensal_Incendio__c">
+          <option value="1000000">1 a 5 milhões</option>
+          <option value="5000000">5 a 10 milhões</option>
+          <option value="10000000">Acima de 10 milhões</option>
+        </select>
       </div>
       <div class="form-group"><label>Produção – Fiança:</label>
-        <select name="Fatura_Mensal_Fianca__c"><option value="1000000">1 a 5 milhões</option><option value="5000000">5 a 10 milhões</option><option value="10000000">Acima de 10 milhões</option></select>
+        <select name="Fatura_Mensal_Fianca__c">
+          <option value="1000000">1 a 5 milhões</option>
+          <option value="5000000">5 a 10 milhões</option>
+          <option value="10000000">Acima de 10 milhões</option>
+        </select>
       </div>
       <div class="form-group"><label>Produção – Título de Capitalização:</label>
-        <select name="Fatura_Mensal_T_tulo__c"><option value="1000000">1 a 5 milhões</option><option value="5000000">5 a 10 milhões</option><option value="10000000">Acima de 10 milhões</option></select>
+        <select name="Fatura_Mensal_T_tulo__c">
+          <option value="1000000">1 a 5 milhões</option>
+          <option value="5000000">5 a 10 milhões</option>
+          <option value="10000000">Acima de 10 milhões</option>
+        </select>
       </div>
       <div class="form-group full"><label>Região (Sucursal):</label>
         <select name="Estado__c"><option value="">Selecione uma região</option><option>São Paulo – SP</option></select>
@@ -101,15 +186,14 @@
       </div>
     </form>
 
-    <div id="thanksMessage" class="thank-you">
-      Obrigado! Nossa equipe comercial entrará em contato com você em breve.
-    </div>
+    <div id="thanksMessage" class="thank-you">Obrigado! Nossa equipe comercial entrará em contato com você em breve.</div>
   </div>
 
   <script>
     document.getElementById("agendar").addEventListener("change", function () {
       document.getElementById("calendlyContainer").style.display = this.value === "Sim" ? "block" : "none";
     });
+
     document.getElementById("leadForm").addEventListener("submit", function () {
       const statusEl = document.getElementById("status");
       statusEl.innerText = "Enviando...";
