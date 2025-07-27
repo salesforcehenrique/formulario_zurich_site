@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+  <META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8">
+
   <meta charset="UTF-8" />
   <title>Formulário de Cadastro</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -121,49 +123,33 @@
   <div class="form-container">
     <h2><span style="color:#0073ff;font-weight:bold;">sempre</span>juntos</h2>
     <p class="subheading">Fale com a gente</p>
-
     <form id="leadForm" action="https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST">
-      <!-- Campos ocultos necessários -->
       <input type="hidden" name="oid" value="00DHa000003AAMB" />
       <input type="hidden" name="retURL" value="https://salesforcehenrique.github.io/formulario_zurich_site/" />
       <input type="hidden" name="debug" value="1" />
-      <input type="hidden" name="debugEmail" value="henrique@cscorp.tec.br" />
+      <input type="hidden" name="debugEmail" value="seu-email@dominio.com" />
       <input type="hidden" name="ValidationNeeded__c" value="false" />
       <input type="hidden" name="LeadSource" value="Website" />
-      <input type="hidden" name="company" value="Zurich Website" />
 
-      <!-- Campos visíveis -->
-      <div class="form-group full"><label>CNPJ:</label><input type="text" name="CNPJ_SegImob__c" required /></div>
-      <div class="form-group"><label>Razão Social:</label><input type="text" name="Razao_Social__c" required /></div>
-      <div class="form-group"><label>Nome Fantasia:</label><input type="text" name="Nome_Fantasia__c" /></div>
-      <div class="form-group"><label>Telefone:</label><input type="text" name="Phone" /></div>
-      <div class="form-group"><label>E-mail:</label><input type="email" name="Email" required /></div>
-      <div class="form-group full"><label>Endereço:</label><input type="text" name="Street" /></div>
+      <div class="form-group full"><label>CNPJ:</label><input type="text" id="cnpj" name="CNPJ_SegImob__c" required /></div>
+      <div class="form-group"><label>Razão Social:</label><input type="text" id="razao_social" name="Razao_Social__c" required /></div>
+      <div class="form-group"><label>Nome Fantasia:</label><input type="text" id="fantasia" name="Nome_Fantasia__c" /></div>
+      <div class="form-group"><label>Telefone:</label><input type="text" id="phone" name="Phone" /></div>
+      <div class="form-group"><label>E-mail:</label><input type="email" id="email" name="Email" required /></div>
+      <div class="form-group full"><label>Endereço:</label><input type="text" id="endereco" name="Street" /></div>
       <div class="form-group"><label>Nome:</label><input type="text" name="first_name" required /></div>
       <div class="form-group"><label>Sobrenome:</label><input type="text" name="last_name" required /></div>
       <div class="form-group"><label>Especialista no ramo imobiliário:</label>
-        <select name="Corretora_especialista__c"><option value="">Selecione</option><option>Sim</option><option>Não</option></select>
+        <select name="Corretora_especialista__c"><option>Sim</option><option>Não</option></select>
       </div>
       <div class="form-group"><label>Produção – Incêndio:</label>
-        <select name="Fatura_Mensal_Incendio__c">
-          <option value="1000000">1 a 5 milhões</option>
-          <option value="5000000">5 a 10 milhões</option>
-          <option value="10000000">Acima de 10 milhões</option>
-        </select>
+        <select name="Fatura_Mensal_Incendio__c"><option>1 a 5 milhões</option><option>5 a 10 milhões</option><option>Acima de 10 milhões</option></select>
       </div>
       <div class="form-group"><label>Produção – Fiança:</label>
-        <select name="Fatura_Mensal_Fianca__c">
-          <option value="1000000">1 a 5 milhões</option>
-          <option value="5000000">5 a 10 milhões</option>
-          <option value="10000000">Acima de 10 milhões</option>
-        </select>
+        <select name="Fatura_Mensal_Fianca__c"><option>1 a 5 milhões</option><option>5 a 10 milhões</option><option>Acima de 10 milhões</option></select>
       </div>
       <div class="form-group"><label>Produção – Título de Capitalização:</label>
-        <select name="Fatura_Mensal_T_tulo__c">
-          <option value="1000000">1 a 5 milhões</option>
-          <option value="5000000">5 a 10 milhões</option>
-          <option value="10000000">Acima de 10 milhões</option>
-        </select>
+        <select name="Fatura_Mensal_T_tulo__c"><option>1 a 5 milhões</option><option>5 a 10 milhões</option><option>Acima de 10 milhões</option></select>
       </div>
       <div class="form-group full"><label>Região (Sucursal):</label>
         <select name="Estado__c"><option value="">Selecione uma região</option><option>São Paulo – SP</option></select>
@@ -172,8 +158,8 @@
       <div class="form-group full"><label>Deseja agendar uma reunião agora?</label>
         <select id="agendar" name="Agendamento_realizado__c">
           <option value="">Selecione</option>
-          <option>Sim</option>
-          <option>Não</option>
+          <option value="true">Sim</option>
+          <option value="false">Não</option>
         </select>
       </div>
 
@@ -181,24 +167,11 @@
       <div id="status"></div>
 
       <div id="calendlyContainer" class="form-group full" style="display:none;">
-        <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ0rW-27jpjR58SLdtmXIkAskIH-0s0ln9XkST6o4SL-11ygRsoDP54DZJEldP4HJJ10ySH2jAnr?gv=true"
-          class="google-calendar-frame"></iframe>
+        <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ0rW-27jpjR58SLdtmXIkAskIH-0s0ln9XkST6o4SL-11ygRsoDP54DZJEldP4HJJ10ySH2jAnr?gv=true" class="google-calendar-frame"></iframe>
       </div>
     </form>
 
     <div id="thanksMessage" class="thank-you">Obrigado! Nossa equipe comercial entrará em contato com você em breve.</div>
   </div>
-
-  <script>
-    document.getElementById("agendar").addEventListener("change", function () {
-      document.getElementById("calendlyContainer").style.display = this.value === "Sim" ? "block" : "none";
-    });
-
-    document.getElementById("leadForm").addEventListener("submit", function () {
-      const statusEl = document.getElementById("status");
-      statusEl.innerText = "Enviando...";
-      statusEl.classList.remove("error");
-    });
-  </script>
 </body>
 </html>
