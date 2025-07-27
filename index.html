@@ -127,6 +127,7 @@
       <input type="hidden" name="debug" value="1" />
       <input type="hidden" name="debugEmail" value="seu-email@dominio.com" />
       <input type="hidden" name="ValidationNeeded__c" value="false" />
+      <input type="hidden" name="LeadSource" value="Website" />
 
       <div class="form-group full"><label>CNPJ:</label><input type="text" id="cnpj" name="CNPJ_SegImob__c" required /></div>
       <div class="form-group"><label>Razão Social:</label><input type="text" id="razao_social" name="Razao_Social__c" required /></div>
@@ -170,67 +171,5 @@
 
     <div id="thanksMessage" class="thank-you">Obrigado! Nossa equipe comercial entrará em contato com você em breve.</div>
   </div>
-
-  <script>
-    document.getElementById('agendar').addEventListener('change', e => {
-      document.getElementById('calendlyContainer').style.display = e.target.value === 'true' ? 'block' : 'none';
-    });
-
-    document.getElementById('leadForm').addEventListener('submit', function(e){
-      e.preventDefault();
-      fetch(this.action, { method:'POST', body: new FormData(this), mode:'no-cors' });
-      this.style.display='none';
-      document.getElementById('calendlyContainer').style.display='none';
-      document.getElementById('thanksMessage').style.display='block';
-    });
-
-    function jsonp(url) {
-      return new Promise((resolve, reject) => {
-        const name = 'jsonp_' + Math.random().toString(36).substr(2,5);
-        window[name] = res => {
-          delete window[name];
-          document.body.removeChild(script);
-          resolve(res);
-        };
-        const script = document.createElement('script');
-        script.src = url + '?callback=' + name;
-        script.onerror = () => reject('Erro de rede');
-        document.body.appendChild(script);
-      });
-    }
-
-    document.getElementById('cnpj').addEventListener('blur', async () => {
-      const raw = document.getElementById('cnpj').value.replace(/\D/g,'');
-      const status = document.getElementById('status');
-      status.textContent = ''; status.className = '';
-      if (raw.length !== 14) {
-        status.textContent = 'CNPJ inválido';
-        status.className = 'error';
-        return;
-      }
-      status.textContent = 'Consultando...';
-      try {
-        const data = await jsonp('https://www.receitaws.com.br/v1/cnpj/' + raw);
-        if (data.status === 'ERROR' || data.erro) {
-          status.textContent = data.message || 'CNPJ não encontrado';
-          status.className = 'error';
-          return;
-        }
-        document.getElementById('razao_social').value = data.nome || '';
-        document.getElementById('fantasia').value = data.fantasia || '';
-        document.getElementById('email').value = data.email || '';
-        document.getElementById('phone').value = data.telefone || '';
-        document.getElementById('endereco').value = [
-          data.logradouro, data.numero, data.complemento,
-          data.bairro, data.municipio, data.uf
-        ].filter(Boolean).join(', ');
-        status.textContent = 'Dados preenchidos com sucesso';
-      } catch(err) {
-        console.error(err);
-        status.textContent = 'Erro ao consultar';
-        status.className = 'error';
-      }
-    });
-  </script>
 </body>
 </html>
