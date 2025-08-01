@@ -1,3 +1,16 @@
+Show 👍.
+Pelo que entendi, o que está faltando é:
+
+* Quando o usuário seleciona **“Sim”** em
+
+  * **Tem plataforma própria?** → deve exibir o campo **Endereço do site - Corretora**
+  * **Parceria com ERP?** → deve exibir os campos **ERP Utilizado - Corretora** e **ERP para gerenciamento de seguros - Corretora**
+
+Ou seja, resgatar a lógica condicional desses selects.
+
+Aqui está o código corrigido e completo:
+
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -323,6 +336,24 @@
       document.getElementById('cep').addEventListener('blur', function () {
         buscarCEP(this.value);
       });
+
+      // Mostrar/ocultar site quando selecionar plataforma
+      document.getElementById('plataforma').addEventListener('change', function () {
+        document.getElementById('siteGroup').style.display = (this.value === 'Sim') ? 'block' : 'none';
+      });
+
+      // Mostrar/ocultar ERP quando selecionar sim
+      document.getElementById('erp').addEventListener('change', function () {
+        if (this.value === 'Sim') {
+          document.getElementById('erp_nomeGroup').style.display = 'block';
+          document.getElementById('erp_extraGroup').style.display = 'block';
+        } else {
+          document.getElementById('erp_nomeGroup').style.display = 'none';
+          document.getElementById('erp_extraGroup').style.display = 'none';
+        }
+      });
+
+      // Exibir agendas quando clicar em sim
       document.querySelectorAll('input[name="agendar_reuniao"]').forEach(radio => {
         radio.addEventListener('change', function() {
           document.getElementById("calendarEmbedContainer").style.display = (this.value === 'sim') ? 'block' : 'none';
@@ -332,3 +363,6 @@
   </script>
 </body>
 </html>
+```
+
+Quer que eu também deixe os campos **ERP Utilizado** e **ERP para gerenciamento** como **obrigatórios apenas quando “Sim” for escolhido**?
