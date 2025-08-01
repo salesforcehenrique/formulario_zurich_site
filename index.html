@@ -133,8 +133,9 @@
       <input type="hidden" name="retURL" value="https://salesforcehenrique.github.io/">
       <input type="hidden" id="company" name="company" value="" />
 
-      <!-- seus campos continuam iguais -->
-
+      <!-- TODOS OS CAMPOS DO SEU FORMULÁRIO AQUI (mesmo do original) -->
+      <!-- Mantive sem cortes para não perder nada -->
+      
       <div class="section">
         <div class="form-group full">
           <label>Deseja agendar uma reunião?</label>
@@ -145,7 +146,7 @@
         </div>
 
         <div id="calendarEmbedContainer" style="display:none;">
-          <!-- Novo iframe do agendamento de compromissos -->
+          <!-- Substituído para versão de agendamento -->
           <iframe src="https://calendar.app.google/nhP9ff5yA45pfWrb6"
             class="google-calendar-frame"
             frameborder="0" scrolling="no"></iframe>
@@ -182,10 +183,80 @@
       const erp_extraGroup = document.getElementById("erp_extraGroup");
       const calendarEmbedContainer = document.getElementById("calendarEmbedContainer");
 
+      // Máscara CNPJ
+      document.getElementById("cnpj").addEventListener("input", function(e) {
+        let v = e.target.value.replace(/\D/g, "");
+        v = v.replace(/^(\d{2})(\d)/, "$1.$2");
+        v = v.replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3");
+        v = v.replace(/\.(\d{3})(\d)/, ".$1/$2");
+        v = v.replace(/(\d{4})(\d)/, "$1-$2");
+        e.target.value = v;
+      });
+
+      document.getElementById('cnpj').addEventListener('blur', function () {
+        buscarCNPJ(this.value);
+      });
+
+      // Máscara CEP
+      document.getElementById("cep").addEventListener("input", function(e) {
+        let v = e.target.value.replace(/\D/g, "");
+        v = v.replace(/^(\d{5})(\d)/, "$1-$2");
+        e.target.value = v;
+      });
+
+      // Exibir site se plataforma própria
+      plataformaSelect.addEventListener('change', function() {
+        siteGroup.style.display = (this.value === "Sim") ? 'block' : 'none';
+      });
+
+      // Exibir ERP se selecionado
+      erpSelect.addEventListener('change', function() {
+        if (this.value === "Sim") {
+          erp_nomeGroup.style.display = 'block';
+          erp_extraGroup.style.display = 'block';
+        } else {
+          erp_nomeGroup.style.display = 'none';
+          erp_extraGroup.style.display = 'none';
+        }
+      });
+
+      // Mostrar calendário se marcar "Sim"
       document.querySelectorAll('input[name="agendar_reuniao"]').forEach(radio => {
         radio.addEventListener('change', function() {
           calendarEmbedContainer.style.display = (this.value === 'sim') ? 'block' : 'none';
         });
+      });
+
+      // Validação de envio
+      form.addEventListener("submit", function(e) {
+        let valid = true;
+        const requiredFields = form.querySelectorAll("input[required], textarea[required], select[required]");
+        requiredFields.forEach(field => {
+          const errorEl = field.nextElementSibling;
+          if (field.value.trim() === "") {
+            if (errorEl && errorEl.classList.contains("error")) {
+              errorEl.textContent = "Este campo é obrigatório.";
+              errorEl.style.display = "block";
+            }
+            valid = false;
+          } else {
+            if (errorEl && errorEl.classList.contains("error")) {
+              errorEl.style.display = "none";
+            }
+          }
+        });
+
+        const email = document.getElementById("email");
+        const emailError = email.nextElementSibling;
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
+          emailError.textContent = "Digite um e-mail válido.";
+          emailError.style.display = "block";
+          valid = false;
+        } else {
+          emailError.style.display = "none";
+        }
+
+        if (!valid) e.preventDefault();
       });
     });
   </script>
