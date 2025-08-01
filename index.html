@@ -53,6 +53,13 @@
       flex: 1 1 100%;
     }
 
+    .section {
+      flex: 1 1 100%;
+      border-top: 1px solid #ccc;
+      padding-top: 20px;
+      margin-top: 20px;
+    }
+
     label {
       font-weight: 600;
       font-size: 14px;
@@ -231,52 +238,57 @@
         <input id="seguradora_capitalizacao" name="Seguradora_principal_Tit_Capitalizacao__c" type="text">
       </div>
 
-      <div class="form-group">
-        <label for="plataforma">Tem plataforma própria?</label>
-        <select id="plataforma" name="00NSG00000QGcb4">
-          <option value="">-- Selecione --</option>
-          <option value="Sim">Sim</option>
-          <option value="Não">Não</option>
-        </select>
-      </div>
+      <div class="section">
+        <div class="form-group">
+          <label for="plataforma">Tem plataforma própria?</label>
+          <select id="plataforma" name="00NSG00000QGcb4">
+            <option value="">-- Selecione --</option>
+            <option value="Sim">Sim</option>
+            <option value="Não">Não</option>
+          </select>
+        </div>
 
-      <div class="form-group">
-        <label for="erp">Parceria com ERP?</label>
-        <select id="erp" name="00NSG00000QGYvd">
-          <option value="">-- Selecione --</option>
-          <option value="Sim">Sim</option>
-          <option value="Não">Não</option>
-        </select>
-      </div>
-
-      <div class="form-group full" id="siteGroup" style="display:none;">
-        <label for="site">Endereço do site</label>
-        <input id="site" name="00NSG00000QGjlN" type="url">
-      </div>
-
-      <div class="form-group full" id="erp_nomeGroup" style="display:none;">
-        <label for="erp_nome">ERP Utilizado</label>
-        <input id="erp_nome" name="00NSG00000QGgKU" type="text">
-      </div>
-
-      <div class="form-group full" id="erp_extraGroup" style="display:none;">
-        <label for="erp_extra">ERP para gerenciamento de seguros</label>
-        <input id="erp_extra" name="ERP_para_gerenciamento" type="text">
-      </div>
-
-      <div class="form-group full">
-        <label>Deseja agendar uma reunião?</label>
-        <div class="radio-group">
-          <label><input type="radio" name="agendar_reuniao" value="sim"> Sim</label>
-          <label><input type="radio" name="agendar_reuniao" value="nao" checked> Não</label>
+        <div class="form-group full" id="siteGroup" style="display:none;">
+          <label for="site">Endereço do site</label>
+          <input id="site" name="00NSG00000QGjlN" type="url">
         </div>
       </div>
 
-      <div id="calendarEmbedContainer" style="display:none;">
-        <!-- Google Calendar Appointment Scheduling begin -->
-        <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ0rW-27jpjR58SLdtmXIkAskIH-0s0ln9XkST6o4SL-11ygRsoDP54DZJEldP4HJJ10ySH2jAnr?gv=true" 
-                style="border: 0" width="100%" height="600" frameborder="0"></iframe>
-        <!-- end Google Calendar Appointment Scheduling -->
+      <div class="section">
+        <div class="form-group">
+          <label for="erp">Parceria com ERP?</label>
+          <select id="erp" name="00NSG00000QGYvd">
+            <option value="">-- Selecione --</option>
+            <option value="Sim">Sim</option>
+            <option value="Não">Não</option>
+          </select>
+        </div>
+
+        <div class="form-group full" id="erp_nomeGroup" style="display:none;">
+          <label for="erp_nome">ERP Utilizado</label>
+          <input id="erp_nome" name="00NSG00000QGgKU" type="text">
+        </div>
+
+        <div class="form-group full" id="erp_extraGroup" style="display:none;">
+          <label for="erp_extra">ERP para gerenciamento de seguros</label>
+          <input id="erp_extra" name="ERP_para_gerenciamento" type="text">
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="form-group full">
+          <label>Deseja agendar uma reunião?</label>
+          <div class="radio-group">
+            <label><input type="radio" name="agendar_reuniao" value="sim"> Sim</label>
+            <label><input type="radio" name="agendar_reuniao" value="nao" checked> Não</label>
+          </div>
+        </div>
+
+        <div id="calendarEmbedContainer" style="display:none;">
+          <iframe class="google-calendar-frame"
+            src="https://calendar.google.com/calendar/embed?src=henrique%40cscorp.tec.br&ctz=America%2FSao_Paulo"
+            frameborder="0" scrolling="no"></iframe>
+        </div>
       </div>
 
       <button type="submit" class="submit-button">Enviar Cadastro</button>
@@ -348,7 +360,6 @@
         });
       });
 
-      // Validação
       form.addEventListener("submit", function(e) {
         let valid = true;
         const requiredFields = form.querySelectorAll("input[required], textarea[required], select[required]");
