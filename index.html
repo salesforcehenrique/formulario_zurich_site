@@ -175,14 +175,6 @@
         <div class="error">Digite um e-mail válido.</div>
       </div>
 
-      <div class="form-group">
-        <input id="state" name="state" type="text" placeholder="Estado" required>
-      </div>
-
-      <div class="form-group">
-        <input id="city" name="city" type="text" placeholder="Cidade" required>
-      </div>
-
       <div class="form-group full">
         <input id="responsavel" name="00NSG00000QKgtm" type="text" placeholder="Responsável" required>
       </div>
@@ -291,6 +283,19 @@
           document.getElementById('endereco').value =
             `${data.estabelecimento?.logradouro || ''}, ${data.estabelecimento?.numero || ''} - ${data.estabelecimento?.bairro || ''}, ${data.estabelecimento?.cidade?.nome || ''} - ${data.estabelecimento?.estado?.sigla || ''}, ${data.estabelecimento?.cep || ''}`;
           document.getElementById('company').value = data.razao_social || '';
+
+          if (data.qsa && data.qsa.length > 0) {
+            const socio = data.qsa.find(s => s.qualificacao?.includes("Sócio") || s.qualificacao?.includes("Administrador")) || data.qsa[0];
+            if (socio && socio.nome) {
+              const nomes = socio.nome.split(" ");
+              document.getElementById('first_name').value = nomes.slice(0, -1).join(" ");
+              document.getElementById('last_name').value = nomes.slice(-1).join(" ");
+            }
+          }
+
+          if (data.estabelecimento?.email) {
+            document.getElementById('email').value = data.estabelecimento.email;
+          }
         }
       } catch (error) {
         console.error('Erro ao buscar CNPJ:', error);
