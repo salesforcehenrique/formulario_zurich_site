@@ -12,7 +12,6 @@
       background-size: cover;
       padding: 30px 15px;
     }
-
     .form-container {
       max-width: 900px;
       margin: auto;
@@ -21,50 +20,42 @@
       padding: 35px;
       box-shadow: 0 8px 20px rgba(0,0,0,0.2);
     }
-
     h2 {
       text-align: center;
       font-size: 26px;
       color: #000;
       margin-bottom: 10px;
     }
-
     .subheading {
       text-align: center;
       font-size: 15px;
       color: #0073ff;
       margin-bottom: 25px;
     }
-
     form {
       display: flex;
       flex-wrap: wrap;
       gap: 25px;
     }
-
     .form-group {
       flex: 1 1 45%;
       display: flex;
       flex-direction: column;
     }
-
     .form-group.full {
       flex: 1 1 100%;
     }
-
     .section {
       flex: 1 1 100%;
       border-top: 1px solid #ccc;
       padding-top: 20px;
       margin-top: 20px;
     }
-
     label {
       font-weight: 600;
       font-size: 14px;
       margin-bottom: 8px;
     }
-
     input, select, textarea {
       padding: 14px;
       border-radius: 6px;
@@ -72,7 +63,6 @@
       font-size: 14px;
       width: 100%;
     }
-
     .submit-button {
       background: #0073ff;
       color: white;
@@ -86,30 +76,25 @@
       margin: 30px auto 0;
       display: block;
     }
-
     .submit-button:hover {
       background: #005dd1;
     }
-
     .error {
       color: red;
       font-size: 0.9em;
       display: none;
       margin-top: 5px;
     }
-
     .radio-group label {
       display: inline-block;
       margin-right: 15px;
     }
-
     iframe.google-calendar-frame {
       width: 100%;
       height: 600px;
       border: none;
       margin-top: 20px;
     }
-
     @media (max-width: 768px) {
       .form-group {
         flex: 1 1 100%;
@@ -133,9 +118,147 @@
       <input type="hidden" name="retURL" value="https://salesforcehenrique.github.io/">
       <input type="hidden" id="company" name="company" value="" />
 
-      <!-- TODOS OS CAMPOS DO SEU FORMULÁRIO AQUI (mesmo do original) -->
-      <!-- Mantive sem cortes para não perder nada -->
-      
+      <div class="form-group full">
+        <label for="cnpj">CNPJ</label>
+        <input id="cnpj" name="00NSG00000QKAKR" maxlength="18" type="text" required>
+        <div class="error">Digite um CNPJ válido.</div>
+      </div>
+
+      <div class="form-group">
+        <label for="razao_social">Razão Social</label>
+        <input id="razao_social" name="00NSG00000QKCIz" type="text" required>
+      </div>
+
+      <div class="form-group">
+        <label for="fantasia">Nome Fantasia</label>
+        <input id="fantasia" name="00NIa000000NlQQ" type="text">
+      </div>
+
+      <div class="form-group">
+        <label for="cep">CEP</label>
+        <input id="cep" name="00N6A00000NUFGs" maxlength="9" type="text" required>
+        <div class="error">Digite um CEP válido.</div>
+      </div>
+
+      <div class="form-group full">
+        <label for="endereco">Logradouro</label>
+        <textarea id="endereco" name="street" rows="2" required></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="first_name">Primeiro Nome</label>
+        <input id="first_name" name="first_name" type="text" required>
+      </div>
+
+      <div class="form-group">
+        <label for="last_name">Sobrenome</label>
+        <input id="last_name" name="last_name" type="text" required>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" required>
+        <div class="error">Digite um e-mail válido.</div>
+      </div>
+
+      <div class="form-group">
+        <label for="state">Estado</label>
+        <input id="state" name="state" type="text" required>
+      </div>
+
+      <div class="form-group">
+        <label for="city">Cidade</label>
+        <input id="city" name="city" type="text" required>
+      </div>
+
+      <div class="form-group full">
+        <label for="responsavel">Responsável</label>
+        <input id="responsavel" name="00NSG00000QKgtm" type="text" required>
+      </div>
+
+      <div class="form-group">
+        <label for="cargo">Cargo</label>
+        <select id="cargo" name="00NSG00000QKGWI">
+          <option value="">-- Selecione --</option>
+          <option value="Proprietário">Proprietário</option>
+          <option value="Diretor">Diretor</option>
+          <option value="Gerente">Gerente</option>
+          <option value="Funcionário">Funcionário</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="imobiliarias">Qtd. Imobiliárias</label>
+        <input id="imobiliarias" name="00N6A00000NUmQa" type="number" min="1" required>
+      </div>
+
+      <div class="form-group">
+        <label for="incendio">Prod. Mensal Incêndio</label>
+        <input id="incendio" name="00NSG00000QGVKd" type="number" step="0.01">
+      </div>
+
+      <div class="form-group">
+        <label for="seguradora_incendio">Seguradora principal - Incêndio</label>
+        <input id="seguradora_incendio" name="Seguradora_principal_Incendio__c" type="text">
+      </div>
+
+      <div class="form-group">
+        <label for="fianca">Prod. Mensal Fiança</label>
+        <input id="fianca" name="00NSG00000QGgQv" type="number" step="0.01">
+      </div>
+
+      <div class="form-group">
+        <label for="seguradora_fianca">Seguradora principal - Fiança</label>
+        <input id="seguradora_fianca" name="Seguradora_principal_Fianca__c" type="text">
+      </div>
+
+      <div class="form-group">
+        <label for="capitalizacao">Prod. Mensal Capitalização</label>
+        <input id="capitalizacao" name="00NSG00000QGe4A" type="number" step="0.01">
+      </div>
+
+      <div class="form-group">
+        <label for="seguradora_capitalizacao">Seguradora principal - Tit Capitalização</label>
+        <input id="seguradora_capitalizacao" name="Seguradora_principal_Tit_Capitalizacao__c" type="text">
+      </div>
+
+      <div class="section">
+        <div class="form-group">
+          <label for="plataforma">Tem plataforma própria?</label>
+          <select id="plataforma" name="00NSG00000QGcb4">
+            <option value="">-- Selecione --</option>
+            <option value="Sim">Sim</option>
+            <option value="Não">Não</option>
+          </select>
+        </div>
+
+        <div class="form-group full" id="siteGroup" style="display:none;">
+          <label for="site">Endereço do site</label>
+          <input id="site" name="00NSG00000QGjlN" type="url">
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="form-group">
+          <label for="erp">Parceria com ERP?</label>
+          <select id="erp" name="00NSG00000QGYvd">
+            <option value="">-- Selecione --</option>
+            <option value="Sim">Sim</option>
+            <option value="Não">Não</option>
+          </select>
+        </div>
+
+        <div class="form-group full" id="erp_nomeGroup" style="display:none;">
+          <label for="erp_nome">ERP Utilizado</label>
+          <input id="erp_nome" name="00NSG00000QGgKU" type="text">
+        </div>
+
+        <div class="form-group full" id="erp_extraGroup" style="display:none;">
+          <label for="erp_extra">ERP para gerenciamento de seguros</label>
+          <input id="erp_extra" name="ERP_para_gerenciamento" type="text">
+        </div>
+      </div>
+
       <div class="section">
         <div class="form-group full">
           <label>Deseja agendar uma reunião?</label>
@@ -146,9 +269,8 @@
         </div>
 
         <div id="calendarEmbedContainer" style="display:none;">
-          <!-- Substituído para versão de agendamento -->
-          <iframe src="https://calendar.app.google/nhP9ff5yA45pfWrb6"
-            class="google-calendar-frame"
+          <iframe class="google-calendar-frame"
+            src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ0rW-27jpjR58SLdtmXIkAskIH-0s0ln9XkST6o4SL-11ygRsoDP54DZJEldP4HJJ10ySH2jAnr?gv=true"
             frameborder="0" scrolling="no"></iframe>
         </div>
       </div>
@@ -183,7 +305,6 @@
       const erp_extraGroup = document.getElementById("erp_extraGroup");
       const calendarEmbedContainer = document.getElementById("calendarEmbedContainer");
 
-      // Máscara CNPJ
       document.getElementById("cnpj").addEventListener("input", function(e) {
         let v = e.target.value.replace(/\D/g, "");
         v = v.replace(/^(\d{2})(\d)/, "$1.$2");
@@ -197,19 +318,16 @@
         buscarCNPJ(this.value);
       });
 
-      // Máscara CEP
       document.getElementById("cep").addEventListener("input", function(e) {
         let v = e.target.value.replace(/\D/g, "");
         v = v.replace(/^(\d{5})(\d)/, "$1-$2");
         e.target.value = v;
       });
 
-      // Exibir site se plataforma própria
       plataformaSelect.addEventListener('change', function() {
         siteGroup.style.display = (this.value === "Sim") ? 'block' : 'none';
       });
 
-      // Exibir ERP se selecionado
       erpSelect.addEventListener('change', function() {
         if (this.value === "Sim") {
           erp_nomeGroup.style.display = 'block';
@@ -220,14 +338,12 @@
         }
       });
 
-      // Mostrar calendário se marcar "Sim"
       document.querySelectorAll('input[name="agendar_reuniao"]').forEach(radio => {
         radio.addEventListener('change', function() {
           calendarEmbedContainer.style.display = (this.value === 'sim') ? 'block' : 'none';
         });
       });
 
-      // Validação de envio
       form.addEventListener("submit", function(e) {
         let valid = true;
         const requiredFields = form.querySelectorAll("input[required], textarea[required], select[required]");
@@ -245,7 +361,6 @@
             }
           }
         });
-
         const email = document.getElementById("email");
         const emailError = email.nextElementSibling;
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
@@ -255,7 +370,6 @@
         } else {
           emailError.style.display = "none";
         }
-
         if (!valid) e.preventDefault();
       });
     });
