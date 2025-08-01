@@ -2,62 +2,262 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Agende seu horário</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulário WebToLead</title>
   <style>
-    body { font-family: Arial, sans-serif; text-align: center; }
-    button {
-      background: #0077cc; color: white; padding: 15px 30px;
-      border: none; border-radius: 6px; cursor: pointer;
-      font-size: 18px; margin-top: 50px;
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0066ff url('https://static.vecteezy.com/system/resources/previews/012/660/601/non_2x/abstract-blue-background-with-waves-free-vector.jpg') no-repeat center center fixed;
+      background-size: cover;
+      padding: 30px 15px;
     }
-    button:hover { background: #005fa3; }
-    .modal {
-      display: none; position: fixed; z-index: 999;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0,0,0,0.6); justify-content: center; align-items: center;
+    .form-container {
+      max-width: 900px;
+      margin: auto;
+      background: white;
+      border-radius: 12px;
+      padding: 35px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
     }
-    .modal-content {
-      background: #fff; width: 90%; max-width: 900px; height: 80%;
-      border-radius: 8px; overflow: hidden; display: flex; flex-direction: column;
+    h2 {
+      text-align: center;
+      font-size: 26px;
+      color: #000;
+      margin-bottom: 10px;
     }
-    .modal-header {
-      background: #0077cc; color: #fff; padding: 10px; text-align: right;
+    .subheading {
+      text-align: center;
+      font-size: 15px;
+      color: #0073ff;
+      margin-bottom: 25px;
     }
-    .close { cursor: pointer; font-size: 22px; font-weight: bold; }
-    iframe { border: 0; width: 100%; height: 100%; }
+    form {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 25px;
+    }
+    .form-group {
+      flex: 1 1 45%;
+      display: flex;
+      flex-direction: column;
+    }
+    .form-group.full {
+      flex: 1 1 100%;
+    }
+    .section {
+      flex: 1 1 100%;
+      border-top: 1px solid #ccc;
+      padding-top: 20px;
+      margin-top: 20px;
+    }
+    label {
+      font-weight: 600;
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+    input, select, textarea {
+      padding: 14px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      width: 100%;
+    }
+    .submit-button {
+      background: #0073ff;
+      color: white;
+      padding: 14px;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      width: 220px;
+      margin: 30px auto 0;
+      display: block;
+    }
+    .submit-button:hover {
+      background: #005dd1;
+    }
+    .error {
+      color: red;
+      font-size: 0.9em;
+      display: none;
+      margin-top: 5px;
+    }
+    .radio-group label {
+      display: inline-block;
+      margin-right: 15px;
+    }
+
+    /* Responsividade para o iframe */
+    .calendar-wrapper {
+      position: relative;
+      padding-bottom: 65%; /* Proporção aproximada */
+      height: 0;
+      overflow: hidden;
+      margin-top: 20px;
+    }
+    .calendar-wrapper iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    @media (max-width: 768px) {
+      .form-group {
+        flex: 1 1 100%;
+      }
+      .submit-button {
+        width: 100%;
+      }
+      .calendar-wrapper {
+        padding-bottom: 100%; /* mais altura no mobile */
+      }
+    }
   </style>
 </head>
 <body>
+  <div class="form-container">
+    <h2>Cadastro de Parceiros</h2>
+    <p class="subheading">Fale com a gente</p>
+  
+    <form id="leadForm" 
+          action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00D6A000002ImjZ" 
+          method="POST">
 
-  <h1>Agende sua consulta</h1>
-  <button onclick="abrirModal()">Agendar Agora</button>
+      <input type="hidden" name="oid" value="00D6A000002ImjZ">
+      <input type="hidden" name="retURL" value="https://salesforcehenrique.github.io/">
+      <input type="hidden" id="company" name="company" value="" />
 
-  <div id="agendaModal" class="modal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <span class="close" onclick="fecharModal()">&times;</span>
+      <!-- Seus campos do formulário seguem aqui... -->
+
+      <div class="section">
+        <div class="form-group full">
+          <label>Deseja agendar uma reunião?</label>
+          <div class="radio-group">
+            <label><input type="radio" name="agendar_reuniao" value="sim"> Sim</label>
+            <label><input type="radio" name="agendar_reuniao" value="nao" checked> Não</label>
+          </div>
+        </div>
+
+        <!-- Calendário Google responsivo -->
+        <div id="calendarEmbedContainer" style="display:none;">
+          <div class="calendar-wrapper">
+            <iframe 
+              src="https://calendar.app.google/B54Z6pKjMCbgjTUv9" 
+              frameborder="0" 
+              scrolling="no">
+            </iframe>
+          </div>
+        </div>
       </div>
-      <iframe id="agendaIframe"></iframe>
-    </div>
+
+      <button type="submit" class="submit-button">Enviar Cadastro</button>
+    </form>
   </div>
 
   <script>
-    const agendaLink = "https://calendar.app.google/B54Z6pKjMCbgjTUv9";
-    const modal = document.getElementById("agendaModal");
-    const iframe = document.getElementById("agendaIframe");
+    async function buscarCNPJ(cnpj) {
+      const sanitized = cnpj.replace(/\D/g, "");
+      if (sanitized.length !== 14) return;
+      try {
+        const response = await fetch(`https://www.receitaws.com.br/v1/cnpj/${sanitized}`);
+        const data = await response.json();
+        if (data.status === 'ERROR') throw new Error(data.message);
+        document.getElementById('razao_social').value = data.nome || '';
+        document.getElementById('fantasia').value = data.fantasia || '';
+        document.getElementById('endereco').value = `${data.logradouro || ''}, ${data.numero || ''} - ${data.bairro || ''}, ${data.municipio || ''} - ${data.uf || ''}, ${data.cep || ''}`;
+        document.getElementById('company').value = data.nome || '';
+      } catch (error) {
+        console.warn('Erro ao buscar CNPJ:', error.message);
+      }
+    }
 
-    function abrirModal() {
-      iframe.src = agendaLink;
-      modal.style.display = "flex";
-    }
-    function fecharModal() {
-      modal.style.display = "none";
-      iframe.src = "";
-    }
-    window.onclick = function(event) {
-      if (event.target === modal) fecharModal();
-    }
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById("leadForm");
+      const plataformaSelect = document.getElementById("plataforma");
+      const erpSelect = document.getElementById("erp");
+      const siteGroup = document.getElementById("siteGroup");
+      const erp_nomeGroup = document.getElementById("erp_nomeGroup");
+      const erp_extraGroup = document.getElementById("erp_extraGroup");
+      const calendarEmbedContainer = document.getElementById("calendarEmbedContainer");
+
+      // Máscara de CNPJ
+      document.getElementById("cnpj").addEventListener("input", function(e) {
+        let v = e.target.value.replace(/\D/g, "");
+        v = v.replace(/^(\d{2})(\d)/, "$1.$2");
+        v = v.replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3");
+        v = v.replace(/\.(\d{3})(\d)/, ".$1/$2");
+        v = v.replace(/(\d{4})(\d)/, "$1-$2");
+        e.target.value = v;
+      });
+
+      document.getElementById('cnpj').addEventListener('blur', function () {
+        buscarCNPJ(this.value);
+      });
+
+      // Máscara de CEP
+      document.getElementById("cep").addEventListener("input", function(e) {
+        let v = e.target.value.replace(/\D/g, "");
+        v = v.replace(/^(\d{5})(\d)/, "$1-$2");
+        e.target.value = v;
+      });
+
+      // Exibir/esconder campos adicionais
+      plataformaSelect?.addEventListener('change', function() {
+        siteGroup.style.display = (this.value === "Sim") ? 'block' : 'none';
+      });
+
+      erpSelect?.addEventListener('change', function() {
+        if (this.value === "Sim") {
+          erp_nomeGroup.style.display = 'block';
+          erp_extraGroup.style.display = 'block';
+        } else {
+          erp_nomeGroup.style.display = 'none';
+          erp_extraGroup.style.display = 'none';
+        }
+      });
+
+      // Mostrar o calendário apenas se marcar "Sim"
+      document.querySelectorAll('input[name="agendar_reuniao"]').forEach(radio => {
+        radio.addEventListener('change', function() {
+          calendarEmbedContainer.style.display = (this.value === 'sim') ? 'block' : 'none';
+        });
+      });
+
+      // Validação do formulário
+      form.addEventListener("submit", function(e) {
+        let valid = true;
+        const requiredFields = form.querySelectorAll("input[required], textarea[required], select[required]");
+        requiredFields.forEach(field => {
+          const errorEl = field.nextElementSibling;
+          if (field.value.trim() === "") {
+            if (errorEl && errorEl.classList.contains("error")) {
+              errorEl.textContent = "Este campo é obrigatório.";
+              errorEl.style.display = "block";
+            }
+            valid = false;
+          } else {
+            if (errorEl && errorEl.classList.contains("error")) {
+              errorEl.style.display = "none";
+            }
+          }
+        });
+        const email = document.getElementById("email");
+        const emailError = email.nextElementSibling;
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
+          emailError.textContent = "Digite um e-mail válido.";
+          emailError.style.display = "block";
+          valid = false;
+        } else {
+          emailError.style.display = "none";
+        }
+        if (!valid) e.preventDefault();
+      });
+    });
   </script>
-
 </body>
 </html>
