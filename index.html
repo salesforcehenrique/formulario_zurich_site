@@ -158,6 +158,11 @@
         <input id="fantasia" name="00NIa000000NlQQ" type="text" placeholder="Nome Fantasia">
       </div>
 
+      <div class="form-group">
+        <input id="cep" name="00N6A00000NUFGs" maxlength="9" type="text" placeholder="CEP" required>
+        <div class="error">Digite um CEP válido.</div>
+      </div>
+
       <div class="form-group full">
         <textarea id="endereco" name="street" rows="2" placeholder="Logradouro" required></textarea>
       </div>
@@ -322,6 +327,12 @@
 
       document.getElementById('cnpj').addEventListener('blur', function () {
         buscarCNPJ(this.value);
+      });
+
+      document.getElementById("cep").addEventListener("input", function(e) {
+        let v = e.target.value.replace(/\D/g, "");
+        v = v.replace(/^(\d{5})(\d)/, "$1-$2");
+        e.target.value = v;
       });
 
       plataformaSelect?.addEventListener('change', function() {
