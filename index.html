@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -187,6 +186,73 @@
         <input id="responsavel" name="00NSG00000QKgtm" type="text" placeholder="Responsável" required>
       </div>
 
+      <div class="form-group">
+        <select id="cargo" name="00NSG00000QKGWI" required>
+          <option value="">Cargo</option>
+          <option value="Proprietário">Proprietário</option>
+          <option value="Diretor">Diretor</option>
+          <option value="Gerente">Gerente</option>
+          <option value="Funcionário">Funcionário</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <input id="imobiliarias" name="00N6A00000NUmQa" type="number" min="1" placeholder="Qtd. Imobiliárias" required>
+      </div>
+
+      <div class="form-group">
+        <input id="incendio" name="00NSG00000QGVKd" type="number" step="0.01" placeholder="Produção Mensal Incêndio">
+      </div>
+
+      <div class="form-group">
+        <input id="seguradora_incendio" name="Seguradora_principal_Incendio__c" type="text" placeholder="Seguradora principal - Incêndio">
+      </div>
+
+      <div class="form-group">
+        <input id="fianca" name="00NSG00000QGgQv" type="number" step="0.01" placeholder="Produção Mensal Fiança">
+      </div>
+
+      <div class="form-group">
+        <input id="seguradora_fianca" name="Seguradora_principal_Fianca__c" type="text" placeholder="Seguradora principal - Fiança">
+      </div>
+
+      <div class="form-group">
+        <input id="capitalizacao" name="00NSG00000QGe4A" type="number" step="0.01" placeholder="Produção Mensal Capitalização">
+      </div>
+
+      <div class="form-group">
+        <input id="seguradora_capitalizacao" name="Seguradora_principal_Tit_Capitalizacao__c" type="text" placeholder="Seguradora principal - Tit Capitalização">
+      </div>
+
+      <div class="section">
+        <div class="form-group">
+          <select id="plataforma" name="00NSG00000QGcb4">
+            <option value="">Tem plataforma própria?</option>
+            <option value="Sim">Sim</option>
+            <option value="Não">Não</option>
+          </select>
+        </div>
+        <div class="form-group full" id="siteGroup" style="display:none;">
+          <input id="site" name="00NSG00000QGjlN" type="url" placeholder="Endereço do site">
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="form-group">
+          <select id="erp" name="00NSG00000QGYvd">
+            <option value="">Parceria com ERP?</option>
+            <option value="Sim">Sim</option>
+            <option value="Não">Não</option>
+          </select>
+        </div>
+        <div class="form-group full" id="erp_nomeGroup" style="display:none;">
+          <input id="erp_nome" name="00NSG00000QGgKU" type="text" placeholder="ERP Utilizado">
+        </div>
+        <div class="form-group full" id="erp_extraGroup" style="display:none;">
+          <input id="erp_extra" name="ERP_para_gerenciamento" type="text" placeholder="ERP para gerenciamento de seguros">
+        </div>
+      </div>
+
       <div class="section">
         <div class="form-group full">
           <input id="responsavel_comercial" name="responsavel_comercial" type="text" placeholder="Responsável Comercial: Zurich">
@@ -278,3 +344,5 @@
 </body>
 </html>
 ```
+
+Quer que eu também faça os campos **Primeiro Nome** e **Sobrenome** ficarem `required` apenas quando a API preencher?
