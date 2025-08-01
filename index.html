@@ -136,32 +136,34 @@
         <input id="telefone_contato" name="telefone_contato" type="tel" placeholder="Telefone do Contato" required>
       </div>
 
-      <div class="form-group">
-        <input id="cep" name="cep" type="text" maxlength="9" placeholder="CEP - Corretora" required>
-      </div>
+      <div class="section">
+        <div class="form-group">
+          <input id="cep" name="cep" type="text" maxlength="9" placeholder="CEP - Corretora" required>
+        </div>
 
-      <div class="form-group full">
-        <input id="logradouro" name="street" type="text" placeholder="Logradouro - Corretora" readonly required>
-      </div>
+        <div class="form-group full">
+          <input id="logradouro" name="street" type="text" placeholder="Logradouro - Corretora" readonly required>
+        </div>
 
-      <div class="form-group">
-        <input id="numero" name="numero" type="text" placeholder="Número - Corretora" required>
-      </div>
+        <div class="form-group">
+          <input id="numero" name="numero" type="text" placeholder="Número - Corretora" required>
+        </div>
 
-      <div class="form-group">
-        <input id="complemento" name="complemento" type="text" placeholder="Complemento - Corretora">
-      </div>
+        <div class="form-group">
+          <input id="complemento" name="complemento" type="text" placeholder="Complemento - Corretora">
+        </div>
 
-      <div class="form-group">
-        <input id="bairro" name="bairro" type="text" placeholder="Bairro - Corretora" readonly required>
-      </div>
+        <div class="form-group">
+          <input id="bairro" name="bairro" type="text" placeholder="Bairro - Corretora" readonly required>
+        </div>
 
-      <div class="form-group">
-        <input id="cidade" name="cidade" type="text" placeholder="Cidade - Corretora" readonly required>
-      </div>
+        <div class="form-group">
+          <input id="cidade" name="cidade" type="text" placeholder="Cidade - Corretora" readonly required>
+        </div>
 
-      <div class="form-group">
-        <input id="estado" name="estado" type="text" placeholder="Estado - Corretora" readonly required>
+        <div class="form-group">
+          <input id="estado" name="estado" type="text" placeholder="Estado - Corretora" readonly required>
+        </div>
       </div>
 
       <div class="form-group full">
@@ -235,7 +237,9 @@
         </div>
       </div>
 
+      <!-- Seção separada só para agenda -->
       <div class="section">
+        <h3>Agendamento</h3>
         <div class="form-group full">
           <label>Deseja agendar uma reunião?</label>
           <div class="radio-group">
@@ -245,7 +249,10 @@
         </div>
         <div id="calendarEmbedContainer" style="display:none;">
           <div class="calendar-wrapper">
-            <iframe src="https://calendar.app.google/B54Z6pKjMCbgjTUv9?src=U5oztqWefrCVZr6z9" allowfullscreen></iframe>
+            <iframe src="https://calendar.app.google/B54Z6pKjMCbgjTUv9" allowfullscreen></iframe>
+          </div>
+          <div class="calendar-wrapper" style="margin-top:20px;">
+            <iframe src="https://calendar.app.google/U5oztqWefrCVZr6z9" allowfullscreen></iframe>
           </div>
         </div>
       </div>
@@ -266,22 +273,6 @@
           document.getElementById('razao_social').value = data.razao_social || '';
           document.getElementById('fantasia').value = data.nome_fantasia || data.razao_social || '';
           document.getElementById('company').value = data.razao_social || '';
-        }
-
-        if (data.qsa && data.qsa.length > 0) {
-          const socio = data.qsa.find(s => s.qualificacao?.includes("Sócio") || s.qualificacao?.includes("Administrador")) || data.qsa[0];
-          if (socio && socio.nome) {
-            const nomes = socio.nome.split(" ");
-            document.getElementById('firstNameGroup').style.display = 'block';
-            document.getElementById('lastNameGroup').style.display = 'block';
-            document.getElementById('first_name').value = nomes.slice(0, -1).join(" ");
-            document.getElementById('last_name').value = nomes.slice(-1).join(" ");
-          }
-        } else {
-          document.getElementById('firstNameGroup').style.display = 'none';
-          document.getElementById('lastNameGroup').style.display = 'none';
-          document.getElementById('first_name').value = "";
-          document.getElementById('last_name').value = "";
         }
       } catch (error) {
         console.error('Erro ao buscar CNPJ:', error);
@@ -329,7 +320,7 @@
         }
       });
 
-      // Exibir agenda
+      // Exibir agendas
       document.querySelectorAll('input[name="agendar_reuniao"]').forEach(radio => {
         radio.addEventListener('change', function() {
           document.getElementById("calendarEmbedContainer").style.display = (this.value === 'sim') ? 'block' : 'none';
