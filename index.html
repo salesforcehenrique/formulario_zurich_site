@@ -61,14 +61,6 @@
       transition: border-color 0.2s, box-shadow 0.2s;
       box-sizing: border-box;
     }
-    input::placeholder, textarea::placeholder {
-      color: #9aa0a6;
-    }
-    input:focus, select:focus, textarea:focus {
-      border-color: #0073ff;
-      box-shadow: 0 0 0 3px rgba(0,115,255,0.2);
-      outline: none;
-    }
     .submit-button {
       background: #0073ff;
       color: white;
@@ -81,21 +73,11 @@
       width: 220px;
       margin: 30px auto 0;
       display: block;
-      transition: background 0.2s;
-    }
-    .submit-button:hover {
-      background: #005dd1;
-    }
-    .error {
-      color: #d93025;
-      font-size: 0.85em;
-      display: none;
-      margin-top: 4px;
     }
     .radio-group {
       display: flex;
-      gap: 30px;
-      margin-top: 12px;
+      gap: 20px;
+      margin-top: 10px;
       align-items: center;
     }
     .calendar-wrapper {
@@ -131,64 +113,64 @@
       <input type="hidden" id="company" name="company" value="" />
 
       <div class="form-group full">
-        <input id="cnpj" name="00NSG00000QKAKR" maxlength="18" type="text" placeholder="CNPJ" required>
+        <input id="cnpj" name="00NSG00000QKAKR" maxlength="18" type="text" placeholder="CNPJ - Corretora" required>
       </div>
 
       <div class="form-group">
-        <input id="razao_social" name="00NSG00000QKCIz" type="text" placeholder="Razão Social" required>
+        <input id="razao_social" name="00NSG00000QKCIz" type="text" placeholder="Razão Social - Corretora" required>
       </div>
 
       <div class="form-group">
-        <input id="fantasia" name="00NIa000000NlQQ" type="text" placeholder="Nome Fantasia" required>
+        <input id="fantasia" name="00NIa000000NlQQ" type="text" placeholder="Nome Fantasia - Corretora" required>
       </div>
 
       <div class="form-group" id="firstNameGroup" style="display:none;">
-        <input id="first_name" name="first_name" type="text" placeholder="Primeiro Nome">
+        <input id="first_name" name="first_name" type="text" placeholder="Primeiro Nome - Corretora">
       </div>
 
       <div class="form-group" id="lastNameGroup" style="display:none;">
-        <input id="last_name" name="last_name" type="text" placeholder="Sobrenome">
+        <input id="last_name" name="last_name" type="text" placeholder="Sobrenome - Corretora">
       </div>
 
       <div class="form-group full">
-        <input id="email" name="email" type="email" placeholder="Email" required>
+        <input id="email" name="email" type="email" placeholder="Email - Corretora" required>
       </div>
 
       <div class="form-group">
-        <input id="cep" name="cep" type="text" maxlength="9" placeholder="CEP" required>
+        <input id="cep" name="cep" type="text" maxlength="9" placeholder="CEP - Corretora" required>
       </div>
 
       <div class="form-group full">
-        <input id="logradouro" name="street" type="text" placeholder="Logradouro" readonly required>
+        <input id="logradouro" name="street" type="text" placeholder="Logradouro - Corretora" readonly required>
       </div>
 
       <div class="form-group">
-        <input id="numero" name="numero" type="text" placeholder="Número" required>
+        <input id="numero" name="numero" type="text" placeholder="Número - Corretora" required>
       </div>
 
       <div class="form-group">
-        <input id="complemento" name="complemento" type="text" placeholder="Complemento">
+        <input id="complemento" name="complemento" type="text" placeholder="Complemento - Corretora">
       </div>
 
       <div class="form-group">
-        <input id="bairro" name="bairro" type="text" placeholder="Bairro" readonly required>
+        <input id="bairro" name="bairro" type="text" placeholder="Bairro - Corretora" readonly required>
       </div>
 
       <div class="form-group">
-        <input id="cidade" name="cidade" type="text" placeholder="Cidade" readonly required>
+        <input id="cidade" name="cidade" type="text" placeholder="Cidade - Corretora" readonly required>
       </div>
 
       <div class="form-group">
-        <input id="estado" name="estado" type="text" placeholder="Estado" readonly required>
+        <input id="estado" name="estado" type="text" placeholder="Estado - Corretora" readonly required>
       </div>
 
       <div class="form-group full">
-        <input id="responsavel" name="00NSG00000QKgtm" type="text" placeholder="Responsável" required>
+        <input id="responsavel" name="00NSG00000QKgtm" type="text" placeholder="Responsável - Corretora" required>
       </div>
 
       <div class="form-group">
         <select id="cargo" name="00NSG00000QKGWI" required>
-          <option value="">Cargo</option>
+          <option value="">Cargo - Corretora</option>
           <option value="Proprietário">Proprietário</option>
           <option value="Diretor">Diretor</option>
           <option value="Gerente">Gerente</option>
@@ -197,65 +179,69 @@
       </div>
 
       <div class="form-group">
-        <input id="imobiliarias" name="00N6A00000NUmQa" type="number" min="1" placeholder="Qtd. Imobiliárias" required>
+        <input id="imobiliarias" name="00N6A00000NUmQa" type="number" min="1" placeholder="Qtd. Imobiliárias - Corretora" required>
       </div>
 
       <div class="form-group">
-        <input id="incendio" name="00NSG00000QGVKd" type="number" step="0.01" placeholder="Produção Mensal Incêndio">
+        <input id="incendio" name="00NSG00000QGVKd" type="number" step="0.01" placeholder="Produção Mensal Incêndio - Corretora">
       </div>
 
       <div class="form-group">
-        <input id="seguradora_incendio" name="Seguradora_principal_Incendio__c" type="text" placeholder="Seguradora principal - Incêndio">
+        <input id="seguradora_incendio" name="Seguradora_principal_Incendio__c" type="text" placeholder="Seguradora principal - Incêndio - Corretora">
       </div>
 
       <div class="form-group">
-        <input id="fianca" name="00NSG00000QGgQv" type="number" step="0.01" placeholder="Produção Mensal Fiança">
+        <input id="fianca" name="00NSG00000QGgQv" type="number" step="0.01" placeholder="Produção Mensal Fiança - Corretora">
       </div>
 
       <div class="form-group">
-        <input id="seguradora_fianca" name="Seguradora_principal_Fianca__c" type="text" placeholder="Seguradora principal - Fiança">
+        <input id="seguradora_fianca" name="Seguradora_principal_Fianca__c" type="text" placeholder="Seguradora principal - Fiança - Corretora">
       </div>
 
       <div class="form-group">
-        <input id="capitalizacao" name="00NSG00000QGe4A" type="number" step="0.01" placeholder="Produção Mensal Capitalização">
+        <input id="capitalizacao" name="00NSG00000QGe4A" type="number" step="0.01" placeholder="Produção Mensal Capitalização - Corretora">
       </div>
 
       <div class="form-group">
-        <input id="seguradora_capitalizacao" name="Seguradora_principal_Tit_Capitalizacao__c" type="text" placeholder="Seguradora principal - Tit Capitalização">
+        <input id="seguradora_capitalizacao" name="Seguradora_principal_Tit_Capitalizacao__c" type="text" placeholder="Seguradora principal - Tit Capitalização - Corretora">
       </div>
 
       <div class="section">
         <div class="form-group">
           <select id="plataforma" name="00NSG00000QGcb4">
-            <option value="">Tem plataforma própria?</option>
+            <option value="">Tem plataforma própria? - Corretora</option>
             <option value="Sim">Sim</option>
             <option value="Não">Não</option>
           </select>
         </div>
         <div class="form-group full" id="siteGroup" style="display:none;">
-          <input id="site" name="00NSG00000QGjlN" type="url" placeholder="Endereço do site">
+          <input id="site" name="00NSG00000QGjlN" type="url" placeholder="Endereço do site - Corretora">
         </div>
       </div>
 
       <div class="section">
         <div class="form-group">
           <select id="erp" name="00NSG00000QGYvd">
-            <option value="">Parceria com ERP?</option>
+            <option value="">Parceria com ERP? - Corretora</option>
             <option value="Sim">Sim</option>
             <option value="Não">Não</option>
           </select>
         </div>
         <div class="form-group full" id="erp_nomeGroup" style="display:none;">
-          <input id="erp_nome" name="00NSG00000QGgKU" type="text" placeholder="ERP Utilizado">
+          <input id="erp_nome" name="00NSG00000QGgKU" type="text" placeholder="ERP Utilizado - Corretora">
         </div>
         <div class="form-group full" id="erp_extraGroup" style="display:none;">
-          <input id="erp_extra" name="ERP_para_gerenciamento" type="text" placeholder="ERP para gerenciamento de seguros">
+          <input id="erp_extra" name="ERP_para_gerenciamento" type="text" placeholder="ERP para gerenciamento de seguros - Corretora">
         </div>
       </div>
 
       <div class="section">
-        <div class="form-group full">
-          <input id="responsavel_comercial" name="responsavel_comercial" type="text" placeholder="Responsável Comercial: Zurich">
+        <h3>Responsável Comercial Zurich</h3>
+        <div class="form-group">
+          <input id="responsavel_comercial" name="responsavel_comercial" type="text" placeholder="Responsável Comercial Zurich">
+        </div>
+        <div class="form-group">
+          <input id="cpf_comercial" name="cpf_comercial" type="text" placeholder="CPF Comercial Zurich">
         </div>
       </div>
 
@@ -270,6 +256,9 @@
         <div id="calendarEmbedContainer" style="display:none;">
           <div class="calendar-wrapper">
             <iframe src="https://calendar.app.google/B54Z6pKjMCbgjTUv9" allowfullscreen></iframe>
+          </div>
+          <div class="calendar-wrapper" style="margin-top:20px;">
+            <iframe src="https://calendar.app.google/U5oztqWefrCVZr6z9" allowfullscreen></iframe>
           </div>
         </div>
       </div>
