@@ -124,16 +124,8 @@
         <input id="fantasia" name="00NIa000000NlQQ" type="text" placeholder="Nome Fantasia - Corretora" required>
       </div>
 
-      <div class="form-group full">
-        <input id="email" name="email" type="email" placeholder="Email do Contato" required>
-      </div>
-
       <div class="form-group">
         <input id="telefone_corretora" name="telefone_corretora" type="tel" placeholder="Telefone - Corretora" required>
-      </div>
-
-      <div class="form-group">
-        <input id="telefone_contato" name="telefone_contato" type="tel" placeholder="Telefone do Contato" required>
       </div>
 
       <div class="section">
@@ -166,8 +158,18 @@
         </div>
       </div>
 
-      <div class="form-group full">
-        <input id="responsavel" name="00NSG00000QKgtm" type="text" placeholder="Responsável - Corretora" required>
+      <!-- Nova seção para dados do responsável -->
+      <div class="section">
+        <h3>Dados do Responsável da Corretora</h3>
+        <div class="form-group full">
+          <input id="email" name="email" type="email" placeholder="Email do Contato" required>
+        </div>
+        <div class="form-group">
+          <input id="telefone_contato" name="telefone_contato" type="tel" placeholder="Telefone do Contato" required>
+        </div>
+        <div class="form-group full">
+          <input id="responsavel" name="00NSG00000QKgtm" type="text" placeholder="Responsável - Corretora" required>
+        </div>
       </div>
 
       <div class="form-group">
@@ -304,12 +306,10 @@
         buscarCEP(this.value);
       });
 
-      // Mostrar/ocultar site
       document.getElementById('plataforma').addEventListener('change', function () {
         document.getElementById('siteGroup').style.display = (this.value === 'Sim') ? 'block' : 'none';
       });
 
-      // Mostrar/ocultar ERP
       document.getElementById('erp').addEventListener('change', function () {
         if (this.value === 'Sim') {
           document.getElementById('erp_nomeGroup').style.display = 'block';
@@ -320,7 +320,6 @@
         }
       });
 
-      // Exibir agendas
       document.querySelectorAll('input[name="agendar_reuniao"]').forEach(radio => {
         radio.addEventListener('change', function() {
           document.getElementById("calendarEmbedContainer").style.display = (this.value === 'sim') ? 'block' : 'none';
