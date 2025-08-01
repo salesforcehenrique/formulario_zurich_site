@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <title>Formulário de Cadastro</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulário WebToLead</title>
   <style>
     body {
       margin: 0;
@@ -58,11 +58,12 @@
       margin-bottom: 5px;
     }
 
-    input, select {
+    input, select, textarea {
       padding: 12px;
       border-radius: 6px;
       border: 1px solid #ccc;
       font-size: 14px;
+      width: 100%;
     }
 
     .submit-button {
@@ -76,33 +77,27 @@
       cursor: pointer;
       width: 200px;
       margin: 20px auto 0;
+      display: block;
     }
 
     .submit-button:hover {
       background: #005dd1;
     }
 
-    .thank-you {
-      display: none;
-      text-align: center;
-      color: green;
-      margin-top: 20px;
-    }
-
-    #status {
-      font-size: 14px;
-      text-align: center;
-      margin-top: 10px;
-    }
-
-    #status.error {
+    .error {
       color: red;
+      font-size: 0.9em;
+      display: none;
+    }
+
+    .radio-group label {
+      display: inline-block;
+      margin-right: 15px;
     }
 
     .google-calendar-frame {
-      width: 100% !important;
-      height: 1000px !important;
-      min-height: 700px;
+      width: 100%;
+      height: 800px;
       border: none;
     }
 
@@ -110,7 +105,6 @@
       .form-group {
         flex: 1 1 100%;
       }
-
       .submit-button {
         width: 100%;
       }
@@ -119,64 +113,186 @@
 </head>
 <body>
   <div class="form-container">
-    <h2><span style="color:#0073ff;font-weight:bold;">sempre</span>juntos</h2>
+    <h2>Cadastro de Parceiros</h2>
     <p class="subheading">Fale com a gente</p>
+  
+    <form id="leadForm" 
+          action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00D6A000002ImjZ" 
+          method="POST">
 
-    <form id="leadForm" action="https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST">
-      <input type="hidden" name="oid" value="00DHa000003AAMB" />
-      <input type="hidden" name="retURL" value="https://salesforcehenrique.github.io/formulario_zurich_site/" />
-      <input type="hidden" name="debug" value="1" />
-      <input type="hidden" name="debugEmail" value="henrique@cscorp.tec.br" />
-      <input type="hidden" name="ValidationNeeded__c" value="false" />
-      <input type="hidden" name="LeadSource" value="Website" />
+      <input type="hidden" name="oid" value="00D6A000002ImjZ">
+      <input type="hidden" name="retURL" value="https://salesforcehenrique.github.io/">
       <input type="hidden" id="company" name="company" value="" />
 
-      <div class="form-group full"><label>CNPJ:</label><input type="text" id="cnpj" name="CNPJ_SegImob__c" required /></div>
-      <div class="form-group"><label>Razão Social:</label><input type="text" id="razao_social" name="Razao_Social__c" required /></div>
-      <div class="form-group"><label>Nome Fantasia:</label><input type="text" id="fantasia" name="Nome_Fantasia__c" /></div>
-      <div class="form-group"><label>Telefone:</label><input type="text" id="phone" name="Phone" /></div>
-      <div class="form-group"><label>E-mail:</label><input type="email" id="email" name="Email" required /></div>
-      <div class="form-group full"><label>Endereço:</label><input type="text" id="endereco" name="Street" /></div>
-      <div class="form-group"><label>Nome:</label><input type="text" name="first_name" required /></div>
-      <div class="form-group"><label>Sobrenome:</label><input type="text" name="last_name" required /></div>
-      <div class="form-group"><label>Especialista no ramo imobiliário:</label>
-        <select name="Corretora_especialista__c"><option>Sim</option><option>Não</option></select>
+      <!-- Campos básicos -->
+      <div class="form-group full">
+        <label for="cnpj">CNPJ</label>
+        <input id="cnpj" name="00NSG00000QKAKR" maxlength="18" type="text" required>
+        <div class="error">Digite um CNPJ válido.</div>
       </div>
-      <div class="form-group"><label>Produção – Incêndio:</label>
-        <select name="Fatura_Mensal_Incendio__c"><option>1 a 5 milhões</option><option>5 a 10 milhões</option><option>Acima de 10 milhões</option></select>
+
+      <div class="form-group">
+        <label for="razao_social">Razão Social</label>
+        <input id="razao_social" name="00NSG00000QKCIz" type="text" required>
       </div>
-      <div class="form-group"><label>Produção – Fiança:</label>
-        <select name="Fatura_Mensal_Fianca__c"><option>1 a 5 milhões</option><option>5 a 10 milhões</option><option>Acima de 10 milhões</option></select>
+
+      <div class="form-group">
+        <label for="fantasia">Nome Fantasia</label>
+        <input id="fantasia" name="00NIa000000NlQQ" type="text">
       </div>
-      <div class="form-group"><label>Produção – Título de Capitalização:</label>
-        <select name="Fatura_Mensal_T_tulo__c"><option>1 a 5 milhões</option><option>5 a 10 milhões</option><option>Acima de 10 milhões</option></select>
+
+      <div class="form-group">
+        <label for="cep">CEP</label>
+        <input id="cep" name="00N6A00000NUFGs" maxlength="9" type="text" required>
+        <div class="error">Digite um CEP válido.</div>
       </div>
-      <div class="form-group full"><label>Região (Sucursal):</label>
-        <select name="Estado__c"><option value="">Selecione uma região</option><option>São Paulo – SP</option></select>
+
+      <div class="form-group full">
+        <label for="endereco">Logradouro</label>
+        <textarea id="endereco" name="street" rows="2" required></textarea>
       </div>
-      <div class="form-group full"><label>Número da SUSEP:</label><input type="text" name="Numero_SUSEP__c" /></div>
-      <div class="form-group full"><label>Deseja agendar uma reunião agora?</label>
-        <select id="agendar" name="Agendamento_realizado__c">
-          <option value="">Selecione</option>
-          <option value="true">Sim</option>
-          <option value="false">Não</option>
+
+      <div class="form-group">
+        <label for="first_name">Primeiro Nome</label>
+        <input id="first_name" name="first_name" type="text" required>
+      </div>
+
+      <div class="form-group">
+        <label for="last_name">Sobrenome</label>
+        <input id="last_name" name="last_name" type="text" required>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" required>
+        <div class="error">Digite um e-mail válido.</div>
+      </div>
+
+      <div class="form-group">
+        <label for="state">Estado</label>
+        <input id="state" name="state" type="text" required>
+      </div>
+
+      <div class="form-group">
+        <label for="city">Cidade</label>
+        <input id="city" name="city" type="text" required>
+      </div>
+
+      <div class="form-group full">
+        <label for="responsavel">Responsável</label>
+        <input id="responsavel" name="00NSG00000QKgtm" type="text" required>
+      </div>
+
+      <div class="form-group">
+        <label for="cargo">Cargo</label>
+        <select id="cargo" name="00NSG00000QKGWI">
+          <option value="">-- Selecione --</option>
+          <option value="Proprietário">Proprietário</option>
+          <option value="Diretor">Diretor</option>
+          <option value="Gerente">Gerente</option>
+          <option value="Funcionário">Funcionário</option>
         </select>
       </div>
 
-      <button type="submit" class="submit-button">ENVIAR</button>
-      <div id="status"></div>
-
-      <div id="calendlyContainer" class="form-group full" style="display:none;">
-        <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ0rW-27jpjR58SLdtmXIkAskIH-0s0ln9XkST6o4SL-11ygRsoDP54DZJEldP4HJJ10ySH2jAnr?gv=true" class="google-calendar-frame"></iframe>
+      <div class="form-group">
+        <label for="imobiliarias">Qtd. Imobiliárias</label>
+        <input id="imobiliarias" name="00N6A00000NUmQa" type="number" min="1" required>
       </div>
+
+      <div class="form-group">
+        <label for="incendio">Prod. Mensal Incêndio</label>
+        <input id="incendio" name="00NSG00000QGVKd" type="number" step="0.01">
+      </div>
+
+      <div class="form-group">
+        <label for="seguradora_incendio">Seguradora principal - Incêndio</label>
+        <input id="seguradora_incendio" name="Seguradora_principal_Incendio__c" type="text">
+      </div>
+
+      <div class="form-group">
+        <label for="fianca">Prod. Mensal Fiança</label>
+        <input id="fianca" name="00NSG00000QGgQv" type="number" step="0.01">
+      </div>
+
+      <div class="form-group">
+        <label for="seguradora_fianca">Seguradora principal - Fiança</label>
+        <input id="seguradora_fianca" name="Seguradora_principal_Fianca__c" type="text">
+      </div>
+
+      <div class="form-group">
+        <label for="capitalizacao">Prod. Mensal Capitalização</label>
+        <input id="capitalizacao" name="00NSG00000QGe4A" type="number" step="0.01">
+      </div>
+
+      <div class="form-group">
+        <label for="seguradora_capitalizacao">Seguradora principal - Tit Capitalização</label>
+        <input id="seguradora_capitalizacao" name="Seguradora_principal_Tit_Capitalizacao__c" type="text">
+      </div>
+
+      <div class="form-group full" id="siteGroup" style="display:none;">
+        <label for="site">Endereço do site</label>
+        <input id="site" name="00NSG00000QGjlN" type="url">
+      </div>
+
+      <div class="form-group">
+        <label for="plataforma">Tem plataforma própria?</label>
+        <select id="plataforma" name="00NSG00000QGcb4">
+          <option value="">-- Selecione --</option>
+          <option value="Sim">Sim</option>
+          <option value="Não">Não</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="erp">Parceria com ERP?</label>
+        <select id="erp" name="00NSG00000QGYvd">
+          <option value="">-- Selecione --</option>
+          <option value="Sim">Sim</option>
+          <option value="Não">Não</option>
+        </select>
+      </div>
+
+      <div class="form-group full" id="erp_nomeGroup" style="display:none;">
+        <label for="erp_nome">ERP Utilizado</label>
+        <input id="erp_nome" name="00NSG00000QGgKU" type="text">
+      </div>
+
+      <div class="form-group full" id="erp_extraGroup" style="display:none;">
+        <label for="erp_extra">ERP para gerenciamento de seguros</label>
+        <input id="erp_extra" name="ERP_para_gerenciamento" type="text">
+      </div>
+
+      <div class="form-group full">
+        <label>Deseja agendar uma reunião?</label>
+        <div class="radio-group">
+          <label><input type="radio" name="agendar_reuniao" value="sim"> Sim</label>
+          <label><input type="radio" name="agendar_reuniao" value="nao" checked> Não</label>
+        </div>
+      </div>
+
+      <button type="submit" class="submit-button">Enviar Cadastro</button>
     </form>
 
-    <div id="thanksMessage" class="thank-you">Obrigado! Nossa equipe comercial entrará em contato com você em breve.</div>
+    <!-- Agenda Embed -->
+    <div id="calendarEmbedContainer" style="display:none; margin-top:20px;">
+      <iframe 
+        class="google-calendar-frame"
+        src="https://calendar.google.com/calendar/embed?src=aGVucmlxdWVAY3Njb3JwLnRlYy5icg"
+        frameborder="0" 
+        scrolling="no">
+      </iframe>
+      <p style="text-align:center; margin-top:10px;">
+        <a href="https://calendar.google.com/calendar/u/0?cid=aGVucmlxdWVAY3Njb3JwLnRlYy5icg" 
+           target="_blank">
+           Acessar calendário completo
+        </a>
+      </p>
+    </div>
   </div>
 
   <script>
     async function buscarCNPJ(cnpj) {
-      const sanitized = cnpj.replace(/\D/g, '');
+      const sanitized = cnpj.replace(/\D/g, "");
       if (sanitized.length !== 14) return;
 
       try {
@@ -194,18 +310,56 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
+      const plataformaSelect = document.getElementById("plataforma");
+      const erpSelect = document.getElementById("erp");
+      const siteGroup = document.getElementById("siteGroup");
+      const erp_nomeGroup = document.getElementById("erp_nomeGroup");
+      const erp_extraGroup = document.getElementById("erp_extraGroup");
+      const calendarEmbedContainer = document.getElementById("calendarEmbedContainer");
+
+      // Máscara CNPJ
+      document.getElementById("cnpj").addEventListener("input", function(e) {
+        let v = e.target.value.replace(/\D/g, "");
+        v = v.replace(/^(\d{2})(\d)/, "$1.$2");
+        v = v.replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3");
+        v = v.replace(/\.(\d{3})(\d)/, ".$1/$2");
+        v = v.replace(/(\d{4})(\d)/, "$1-$2");
+        e.target.value = v;
+      });
+
+      // Buscar CNPJ ao sair do campo
       document.getElementById('cnpj').addEventListener('blur', function () {
         buscarCNPJ(this.value);
       });
 
-      document.getElementById("agendar").addEventListener("change", function () {
-        document.getElementById("calendlyContainer").style.display = this.value === "true" ? "block" : "none";
+      // Máscara CEP
+      document.getElementById("cep").addEventListener("input", function(e) {
+        let v = e.target.value.replace(/\D/g, "");
+        v = v.replace(/^(\d{5})(\d)/, "$1-$2");
+        e.target.value = v;
       });
 
-      document.getElementById("leadForm").addEventListener("submit", function () {
-        const statusEl = document.getElementById("status");
-        statusEl.innerText = "Enviando...";
-        statusEl.classList.remove("error");
+      // Mostrar site se tiver plataforma
+      plataformaSelect.addEventListener('change', function() {
+        siteGroup.style.display = (this.value === "Sim") ? 'block' : 'none';
+      });
+
+      // Mostrar ERP se tiver parceria
+      erpSelect.addEventListener('change', function() {
+        if (this.value === "Sim") {
+          erp_nomeGroup.style.display = 'block';
+          erp_extraGroup.style.display = 'block';
+        } else {
+          erp_nomeGroup.style.display = 'none';
+          erp_extraGroup.style.display = 'none';
+        }
+      });
+
+      // Mostrar calendário se marcar SIM
+      document.querySelectorAll('input[name="agendar_reuniao"]').forEach(radio => {
+        radio.addEventListener('change', function() {
+          calendarEmbedContainer.style.display = (this.value === 'sim') ? 'block' : 'none';
+        });
       });
     });
   </script>
