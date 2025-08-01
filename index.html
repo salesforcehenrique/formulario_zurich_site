@@ -21,14 +21,12 @@
       box-shadow: 0 2px 6px rgba(0,0,0,0.05);
     }
     h2 {
-      text-align: left;
       font-size: 22px;
       font-weight: 600;
       color: #222;
       margin-bottom: 5px;
     }
     .subheading {
-      text-align: left;
       font-size: 14px;
       color: #0073ff;
       margin-bottom: 20px;
@@ -52,15 +50,9 @@
       padding-top: 20px;
       margin-top: 20px;
     }
-    label {
-      font-weight: 500;
-      font-size: 13px;
-      margin-bottom: 6px;
-      color: #444;
-    }
     input, select, textarea {
-      padding: 12px 14px;
-      border-radius: 6px;
+      padding: 14px;
+      border-radius: 8px;
       border: 1px solid #dcdfe6;
       font-size: 14px;
       width: 100%;
@@ -101,9 +93,6 @@
       margin-top: 8px;
     }
     .radio-group label {
-      display: flex;
-      align-items: center;
-      gap: 6px;
       font-size: 14px;
       color: #333;
     }
@@ -149,67 +138,55 @@
       <input type="hidden" id="company" name="company" value="" />
 
       <div class="form-group full">
-        <label for="cnpj">CNPJ</label>
-        <input id="cnpj" name="00NSG00000QKAKR" maxlength="18" type="text" required>
+        <input id="cnpj" name="00NSG00000QKAKR" maxlength="18" type="text" placeholder="CNPJ" required>
         <div class="error">Digite um CNPJ válido.</div>
       </div>
 
       <div class="form-group">
-        <label for="razao_social">Razão Social</label>
-        <input id="razao_social" name="00NSG00000QKCIz" type="text" required>
+        <input id="razao_social" name="00NSG00000QKCIz" type="text" placeholder="Razão Social" required>
       </div>
 
       <div class="form-group">
-        <label for="fantasia">Nome Fantasia</label>
-        <input id="fantasia" name="00NIa000000NlQQ" type="text">
+        <input id="fantasia" name="00NIa000000NlQQ" type="text" placeholder="Nome Fantasia">
       </div>
 
       <div class="form-group">
-        <label for="cep">CEP</label>
-        <input id="cep" name="00N6A00000NUFGs" maxlength="9" type="text" required>
+        <input id="cep" name="00N6A00000NUFGs" maxlength="9" type="text" placeholder="CEP" required>
         <div class="error">Digite um CEP válido.</div>
       </div>
 
       <div class="form-group full">
-        <label for="endereco">Logradouro</label>
-        <textarea id="endereco" name="street" rows="2" required></textarea>
+        <textarea id="endereco" name="street" rows="2" placeholder="Logradouro" required></textarea>
       </div>
 
       <div class="form-group">
-        <label for="first_name">Primeiro Nome</label>
-        <input id="first_name" name="first_name" type="text" required>
+        <input id="first_name" name="first_name" type="text" placeholder="Primeiro Nome" required>
       </div>
 
       <div class="form-group">
-        <label for="last_name">Sobrenome</label>
-        <input id="last_name" name="last_name" type="text" required>
+        <input id="last_name" name="last_name" type="text" placeholder="Sobrenome" required>
       </div>
 
       <div class="form-group">
-        <label for="email">Email</label>
-        <input id="email" name="email" type="email" required>
+        <input id="email" name="email" type="email" placeholder="Email" required>
         <div class="error">Digite um e-mail válido.</div>
       </div>
 
       <div class="form-group">
-        <label for="state">Estado</label>
-        <input id="state" name="state" type="text" required>
+        <input id="state" name="state" type="text" placeholder="Estado" required>
       </div>
 
       <div class="form-group">
-        <label for="city">Cidade</label>
-        <input id="city" name="city" type="text" required>
+        <input id="city" name="city" type="text" placeholder="Cidade" required>
       </div>
 
       <div class="form-group full">
-        <label for="responsavel">Responsável</label>
-        <input id="responsavel" name="00NSG00000QKgtm" type="text" required>
+        <input id="responsavel" name="00NSG00000QKgtm" type="text" placeholder="Responsável" required>
       </div>
 
       <div class="form-group">
-        <label for="cargo">Cargo</label>
         <select id="cargo" name="00NSG00000QKGWI">
-          <option value="">-- Selecione --</option>
+          <option value="">Cargo</option>
           <option value="Proprietário">Proprietário</option>
           <option value="Diretor">Diretor</option>
           <option value="Gerente">Gerente</option>
@@ -218,82 +195,69 @@
       </div>
 
       <div class="form-group">
-        <label for="imobiliarias">Qtd. Imobiliárias</label>
-        <input id="imobiliarias" name="00N6A00000NUmQa" type="number" min="1" required>
+        <input id="imobiliarias" name="00N6A00000NUmQa" type="number" min="1" placeholder="Qtd. Imobiliárias" required>
       </div>
 
       <div class="form-group">
-        <label for="incendio">Prod. Mensal Incêndio</label>
-        <input id="incendio" name="00NSG00000QGVKd" type="number" step="0.01">
+        <input id="incendio" name="00NSG00000QGVKd" type="number" step="0.01" placeholder="Produção Mensal Incêndio">
       </div>
 
       <div class="form-group">
-        <label for="seguradora_incendio">Seguradora principal - Incêndio</label>
-        <input id="seguradora_incendio" name="Seguradora_principal_Incendio__c" type="text">
+        <input id="seguradora_incendio" name="Seguradora_principal_Incendio__c" type="text" placeholder="Seguradora principal - Incêndio">
       </div>
 
       <div class="form-group">
-        <label for="fianca">Prod. Mensal Fiança</label>
-        <input id="fianca" name="00NSG00000QGgQv" type="number" step="0.01">
+        <input id="fianca" name="00NSG00000QGgQv" type="number" step="0.01" placeholder="Produção Mensal Fiança">
       </div>
 
       <div class="form-group">
-        <label for="seguradora_fianca">Seguradora principal - Fiança</label>
-        <input id="seguradora_fianca" name="Seguradora_principal_Fianca__c" type="text">
+        <input id="seguradora_fianca" name="Seguradora_principal_Fianca__c" type="text" placeholder="Seguradora principal - Fiança">
       </div>
 
       <div class="form-group">
-        <label for="capitalizacao">Prod. Mensal Capitalização</label>
-        <input id="capitalizacao" name="00NSG00000QGe4A" type="number" step="0.01">
+        <input id="capitalizacao" name="00NSG00000QGe4A" type="number" step="0.01" placeholder="Produção Mensal Capitalização">
       </div>
 
       <div class="form-group">
-        <label for="seguradora_capitalizacao">Seguradora principal - Tit Capitalização</label>
-        <input id="seguradora_capitalizacao" name="Seguradora_principal_Tit_Capitalizacao__c" type="text">
+        <input id="seguradora_capitalizacao" name="Seguradora_principal_Tit_Capitalizacao__c" type="text" placeholder="Seguradora principal - Tit Capitalização">
       </div>
 
       <div class="section">
         <div class="form-group">
-          <label for="plataforma">Tem plataforma própria?</label>
           <select id="plataforma" name="00NSG00000QGcb4">
-            <option value="">-- Selecione --</option>
+            <option value="">Tem plataforma própria?</option>
             <option value="Sim">Sim</option>
             <option value="Não">Não</option>
           </select>
         </div>
 
         <div class="form-group full" id="siteGroup" style="display:none;">
-          <label for="site">Endereço do site</label>
-          <input id="site" name="00NSG00000QGjlN" type="url">
+          <input id="site" name="00NSG00000QGjlN" type="url" placeholder="Endereço do site">
         </div>
       </div>
 
       <div class="section">
         <div class="form-group">
-          <label for="erp">Parceria com ERP?</label>
           <select id="erp" name="00NSG00000QGYvd">
-            <option value="">-- Selecione --</option>
+            <option value="">Parceria com ERP?</option>
             <option value="Sim">Sim</option>
             <option value="Não">Não</option>
           </select>
         </div>
 
         <div class="form-group full" id="erp_nomeGroup" style="display:none;">
-          <label for="erp_nome">ERP Utilizado</label>
-          <input id="erp_nome" name="00NSG00000QGgKU" type="text">
+          <input id="erp_nome" name="00NSG00000QGgKU" type="text" placeholder="ERP Utilizado">
         </div>
 
         <div class="form-group full" id="erp_extraGroup" style="display:none;">
-          <label for="erp_extra">ERP para gerenciamento de seguros</label>
-          <input id="erp_extra" name="ERP_para_gerenciamento" type="text">
+          <input id="erp_extra" name="ERP_para_gerenciamento" type="text" placeholder="ERP para gerenciamento de seguros">
         </div>
       </div>
 
       <div class="section">
         <div class="form-group full">
-          <label>Deseja agendar uma reunião?</label>
           <div class="radio-group">
-            <label><input type="radio" name="agendar_reuniao" value="sim"> Sim</label>
+            <label><input type="radio" name="agendar_reuniao" value="sim"> Deseja agendar uma reunião? Sim</label>
             <label><input type="radio" name="agendar_reuniao" value="nao" checked> Não</label>
           </div>
         </div>
