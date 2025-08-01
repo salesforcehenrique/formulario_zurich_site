@@ -7,38 +7,39 @@
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #0066ff url('https://static.vecteezy.com/system/resources/previews/012/660/601/non_2x/abstract-blue-background-with-waves-free-vector.jpg') no-repeat center center fixed;
-      background-size: cover;
-      padding: 30px 15px;
+      font-family: "Segoe UI", Roboto, Arial, sans-serif;
+      background: #f9f9fb;
+      padding: 20px;
+      color: #333;
     }
     .form-container {
-      max-width: 900px;
+      max-width: 1100px;
       margin: auto;
-      background: white;
-      border-radius: 12px;
-      padding: 35px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      background: #fff;
+      border-radius: 8px;
+      padding: 30px 25px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
     }
     h2 {
-      text-align: center;
-      font-size: 26px;
-      color: #000;
-      margin-bottom: 10px;
+      text-align: left;
+      font-size: 22px;
+      font-weight: 600;
+      color: #222;
+      margin-bottom: 5px;
     }
     .subheading {
-      text-align: center;
-      font-size: 15px;
+      text-align: left;
+      font-size: 14px;
       color: #0073ff;
-      margin-bottom: 25px;
+      margin-bottom: 20px;
     }
     form {
       display: flex;
       flex-wrap: wrap;
-      gap: 25px;
+      gap: 20px;
     }
     .form-group {
-      flex: 1 1 45%;
+      flex: 1 1 48%;
       display: flex;
       flex-direction: column;
     }
@@ -47,53 +48,68 @@
     }
     .section {
       flex: 1 1 100%;
-      border-top: 1px solid #ccc;
+      border-top: 1px solid #e0e0e0;
       padding-top: 20px;
       margin-top: 20px;
     }
     label {
-      font-weight: 600;
-      font-size: 14px;
-      margin-bottom: 8px;
+      font-weight: 500;
+      font-size: 13px;
+      margin-bottom: 6px;
+      color: #444;
     }
     input, select, textarea {
-      padding: 14px;
+      padding: 12px 14px;
       border-radius: 6px;
-      border: 1px solid #ccc;
+      border: 1px solid #dcdfe6;
       font-size: 14px;
       width: 100%;
+      background: #fff;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: #0073ff;
+      box-shadow: 0 0 0 2px rgba(0,115,255,0.15);
+      outline: none;
     }
     .submit-button {
       background: #0073ff;
       color: white;
       padding: 14px;
-      font-size: 16px;
-      font-weight: bold;
+      font-size: 15px;
+      font-weight: 600;
       border: none;
       border-radius: 6px;
       cursor: pointer;
       width: 220px;
       margin: 30px auto 0;
       display: block;
+      transition: background 0.2s;
     }
     .submit-button:hover {
       background: #005dd1;
     }
     .error {
-      color: red;
-      font-size: 0.9em;
+      color: #d93025;
+      font-size: 0.85em;
       display: none;
-      margin-top: 5px;
+      margin-top: 4px;
+    }
+    .radio-group {
+      display: flex;
+      gap: 20px;
+      margin-top: 8px;
     }
     .radio-group label {
-      display: inline-block;
-      margin-right: 15px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      color: #333;
     }
-
-    /* Responsivo para o iframe */
     .calendar-wrapper {
       position: relative;
-      padding-bottom: 75%; /* Proporção */
+      padding-bottom: 75%;
       height: 0;
       overflow: hidden;
       margin-top: 20px;
@@ -104,6 +120,7 @@
       width: 100%;
       height: 100%;
       border: none;
+      background: #fff;
     }
     @media (max-width: 768px) {
       .form-group {
@@ -113,7 +130,7 @@
         width: 100%;
       }
       .calendar-wrapper {
-        padding-bottom: 120%; /* mais alto no mobile */
+        padding-bottom: 120%;
       }
     }
   </style>
@@ -281,13 +298,9 @@
           </div>
         </div>
 
-        <!-- Calendário Google responsivo -->
         <div id="calendarEmbedContainer" style="display:none;">
           <div class="calendar-wrapper">
-            <iframe 
-              src="https://calendar.app.google/B54Z6pKjMCbgjTUv9" 
-              allowfullscreen>
-            </iframe>
+            <iframe src="https://calendar.app.google/B54Z6pKjMCbgjTUv9" allowfullscreen></iframe>
           </div>
         </div>
       </div>
@@ -322,7 +335,6 @@
       const erp_extraGroup = document.getElementById("erp_extraGroup");
       const calendarEmbedContainer = document.getElementById("calendarEmbedContainer");
 
-      // Máscara de CNPJ
       document.getElementById("cnpj").addEventListener("input", function(e) {
         let v = e.target.value.replace(/\D/g, "");
         v = v.replace(/^(\d{2})(\d)/, "$1.$2");
@@ -336,14 +348,12 @@
         buscarCNPJ(this.value);
       });
 
-      // Máscara de CEP
       document.getElementById("cep").addEventListener("input", function(e) {
         let v = e.target.value.replace(/\D/g, "");
         v = v.replace(/^(\d{5})(\d)/, "$1-$2");
         e.target.value = v;
       });
 
-      // Exibir/esconder campos adicionais
       plataformaSelect?.addEventListener('change', function() {
         siteGroup.style.display = (this.value === "Sim") ? 'block' : 'none';
       });
@@ -358,14 +368,12 @@
         }
       });
 
-      // Mostrar o calendário apenas se marcar "Sim"
       document.querySelectorAll('input[name="agendar_reuniao"]').forEach(radio => {
         radio.addEventListener('change', function() {
           calendarEmbedContainer.style.display = (this.value === 'sim') ? 'block' : 'none';
         });
       });
 
-      // Validação do formulário
       form.addEventListener("submit", function(e) {
         let valid = true;
         const requiredFields = form.querySelectorAll("input[required], textarea[required], select[required]");
