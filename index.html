@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cadastro de Parceiros</title>
+  <title>Formulário WebToLead</title>
   <style>
     body {
       margin: 0;
@@ -12,93 +12,65 @@
       padding: 40px 20px;
       color: #333;
     }
-
     .form-container {
-      max-width: 1200px;
+      max-width: 1350px; /* largura maior */
       margin: auto;
       background: #fff;
       border-radius: 8px;
-      padding: 30px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      padding: 50px 40px; /* espaçamento interno aumentado */
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     }
-
     h2 {
       font-size: 22px;
       font-weight: 600;
-      margin-bottom: 8px;
       color: #222;
+      margin-bottom: 5px;
     }
-
     .subheading {
       font-size: 14px;
-      color: #007bff;
+      color: #0073ff;
       margin-bottom: 25px;
     }
-
     form {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 28px; /* espaçamento entre campos */
     }
-
+    .form-group {
+      flex: 1 1 calc(50% - 14px);
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 20px;
+    }
+    .form-group.full {
+      flex: 1 1 100%;
+    }
+    .section {
+      flex: 1 1 100%;
+      border-top: 1px solid #e5e7eb;
+      padding-top: 24px;
+      margin-top: 24px;
+    }
     input, select, textarea {
       padding: 14px 16px;
       border-radius: 6px;
-      border: 1px solid #d0d5dd;
+      border: 2px solid #000; /* borda preta */
       font-size: 14px;
+      width: 100%;
       background: #fff;
       transition: border-color 0.2s, box-shadow 0.2s;
+      box-sizing: border-box;
     }
-
     input::placeholder, textarea::placeholder {
       color: #9aa0a6;
     }
-
     input:focus, select:focus, textarea:focus {
-      border-color: #007bff;
-      box-shadow: 0 0 0 2px rgba(0,123,255,0.15);
+      border-color: #0073ff;
+      box-shadow: 0 0 0 3px rgba(0,115,255,0.2);
       outline: none;
     }
-
-    .form-group.full {
-      grid-column: span 2;
-    }
-
-    .section {
-      grid-column: span 2;
-      border-top: 1px solid #e0e0e0;
-      padding-top: 20px;
-      margin-top: 20px;
-    }
-
-    .radio-group {
-      display: flex;
-      align-items: center;
-      gap: 25px;
-      margin-top: 8px;
-    }
-
-    .radio-group label {
-      font-size: 14px;
-      color: #333;
-    }
-
-    .calendar-wrapper {
-      margin-top: 20px;
-      border: 1px solid #d0d5dd;
-      border-radius: 6px;
-      overflow: hidden;
-      height: 500px;
-    }
-
-    .calendar-wrapper iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-
     .submit-button {
-      background: #007bff;
+      background: #0073ff;
       color: white;
       padding: 14px;
       font-size: 15px;
@@ -106,25 +78,56 @@
       border: none;
       border-radius: 6px;
       cursor: pointer;
+      width: 220px;
+      margin: 30px auto 0;
+      display: block;
       transition: background 0.2s;
-      grid-column: span 2;
-      max-width: 220px;
-      justify-self: center;
     }
-
     .submit-button:hover {
-      background: #0056b3;
+      background: #005dd1;
     }
-
+    .error {
+      color: #d93025;
+      font-size: 0.85em;
+      display: none;
+      margin-top: 4px;
+    }
+    .radio-group {
+      display: flex;
+      gap: 30px;
+      margin-top: 12px;
+      align-items: center;
+    }
+    .radio-group label {
+      font-size: 14px;
+      color: #333;
+    }
+    .calendar-wrapper {
+      position: relative;
+      padding-bottom: 70%;
+      height: 0;
+      overflow: hidden;
+      margin-top: 20px;
+      border: 2px solid #000; /* borda preta na agenda também */
+      border-radius: 6px;
+    }
+    .calendar-wrapper iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: #fff;
+    }
     @media (max-width: 768px) {
-      form {
-        grid-template-columns: 1fr;
-      }
-      .form-group.full {
-        grid-column: span 1;
+      .form-group {
+        flex: 1 1 100%;
       }
       .submit-button {
         width: 100%;
+      }
+      .calendar-wrapper {
+        padding-bottom: 120%;
       }
     }
   </style>
@@ -133,73 +136,246 @@
   <div class="form-container">
     <h2>Cadastro de Parceiros</h2>
     <p class="subheading">Fale com a gente</p>
-
+  
     <form id="leadForm" 
           action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00D6A000002ImjZ" 
           method="POST">
 
       <input type="hidden" name="oid" value="00D6A000002ImjZ">
       <input type="hidden" name="retURL" value="https://salesforcehenrique.github.io/">
+      <input type="hidden" id="company" name="company" value="" />
 
-      <input id="cnpj" name="00NSG00000QKAKR" maxlength="18" type="text" placeholder="CNPJ" required>
-      <input id="razao_social" name="00NSG00000QKCIz" type="text" placeholder="Razão Social" required>
-      <input id="fantasia" name="00NIa000000NlQQ" type="text" placeholder="Nome Fantasia">
-      <input id="cep" name="00N6A00000NUFGs" maxlength="9" type="text" placeholder="CEP" required>
-      <textarea id="endereco" name="street" rows="2" placeholder="Logradouro" class="form-group full" required></textarea>
-      <input id="first_name" name="first_name" type="text" placeholder="Primeiro Nome" required>
-      <input id="last_name" name="last_name" type="text" placeholder="Sobrenome" required>
-      <input id="email" name="email" type="email" placeholder="Email" required>
-      <input id="state" name="state" type="text" placeholder="Estado" required>
-      <input id="city" name="city" type="text" placeholder="Cidade" required>
-      <input id="responsavel" name="00NSG00000QKgtm" type="text" placeholder="Responsável" class="form-group full" required>
+      <div class="form-group full">
+        <input id="cnpj" name="00NSG00000QKAKR" maxlength="18" type="text" placeholder="CNPJ" required>
+        <div class="error">Digite um CNPJ válido.</div>
+      </div>
 
-      <select id="cargo" name="00NSG00000QKGWI" required>
-        <option value="">Cargo</option>
-        <option value="Proprietário">Proprietário</option>
-        <option value="Diretor">Diretor</option>
-        <option value="Gerente">Gerente</option>
-        <option value="Funcionário">Funcionário</option>
-      </select>
-      <input id="imobiliarias" name="00N6A00000NUmQa" type="number" min="1" placeholder="Qtd. Imobiliárias" required>
-      <input id="incendio" name="00NSG00000QGVKd" type="number" step="0.01" placeholder="Produção Mensal Incêndio">
-      <input id="seguradora_incendio" name="Seguradora_principal_Incendio__c" type="text" placeholder="Seguradora principal - Incêndio">
-      <input id="fianca" name="00NSG00000QGgQv" type="number" step="0.01" placeholder="Produção Mensal Fiança">
-      <input id="seguradora_fianca" name="Seguradora_principal_Fianca__c" type="text" placeholder="Seguradora principal - Fiança">
-      <input id="capitalizacao" name="00NSG00000QGe4A" type="number" step="0.01" placeholder="Produção Mensal Capitalização">
-      <input id="seguradora_capitalizacao" name="Seguradora_principal_Tit_Capitalizacao__c" type="text" placeholder="Seguradora principal - Tit Capitalização">
+      <div class="form-group">
+        <input id="razao_social" name="00NSG00000QKCIz" type="text" placeholder="Razão Social" required>
+      </div>
 
-      <div class="section">
-        <select id="plataforma" name="00NSG00000QGcb4">
-          <option value="">Tem plataforma própria?</option>
-          <option value="Sim">Sim</option>
-          <option value="Não">Não</option>
+      <div class="form-group">
+        <input id="fantasia" name="00NIa000000NlQQ" type="text" placeholder="Nome Fantasia">
+      </div>
+
+      <div class="form-group">
+        <input id="cep" name="00N6A00000NUFGs" maxlength="9" type="text" placeholder="CEP" required>
+        <div class="error">Digite um CEP válido.</div>
+      </div>
+
+      <div class="form-group full">
+        <textarea id="endereco" name="street" rows="2" placeholder="Logradouro" required></textarea>
+      </div>
+
+      <div class="form-group">
+        <input id="first_name" name="first_name" type="text" placeholder="Primeiro Nome" required>
+      </div>
+
+      <div class="form-group">
+        <input id="last_name" name="last_name" type="text" placeholder="Sobrenome" required>
+      </div>
+
+      <div class="form-group">
+        <input id="email" name="email" type="email" placeholder="Email" required>
+        <div class="error">Digite um e-mail válido.</div>
+      </div>
+
+      <div class="form-group">
+        <input id="state" name="state" type="text" placeholder="Estado" required>
+      </div>
+
+      <div class="form-group">
+        <input id="city" name="city" type="text" placeholder="Cidade" required>
+      </div>
+
+      <div class="form-group full">
+        <input id="responsavel" name="00NSG00000QKgtm" type="text" placeholder="Responsável" required>
+      </div>
+
+      <div class="form-group">
+        <select id="cargo" name="00NSG00000QKGWI" required>
+          <option value="">Cargo</option>
+          <option value="Proprietário">Proprietário</option>
+          <option value="Diretor">Diretor</option>
+          <option value="Gerente">Gerente</option>
+          <option value="Funcionário">Funcionário</option>
         </select>
-        <input id="site" name="00NSG00000QGjlN" type="url" placeholder="Endereço do site" style="display:none;">
+      </div>
+
+      <div class="form-group">
+        <input id="imobiliarias" name="00N6A00000NUmQa" type="number" min="1" placeholder="Qtd. Imobiliárias" required>
+      </div>
+
+      <div class="form-group">
+        <input id="incendio" name="00NSG00000QGVKd" type="number" step="0.01" placeholder="Produção Mensal Incêndio">
+      </div>
+
+      <div class="form-group">
+        <input id="seguradora_incendio" name="Seguradora_principal_Incendio__c" type="text" placeholder="Seguradora principal - Incêndio">
+      </div>
+
+      <div class="form-group">
+        <input id="fianca" name="00NSG00000QGgQv" type="number" step="0.01" placeholder="Produção Mensal Fiança">
+      </div>
+
+      <div class="form-group">
+        <input id="seguradora_fianca" name="Seguradora_principal_Fianca__c" type="text" placeholder="Seguradora principal - Fiança">
+      </div>
+
+      <div class="form-group">
+        <input id="capitalizacao" name="00NSG00000QGe4A" type="number" step="0.01" placeholder="Produção Mensal Capitalização">
+      </div>
+
+      <div class="form-group">
+        <input id="seguradora_capitalizacao" name="Seguradora_principal_Tit_Capitalizacao__c" type="text" placeholder="Seguradora principal - Tit Capitalização">
       </div>
 
       <div class="section">
-        <select id="erp" name="00NSG00000QGYvd">
-          <option value="">Parceria com ERP?</option>
-          <option value="Sim">Sim</option>
-          <option value="Não">Não</option>
-        </select>
-        <input id="erp_nome" name="00NSG00000QGgKU" type="text" placeholder="ERP Utilizado" style="display:none;">
-        <input id="erp_extra" name="ERP_para_gerenciamento" type="text" placeholder="ERP para gerenciamento de seguros" style="display:none;">
-      </div>
-
-      <div class="section">
-        <label>Deseja agendar uma reunião?</label>
-        <div class="radio-group">
-          <label><input type="radio" name="agendar_reuniao" value="sim"> Sim</label>
-          <label><input type="radio" name="agendar_reuniao" value="nao" checked> Não</label>
+        <div class="form-group">
+          <select id="plataforma" name="00NSG00000QGcb4">
+            <option value="">Tem plataforma própria?</option>
+            <option value="Sim">Sim</option>
+            <option value="Não">Não</option>
+          </select>
         </div>
-        <div id="calendarEmbedContainer" style="display:none;" class="calendar-wrapper">
-          <iframe src="https://calendar.app.google/B54Z6pKjMCbgjTUv9"></iframe>
+
+        <div class="form-group full" id="siteGroup" style="display:none;">
+          <input id="site" name="00NSG00000QGjlN" type="url" placeholder="Endereço do site">
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="form-group">
+          <select id="erp" name="00NSG00000QGYvd">
+            <option value="">Parceria com ERP?</option>
+            <option value="Sim">Sim</option>
+            <option value="Não">Não</option>
+          </select>
+        </div>
+
+        <div class="form-group full" id="erp_nomeGroup" style="display:none;">
+          <input id="erp_nome" name="00NSG00000QGgKU" type="text" placeholder="ERP Utilizado">
+        </div>
+
+        <div class="form-group full" id="erp_extraGroup" style="display:none;">
+          <input id="erp_extra" name="ERP_para_gerenciamento" type="text" placeholder="ERP para gerenciamento de seguros">
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="form-group full">
+          <label>Deseja agendar uma reunião?</label>
+          <div class="radio-group">
+            <label><input type="radio" name="agendar_reuniao" value="sim"> Sim</label>
+            <label><input type="radio" name="agendar_reuniao" value="nao" checked> Não</label>
+          </div>
+        </div>
+
+        <div id="calendarEmbedContainer" style="display:none;">
+          <div class="calendar-wrapper">
+            <iframe src="https://calendar.app.google/B54Z6pKjMCbgjTUv9" allowfullscreen></iframe>
+          </div>
         </div>
       </div>
 
       <button type="submit" class="submit-button">Enviar Cadastro</button>
     </form>
   </div>
+
+  <script>
+    async function buscarCNPJ(cnpj) {
+      const sanitized = cnpj.replace(/\D/g, "");
+      if (sanitized.length !== 14) return;
+      try {
+        const response = await fetch(`https://www.receitaws.com.br/v1/cnpj/${sanitized}`);
+        const data = await response.json();
+        if (data.status === 'ERROR') throw new Error(data.message);
+        document.getElementById('razao_social').value = data.nome || '';
+        document.getElementById('fantasia').value = data.fantasia || '';
+        document.getElementById('endereco').value = `${data.logradouro || ''}, ${data.numero || ''} - ${data.bairro || ''}, ${data.municipio || ''} - ${data.uf || ''}, ${data.cep || ''}`;
+        document.getElementById('company').value = data.nome || '';
+      } catch (error) {
+        console.warn('Erro ao buscar CNPJ:', error.message);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById("leadForm");
+      const plataformaSelect = document.getElementById("plataforma");
+      const erpSelect = document.getElementById("erp");
+      const siteGroup = document.getElementById("siteGroup");
+      const erp_nomeGroup = document.getElementById("erp_nomeGroup");
+      const erp_extraGroup = document.getElementById("erp_extraGroup");
+      const calendarEmbedContainer = document.getElementById("calendarEmbedContainer");
+
+      document.getElementById("cnpj").addEventListener("input", function(e) {
+        let v = e.target.value.replace(/\D/g, "");
+        v = v.replace(/^(\d{2})(\d)/, "$1.$2");
+        v = v.replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3");
+        v = v.replace(/\.(\d{3})(\d)/, ".$1/$2");
+        v = v.replace(/(\d{4})(\d)/, "$1-$2");
+        e.target.value = v;
+      });
+
+      document.getElementById('cnpj').addEventListener('blur', function () {
+        buscarCNPJ(this.value);
+      });
+
+      document.getElementById("cep").addEventListener("input", function(e) {
+        let v = e.target.value.replace(/\D/g, "");
+        v = v.replace(/^(\d{5})(\d)/, "$1-$2");
+        e.target.value = v;
+      });
+
+      plataformaSelect?.addEventListener('change', function() {
+        siteGroup.style.display = (this.value === "Sim") ? 'block' : 'none';
+      });
+
+      erpSelect?.addEventListener('change', function() {
+        if (this.value === "Sim") {
+          erp_nomeGroup.style.display = 'block';
+          erp_extraGroup.style.display = 'block';
+        } else {
+          erp_nomeGroup.style.display = 'none';
+          erp_extraGroup.style.display = 'none';
+        }
+      });
+
+      document.querySelectorAll('input[name="agendar_reuniao"]').forEach(radio => {
+        radio.addEventListener('change', function() {
+          calendarEmbedContainer.style.display = (this.value === 'sim') ? 'block' : 'none';
+        });
+      });
+
+      form.addEventListener("submit", function(e) {
+        let valid = true;
+        const requiredFields = form.querySelectorAll("input[required], textarea[required], select[required]");
+        requiredFields.forEach(field => {
+          const errorEl = field.nextElementSibling;
+          if (field.value.trim() === "") {
+            if (errorEl && errorEl.classList.contains("error")) {
+              errorEl.textContent = "Este campo é obrigatório.";
+              errorEl.style.display = "block";
+            }
+            valid = false;
+          } else {
+            if (errorEl && errorEl.classList.contains("error")) {
+              errorEl.style.display = "none";
+            }
+          }
+        });
+        const email = document.getElementById("email");
+        const emailError = email.nextElementSibling;
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
+          emailError.textContent = "Digite um e-mail válido.";
+          emailError.style.display = "block";
+          valid = false;
+        } else {
+          emailError.style.display = "none";
+        }
+        if (!valid) e.preventDefault();
+      });
+    });
+  </script>
 </body>
 </html>
