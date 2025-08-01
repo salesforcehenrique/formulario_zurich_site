@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -10,7 +11,7 @@
       font-family: Arial, sans-serif;
       background: #0066ff url('https://static.vecteezy.com/system/resources/previews/012/660/601/non_2x/abstract-blue-background-with-waves-free-vector.jpg') no-repeat center center fixed;
       background-size: cover;
-      padding: 50px 20px;
+      padding: 30px 15px;
     }
 
     .form-container {
@@ -18,7 +19,7 @@
       margin: auto;
       background: white;
       border-radius: 12px;
-      padding: 40px;
+      padding: 35px;
       box-shadow: 0 8px 20px rgba(0,0,0,0.2);
     }
 
@@ -26,20 +27,20 @@
       text-align: center;
       font-size: 26px;
       color: #000;
-      margin-bottom: 6px;
+      margin-bottom: 10px;
     }
 
     .subheading {
       text-align: center;
       font-size: 15px;
       color: #0073ff;
-      margin-bottom: 30px;
+      margin-bottom: 25px;
     }
 
     form {
       display: flex;
       flex-wrap: wrap;
-      gap: 20px;
+      gap: 25px;
     }
 
     .form-group {
@@ -55,11 +56,11 @@
     label {
       font-weight: 600;
       font-size: 14px;
-      margin-bottom: 5px;
+      margin-bottom: 8px;
     }
 
     input, select, textarea {
-      padding: 12px;
+      padding: 14px;
       border-radius: 6px;
       border: 1px solid #ccc;
       font-size: 14px;
@@ -75,8 +76,8 @@
       border: none;
       border-radius: 6px;
       cursor: pointer;
-      width: 200px;
-      margin: 20px auto 0;
+      width: 220px;
+      margin: 30px auto 0;
       display: block;
     }
 
@@ -88,6 +89,7 @@
       color: red;
       font-size: 0.9em;
       display: none;
+      margin-top: 5px;
     }
 
     .radio-group label {
@@ -95,10 +97,11 @@
       margin-right: 15px;
     }
 
-    .google-calendar-frame {
+    iframe.google-calendar-frame {
       width: 100%;
-      height: 800px;
+      height: 600px;
       border: none;
+      margin-top: 20px;
     }
 
     @media (max-width: 768px) {
@@ -124,7 +127,6 @@
       <input type="hidden" name="retURL" value="https://salesforcehenrique.github.io/">
       <input type="hidden" id="company" name="company" value="" />
 
-      <!-- Campos básicos -->
       <div class="form-group full">
         <label for="cnpj">CNPJ</label>
         <input id="cnpj" name="00NSG00000QKAKR" maxlength="18" type="text" required>
@@ -229,11 +231,6 @@
         <input id="seguradora_capitalizacao" name="Seguradora_principal_Tit_Capitalizacao__c" type="text">
       </div>
 
-      <div class="form-group full" id="siteGroup" style="display:none;">
-        <label for="site">Endereço do site</label>
-        <input id="site" name="00NSG00000QGjlN" type="url">
-      </div>
-
       <div class="form-group">
         <label for="plataforma">Tem plataforma própria?</label>
         <select id="plataforma" name="00NSG00000QGcb4">
@@ -250,6 +247,11 @@
           <option value="Sim">Sim</option>
           <option value="Não">Não</option>
         </select>
+      </div>
+
+      <div class="form-group full" id="siteGroup" style="display:none;">
+        <label for="site">Endereço do site</label>
+        <input id="site" name="00NSG00000QGjlN" type="url">
       </div>
 
       <div class="form-group full" id="erp_nomeGroup" style="display:none;">
@@ -270,36 +272,25 @@
         </div>
       </div>
 
+      <div id="calendarEmbedContainer" style="display:none;">
+        <!-- Google Calendar Appointment Scheduling begin -->
+        <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ0rW-27jpjR58SLdtmXIkAskIH-0s0ln9XkST6o4SL-11ygRsoDP54DZJEldP4HJJ10ySH2jAnr?gv=true" 
+                style="border: 0" width="100%" height="600" frameborder="0"></iframe>
+        <!-- end Google Calendar Appointment Scheduling -->
+      </div>
+
       <button type="submit" class="submit-button">Enviar Cadastro</button>
     </form>
-
-    <!-- Agenda Embed -->
-    <div id="calendarEmbedContainer" style="display:none; margin-top:20px;">
-      <iframe 
-        class="google-calendar-frame"
-        src="https://calendar.google.com/calendar/embed?src=aGVucmlxdWVAY3Njb3JwLnRlYy5icg"
-        frameborder="0" 
-        scrolling="no">
-      </iframe>
-      <p style="text-align:center; margin-top:10px;">
-        <a href="https://calendar.google.com/calendar/u/0?cid=aGVucmlxdWVAY3Njb3JwLnRlYy5icg" 
-           target="_blank">
-           Acessar calendário completo
-        </a>
-      </p>
-    </div>
   </div>
 
   <script>
     async function buscarCNPJ(cnpj) {
       const sanitized = cnpj.replace(/\D/g, "");
       if (sanitized.length !== 14) return;
-
       try {
         const response = await fetch(`https://www.receitaws.com.br/v1/cnpj/${sanitized}`);
         const data = await response.json();
         if (data.status === 'ERROR') throw new Error(data.message);
-
         document.getElementById('razao_social').value = data.nome || '';
         document.getElementById('fantasia').value = data.fantasia || '';
         document.getElementById('endereco').value = `${data.logradouro || ''}, ${data.numero || ''} - ${data.bairro || ''}, ${data.municipio || ''} - ${data.uf || ''}, ${data.cep || ''}`;
@@ -310,6 +301,7 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById("leadForm");
       const plataformaSelect = document.getElementById("plataforma");
       const erpSelect = document.getElementById("erp");
       const siteGroup = document.getElementById("siteGroup");
@@ -317,7 +309,6 @@
       const erp_extraGroup = document.getElementById("erp_extraGroup");
       const calendarEmbedContainer = document.getElementById("calendarEmbedContainer");
 
-      // Máscara CNPJ
       document.getElementById("cnpj").addEventListener("input", function(e) {
         let v = e.target.value.replace(/\D/g, "");
         v = v.replace(/^(\d{2})(\d)/, "$1.$2");
@@ -327,24 +318,20 @@
         e.target.value = v;
       });
 
-      // Buscar CNPJ ao sair do campo
       document.getElementById('cnpj').addEventListener('blur', function () {
         buscarCNPJ(this.value);
       });
 
-      // Máscara CEP
       document.getElementById("cep").addEventListener("input", function(e) {
         let v = e.target.value.replace(/\D/g, "");
         v = v.replace(/^(\d{5})(\d)/, "$1-$2");
         e.target.value = v;
       });
 
-      // Mostrar site se tiver plataforma
       plataformaSelect.addEventListener('change', function() {
         siteGroup.style.display = (this.value === "Sim") ? 'block' : 'none';
       });
 
-      // Mostrar ERP se tiver parceria
       erpSelect.addEventListener('change', function() {
         if (this.value === "Sim") {
           erp_nomeGroup.style.display = 'block';
@@ -355,13 +342,43 @@
         }
       });
 
-      // Mostrar calendário se marcar SIM
       document.querySelectorAll('input[name="agendar_reuniao"]').forEach(radio => {
         radio.addEventListener('change', function() {
           calendarEmbedContainer.style.display = (this.value === 'sim') ? 'block' : 'none';
         });
       });
+
+      // Validação
+      form.addEventListener("submit", function(e) {
+        let valid = true;
+        const requiredFields = form.querySelectorAll("input[required], textarea[required], select[required]");
+        requiredFields.forEach(field => {
+          const errorEl = field.nextElementSibling;
+          if (field.value.trim() === "") {
+            if (errorEl && errorEl.classList.contains("error")) {
+              errorEl.textContent = "Este campo é obrigatório.";
+              errorEl.style.display = "block";
+            }
+            valid = false;
+          } else {
+            if (errorEl && errorEl.classList.contains("error")) {
+              errorEl.style.display = "none";
+            }
+          }
+        });
+        const email = document.getElementById("email");
+        const emailError = email.nextElementSibling;
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
+          emailError.textContent = "Digite um e-mail válido.";
+          emailError.style.display = "block";
+          valid = false;
+        } else {
+          emailError.style.display = "none";
+        }
+        if (!valid) e.preventDefault();
+      });
     });
   </script>
 </body>
 </html>
+```
