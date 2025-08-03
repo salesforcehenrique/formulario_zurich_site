@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Formulário WebToLead</title>
+  <title>Cadastro de Parceiros - Zurich SegImob</title>
   <style>
     body {
       margin: 0;
@@ -13,23 +13,25 @@
       color: #333;
     }
     .form-container {
-      max-width: 1350px;
+      max-width: 1200px;
       margin: auto;
       background: #fff;
       border-radius: 8px;
-      padding: 50px 40px;
+      padding: 40px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     }
     h2 {
       font-size: 22px;
       font-weight: 600;
       color: #222;
-      margin-bottom: 5px;
+      margin-bottom: 10px;
     }
-    .subheading {
-      font-size: 14px;
-      color: #0073ff;
-      margin-bottom: 25px;
+    h3 {
+      font-size: 18px;
+      font-weight: 600;
+      margin: 20px 0 10px;
+      border-bottom: 1px solid #e5e7eb;
+      padding-bottom: 8px;
     }
     form {
       display: flex;
@@ -40,26 +42,30 @@
       flex: 1 1 calc(50% - 14px);
       display: flex;
       flex-direction: column;
-      margin-bottom: 20px;
     }
     .form-group.full {
       flex: 1 1 100%;
     }
-    .section {
-      flex: 1 1 100%;
-      border-top: 1px solid #e5e7eb;
-      padding-top: 24px;
-      margin-top: 24px;
+    label {
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 6px;
+      color: #444;
     }
     input, select {
       padding: 14px 16px;
       border-radius: 6px;
-      border: 2px solid #000;
+      border: 2px solid #ccc;
       font-size: 14px;
       width: 100%;
       background: #fff;
       transition: border-color 0.2s, box-shadow 0.2s;
       box-sizing: border-box;
+    }
+    input:focus, select:focus {
+      border-color: #0073ff;
+      box-shadow: 0 0 0 3px rgba(0,115,255,0.2);
+      outline: none;
     }
     .submit-button {
       background: #0073ff;
@@ -102,7 +108,6 @@
 <body>
   <div class="form-container">
     <h2>Cadastro de Parceiros</h2>
-    <p class="subheading">Fale com a gente</p>
   
     <form id="leadForm" 
           action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00D6A000002ImjZ" 
@@ -112,81 +117,91 @@
       <input type="hidden" name="retURL" value="https://salesforcehenrique.github.io/">
       <input type="hidden" id="company" name="company" value="" />
 
-      <!-- CNPJ (não obrigatório) -->
+      <h3>Dados da Corretora</h3>
       <div class="form-group full">
+        <label for="cnpj">CNPJ</label>
         <input id="cnpj" name="00NSG00000QKAKR" maxlength="18" type="text" placeholder="CNPJ - Corretora">
       </div>
-
       <div class="form-group">
+        <label for="razao_social">Razão Social</label>
         <input id="razao_social" name="00NSG00000QKCIz" type="text" placeholder="Razão Social - Corretora" required>
       </div>
       <div class="form-group">
+        <label for="fantasia">Nome Fantasia</label>
         <input id="fantasia" name="00NIa000000NlQQ" type="text" placeholder="Nome Fantasia - Corretora" required>
       </div>
-      <div class="form-group">
+      <div class="form-group full">
+        <label for="telefone_corretora">Telefone da Corretora</label>
         <input id="telefone_corretora" name="telefone_corretora" type="tel" placeholder="Telefone - Corretora" required>
       </div>
 
-      <!-- Endereço -->
-      <div class="section">
-        <div class="form-group">
-          <input id="cep" name="cep" type="text" maxlength="9" placeholder="CEP - Corretora" required>
-        </div>
-        <div class="form-group full">
-          <input id="logradouro" name="street" type="text" placeholder="Logradouro - Corretora" readonly required>
-        </div>
-        <div class="form-group">
-          <input id="numero" name="numero" type="text" placeholder="Número - Corretora" required>
-        </div>
-        <div class="form-group">
-          <input id="complemento" name="complemento" type="text" placeholder="Complemento - Corretora">
-        </div>
-        <div class="form-group">
-          <input id="bairro" name="bairro" type="text" placeholder="Bairro - Corretora" readonly required>
-        </div>
-        <div class="form-group">
-          <input id="cidade" name="cidade" type="text" placeholder="Cidade - Corretora" readonly required>
-        </div>
-        <div class="form-group">
-          <input id="estado" name="estado" type="text" placeholder="Estado - Corretora" readonly required>
-        </div>
-      </div>
-
-      <!-- Responsável -->
-      <div class="section">
-        <h3>Dados do Responsável da Corretora</h3>
-        <div class="form-group full">
-          <input id="responsavel" name="00NSG00000QKgtm" type="text" placeholder="Responsável - Corretora" required>
-        </div>
-        <div class="form-group">
-          <input id="telefone_contato" name="telefone_contato" type="tel" placeholder="Telefone do Contato" required>
-        </div>
-        <div class="form-group">
-          <input id="email" name="email" type="email" placeholder="Email do Contato" required>
-        </div>
-        <div class="form-group">
-          <select id="cargo" name="00NSG00000QKGWI" required>
-            <option value="">Cargo - Corretora</option>
-            <option value="Proprietário">Proprietário</option>
-            <option value="Diretor">Diretor</option>
-            <option value="Gerente">Gerente</option>
-            <option value="Funcionário">Funcionário</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <input id="imobiliarias" name="00N6A00000NUmQa" type="number" min="1" placeholder="Qtd. Imobiliárias - Corretora" required>
-        </div>
-      </div>
-
-      <!-- Produção -->
+      <h3>Endereço</h3>
       <div class="form-group">
-        <input id="incendio" name="00NSG00000QGVKd" type="number" step="0.01" placeholder="Produção Mensal Incêndio - Corretora" required>
+        <label for="cep">CEP</label>
+        <input id="cep" name="cep" type="text" maxlength="9" placeholder="CEP - Corretora" required>
+      </div>
+      <div class="form-group full">
+        <label for="logradouro">Logradouro</label>
+        <input id="logradouro" name="street" type="text" placeholder="Logradouro - Corretora" readonly required>
+      </div>
+      <div class="form-group">
+        <label for="numero">Número</label>
+        <input id="numero" name="numero" type="text" placeholder="Número - Corretora" required>
+      </div>
+      <div class="form-group">
+        <label for="complemento">Complemento</label>
+        <input id="complemento" name="complemento" type="text" placeholder="Complemento - Corretora">
+      </div>
+      <div class="form-group">
+        <label for="bairro">Bairro</label>
+        <input id="bairro" name="bairro" type="text" placeholder="Bairro - Corretora" readonly required>
+      </div>
+      <div class="form-group">
+        <label for="cidade">Cidade</label>
+        <input id="cidade" name="cidade" type="text" placeholder="Cidade - Corretora" readonly required>
+      </div>
+      <div class="form-group">
+        <label for="estado">Estado</label>
+        <input id="estado" name="estado" type="text" placeholder="Estado - Corretora" readonly required>
       </div>
 
-      <!-- Seguradora Incêndio -->
+      <h3>Dados do Responsável</h3>
+      <div class="form-group full">
+        <label for="responsavel">Nome do Responsável</label>
+        <input id="responsavel" name="00NSG00000QKgtm" type="text" placeholder="Responsável - Corretora" required>
+      </div>
       <div class="form-group">
+        <label for="telefone_contato">Telefone do Contato</label>
+        <input id="telefone_contato" name="telefone_contato" type="tel" placeholder="Telefone do Contato" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email do Contato</label>
+        <input id="email" name="email" type="email" placeholder="Email do Contato" required>
+      </div>
+      <div class="form-group">
+        <label for="cargo">Cargo</label>
+        <select id="cargo" name="00NSG00000QKGWI" required>
+          <option value="">Selecione</option>
+          <option value="Proprietário">Proprietário</option>
+          <option value="Diretor">Diretor</option>
+          <option value="Gerente">Gerente</option>
+          <option value="Funcionário">Funcionário</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="imobiliarias">Qtd. Imobiliárias</label>
+        <input id="imobiliarias" name="00N6A00000NUmQa" type="number" min="1" placeholder="Qtd. Imobiliárias" required>
+      </div>
+
+      <h3>Produção e Seguradoras</h3>
+      <div class="form-group">
+        <label for="incendio">Produção Mensal - Incêndio</label>
+        <input id="incendio" name="00NSG00000QGVKd" type="number" step="0.01" placeholder="Produção Mensal Incêndio" required>
+      </div>
+      <div class="form-group">
+        <label for="seguradora_incendio">Seguradora - Incêndio</label>
         <select id="seguradora_incendio" name="Seguradora_principal_Incendio__c" required>
-          <option value="">Seguradora principal - Incêndio</option>
+          <option value="">Selecione</option>
           <option>Alfa/Safra</option>
           <option>Mapfre</option>
           <option>Porto Seguro</option>
@@ -197,13 +212,18 @@
         </select>
       </div>
       <div class="form-group full" id="seguradora_incendio_outra" style="display:none;">
-        <input type="text" name="Seguradora_Incendio_Outra" placeholder="Digite o nome da seguradora">
+        <label for="outra_incendio">Qual?</label>
+        <input id="outra_incendio" type="text" name="Seguradora_Incendio_Outra" placeholder="Digite o nome da seguradora">
       </div>
 
-      <!-- Seguradora Fiança -->
       <div class="form-group">
+        <label for="fianca">Produção Mensal - Fiança</label>
+        <input id="fianca" name="00NSG00000QGgQv" type="number" step="0.01" placeholder="Produção Mensal Fiança" required>
+      </div>
+      <div class="form-group">
+        <label for="seguradora_fianca">Seguradora - Fiança</label>
         <select id="seguradora_fianca" name="Seguradora_principal_Fianca__c" required>
-          <option value="">Seguradora principal - Fiança</option>
+          <option value="">Selecione</option>
           <option>Alfa/Safra</option>
           <option>Mapfre</option>
           <option>Porto Seguro</option>
@@ -214,79 +234,79 @@
         </select>
       </div>
       <div class="form-group full" id="seguradora_fianca_outra" style="display:none;">
-        <input type="text" name="Seguradora_Fianca_Outra" placeholder="Digite o nome da seguradora">
+        <label for="outra_fianca">Qual?</label>
+        <input id="outra_fianca" type="text" name="Seguradora_Fianca_Outra" placeholder="Digite o nome da seguradora">
       </div>
 
-      <!-- Capitalização -->
       <div class="form-group">
-        <input id="capitalizacao" name="00NSG00000QGe4A" type="number" step="0.01" placeholder="Produção Mensal Capitalização - Corretora" required>
+        <label for="capitalizacao">Produção Mensal - Título de Capitalização</label>
+        <input id="capitalizacao" name="00NSG00000QGe4A" type="number" step="0.01" placeholder="Produção Mensal Capitalização" required>
       </div>
       <div class="form-group">
+        <label for="seguradora_capitalizacao">Título de Capitalização</label>
         <select id="seguradora_capitalizacao" name="Seguradora_principal_Tit_Capitalizacao__c" required>
-          <option value="">Seguradora principal - Título Capitalização</option>
-          <option>Mapfre</option>
+          <option value="">Selecione</option>
+          <option>Icatu</option>
           <option>Porto Seguro</option>
           <option value="Outra">Outra</option>
         </select>
       </div>
       <div class="form-group full" id="seguradora_capitalizacao_outra" style="display:none;">
-        <input type="text" name="Seguradora_Capitalizacao_Outra" placeholder="Digite o nome da seguradora">
+        <label for="outra_capitalizacao">Qual?</label>
+        <input id="outra_capitalizacao" type="text" name="Seguradora_Capitalizacao_Outra" placeholder="Digite o nome da seguradora">
       </div>
 
-      <!-- Plataforma -->
-      <div class="section">
-        <div class="form-group">
-          <select id="plataforma" name="00NSG00000QGcb4" required>
-            <option value="">Usa alguma plataforma? - Corretora</option>
-            <option value="Sim">Sim</option>
-            <option value="Não">Não</option>
-          </select>
-        </div>
-        <div class="form-group full" id="plataforma_qual" style="display:none;">
-          <input type="text" name="Plataforma_Qual" placeholder="Digite o nome da plataforma">
-        </div>
+      <h3>Integrações</h3>
+      <div class="form-group">
+        <label for="plataforma">Usa alguma plataforma?</label>
+        <select id="plataforma" name="00NSG00000QGcb4" required>
+          <option value="">Selecione</option>
+          <option value="Sim">Sim</option>
+          <option value="Não">Não</option>
+        </select>
+      </div>
+      <div class="form-group full" id="plataforma_qual" style="display:none;">
+        <label for="plataforma_nome">Qual?</label>
+        <input id="plataforma_nome" type="text" name="Plataforma_Qual" placeholder="Digite o nome da plataforma">
       </div>
 
-      <!-- ERP -->
-      <div class="section">
-        <div class="form-group">
-          <select id="erp" name="00NSG00000QGYvd" required>
-            <option value="">Parceria com ERP? - Corretora</option>
-            <option value="Sim">Sim</option>
-            <option value="Não">Não</option>
-          </select>
-        </div>
-        <div class="form-group full" id="erp_nomeGroup" style="display:none;">
-          <input id="erp_nome" name="00NSG00000QGgKU" type="text" placeholder="ERP Utilizado - Corretora">
-        </div>
-        <div class="form-group full" id="erp_extraGroup" style="display:none;">
-          <input id="erp_extra" name="ERP_para_gerenciamento" type="text" placeholder="ERP para gerenciamento de seguros - Corretora">
-        </div>
+      <div class="form-group">
+        <label for="erp">Parceria com ERP?</label>
+        <select id="erp" name="00NSG00000QGYvd" required>
+          <option value="">Selecione</option>
+          <option value="Sim">Sim</option>
+          <option value="Não">Não</option>
+        </select>
+      </div>
+      <div class="form-group full" id="erp_nomeGroup" style="display:none;">
+        <label for="erp_nome">ERP Utilizado</label>
+        <input id="erp_nome" type="text" name="00NSG00000QGgKU" placeholder="ERP Utilizado">
+      </div>
+      <div class="form-group full" id="erp_extraGroup" style="display:none;">
+        <label for="erp_extra">ERP para gerenciamento de seguros</label>
+        <input id="erp_extra" type="text" name="ERP_para_gerenciamento" placeholder="ERP para gerenciamento de seguros">
       </div>
 
-      <!-- Agendamento -->
-      <div class="section">
-        <h3>Agendamento</h3>
-        <div class="form-group full">
-          <label>Deseja agendar uma reunião?</label>
-          <div class="radio-group">
-            <label><input type="radio" name="agendar_reuniao" value="sim"> Sim</label>
-            <label><input type="radio" name="agendar_reuniao" value="nao" checked> Não</label>
-          </div>
+      <h3>Agendamento</h3>
+      <div class="form-group full">
+        <label>Deseja agendar uma reunião?</label>
+        <div class="radio-group">
+          <label><input type="radio" name="agendar_reuniao" value="sim"> Sim</label>
+          <label><input type="radio" name="agendar_reuniao" value="nao" checked> Não</label>
         </div>
-        <div id="calendarEmbedContainer" style="display:none;">
-          <div class="calendar-wrapper">
-            <iframe src="https://calendar.app.google/B54Z6pKjMCbgjTUv9" allowfullscreen></iframe>
-          </div>
-          <div class="calendar-wrapper" style="margin-top:20px;">
-            <iframe src="https://calendar.app.google/U5oztqWefrCVZr6z9" allowfullscreen></iframe>
-          </div>
-          <div class="calendar-wrapper" style="margin-top:20px;">
-            <iframe src="https://calendar.app.google/henrique" allowfullscreen></iframe>
-          </div>
-          <div class="calendar-wrapper" style="margin-top:20px;">
-            <iframe src="https://calendar.app.google/satomi" allowfullscreen></iframe>
-          </div>
+      </div>
+      <div id="calendarEmbedContainer" style="display:none;">
+        <div class="calendar-wrapper">
+          <iframe src="https://calendar.app.google/B54Z6pKjMCbgjTUv9" allowfullscreen></iframe>
+        </div>
+        <div class="calendar-wrapper" style="margin-top:20px;">
+          <iframe src="https://calendar.app.google/U5oztqWefrCVZr6z9" allowfullscreen></iframe>
+        </div>
+        <div class="calendar-wrapper" style="margin-top:20px;">
+          <iframe src="https://calendar.app.google/henrique" allowfullscreen></iframe>
+        </div>
+        <div class="calendar-wrapper" style="margin-top:20px;">
+          <iframe src="https://calendar.app.google/satomi" allowfullscreen></iframe>
         </div>
       </div>
 
@@ -295,7 +315,6 @@
   </div>
 
   <script>
-    // Exibir/Ocultar campos extras
     document.addEventListener('DOMContentLoaded', () => {
       // Plataforma
       document.getElementById('plataforma').addEventListener('change', function () {
