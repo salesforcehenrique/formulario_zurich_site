@@ -95,18 +95,46 @@
         </div>
       </div>
 
-      <!-- 3 Responsável -->
-      <div class="form-section">
-        <h3 class="section-title"><span class="section-icon">3</span>Dados do Responsável</h3>
-        <div class="form-grid">
-          <div class="form-group"><label for="responsavel">Nome *</label><input id="responsavel" name="00NSG00000QKgtm" type="text" required></div>
-          <div class="form-group"><label for="cargo">Cargo *</label>
-            <select id="cargo" name="00NSG00000QKGWI" required>
-              <option value="">Selecione</option><option value="Proprietário">Proprietário</option><option value="Diretor">Diretor</option><option value="Gerente">Gerente</option><option value="Funcionário">Funcionário</option>
-            </select>
-          </div>
-        </div>
-      </div>
+<!-- 3 Responsável -->
+<div class="form-section">
+  <h3 class="section-title">
+    <span class="section-icon">3</span>Dados do Responsável
+  </h3>
+  <div class="form-grid">
+
+    <!-- Cargo -->
+    <div class="form-group">
+      <label for="cargo">Cargo *</label>
+      <select id="cargo" name="00NSG00000QKGWI" required>
+        <option value="">Selecione</option>
+        <option value="Proprietário">Proprietário</option>
+        <option value="Diretor">Diretor</option>
+        <option value="Gerente">Gerente</option>
+        <option value="Funcionário">Funcionário</option>
+      </select>
+    </div>
+
+    <!-- Nome -->
+    <div class="form-group">
+      <label for="responsavel">Nome *</label>
+      <input id="responsavel" name="00NSG00000QKgtm" type="text" required>
+    </div>
+
+    <!-- Telefone -->
+    <div class="form-group">
+      <label for="telefone">Telefone *</label>
+      <input id="telefone" name="00NSG00000QKTEL" type="tel" required>
+    </div>
+
+    <!-- Email -->
+    <div class="form-group">
+      <label for="email">E-mail *</label>
+      <input id="email" name="00NSG00000QKMAIL" type="email" required>
+    </div>
+
+  </div>
+</div>
+
 
       <!-- 4 Produção -->
       <div class="form-section">
