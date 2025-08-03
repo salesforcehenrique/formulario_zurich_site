@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -25,7 +26,9 @@
     .form-grid.single-column{grid-template-columns:1fr;}
     .form-group{display:flex;flex-direction:column;position:relative;}
     .form-group label{font-size:14px;font-weight:600;margin-bottom:8px;color:#374151;}
-    .form-group input,.form-group select,.form-group textarea{padding:14px 16px;border-radius:8px;border:2px solid #e5e7eb;font-size:14px;background:#fff;transition:all 0.3s ease;font-family:inherit;}
+    .form-group input,.form-group select,.form-group textarea{padding:14px 16px;border-radius:8px;border:2px solid #e5e7eb;font-size:14px;background:#fff;transition:all 0.3s ease;font-family:inherit;width:100%;}
+    .form-group input[type="text"]{max-width: 100%;}
+    .form-group input[type="url"]{width: 100%;}
     .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:#0073ff;box-shadow:0 0 0 3px rgba(0,115,255,0.1);outline:none;transform:translateY(-1px);}
     .form-group input[readonly]{background:#f9fafb;color:#6b7280;cursor:not-allowed;}
     .error-msg{color:#ef4444;font-size:12px;margin-top:6px;}
@@ -33,10 +36,10 @@
     .radio-group label{display:flex;align-items:center;gap:8px;font-weight:500;cursor:pointer;padding:8px 12px;border-radius:6px;transition:background 0.2s ease;}
     .radio-group label:hover{background:#f3f4f6;}
     .agenda-section{background:linear-gradient(135deg,#f0f9ff 0%,#e0f2fe 100%);border-left-color:#0284c7;}
-    .calendars-container{display:none;margin-top:20px;}
-    .calendars-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
-    .calendar-wrapper{position:relative;padding-bottom:70%;height:0;overflow:hidden;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,0.1);background:#fff;}
-    .calendar-wrapper iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none;border-radius:8px;}
+    .calendars-container{display:block;margin-top:20px;}
+    .calendars-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(400px,1fr));gap:20px;}
+    .calendar-wrapper{position:relative;height:400px;overflow:auto;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,0.1);background:#fff;}
+    .calendar-wrapper iframe{position:relative;width:100%;height:100%;border:none;border-radius:8px;}
     .calendar-title{font-size:14px;font-weight:600;color:#374151;margin-bottom:10px;text-align:center;}
     .submit-section{text-align:center;margin-top:40px;padding-top:30px;border-top:2px solid #e5e7eb;}
     .submit-button{background:linear-gradient(135deg,#0073ff 0%,#00c6ff 100%);color:white;padding:16px 40px;font-size:16px;font-weight:600;border:none;border-radius:8px;cursor:pointer;transition:all 0.3s ease;box-shadow:0 4px 12px rgba(0,115,255,0.3);}
@@ -44,7 +47,7 @@
     .submit-button:disabled{opacity:0.6;cursor:not-allowed;}
     @media(max-width:768px){.form-container{padding:20px;margin:10px;}.calendars-grid{grid-template-columns:1fr;}.calendar-wrapper{padding-bottom:90%;}.form-grid{grid-template-columns:1fr;}.header h1{font-size:24px;}.section-title{font-size:18px;}}
     .loading{position:relative;pointer-events:none;}
-    .loading::after{content:'';position:absolute;top:50%;right:12px;width:16px;height:16px;border:2px solid #e5e7eb;border-top:2px solid #0073ff;border-radius:50%;animation:spin 1s linear infinite;transform:translateY(-50%);}
+    .loading::after{content:"";position:absolute;top:50%;right:12px;width:16px;height:16px;border:2px solid #e5e7eb;border-top:2px solid #0073ff;border-radius:50%;animation:spin 1s linear infinite;transform:translateY(-50%);}
     @keyframes spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
   </style>
 </head>
@@ -109,9 +112,46 @@
       <div class="form-section">
         <h3 class="section-title"><span class="section-icon">4</span>Informações de Produção</h3>
         <div class="form-grid">
-          <div class="form-group"><label for="incendio">Produção Incêndio</label><input id="incendio" name="00NSG00000QGVKd" type="number" step="0.01"></div>
-          <div class="form-group"><label for="fianca">Produção Fiança</label><input id="fianca" name="00NSG00000QGgQv" type="number" step="0.01"></div>
-          <div class="form-group"><label for="capitalizacao">Produção Capitalização</label><input id="capitalizacao" name="00NSG00000QGe4A" type="number" step="0.01"></div>
+          <div class="form-group">
+            <label for="incendio">Produção Incêndio</label>
+            <input id="incendio" name="00NSG00000QGVKd" type="number" step="0.01">
+            <label for="seguradora_incendio">Seguradora Incêndio</label>
+            <select id="seguradora_incendio" name="seguradora_incendio">
+              <option value="">Selecione</option>
+              <option value="Alfa/Safra">Alfa/Safra</option>
+              <option value="Mapfre">Mapfre</option>
+              <option value="Porto Seguro">Porto Seguro</option>
+              <option value="Sancor">Sancor</option>
+              <option value="Tokio Marine">Tokio Marine</option>
+              <option value="Zurich">Zurich</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="fianca">Produção Fiança</label>
+            <input id="fianca" name="00NSG00000QGgQv" type="number" step="0.01">
+            <label for="seguradora_fianca">Seguradora Fiança</label>
+            <select id="seguradora_fianca" name="seguradora_fianca">
+              <option value="">Selecione</option>
+              <option value="Porto Seguro">Porto Seguro</option>
+              <option value="Pottencial">Pottencial</option>
+              <option value="Tokio Marine">Tokio Marine</option>
+              <option value="TOO">TOO</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="capitalizacao">Produção Capitalização</label>
+            <input id="capitalizacao" name="00NSG00000QGe4A" type="number" step="0.01">
+            <label for="seguradora_capitalizacao">Seguradora Capitalização</label>
+            <select id="seguradora_capitalizacao" name="seguradora_capitalizacao">
+              <option value="">Selecione</option>
+              <option value="Icatu">Icatu</option>
+              <option value="Porto Seguro">Porto Seguro</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="quantidade_imobiliarias">Quantidade de Imobiliárias</label>
+            <input id="quantidade_imobiliarias" name="quantidade_imobiliarias" type="number" step="1">
+          </div>
         </div>
       </div>
 
@@ -120,7 +160,10 @@
         <h3 class="section-title"><span class="section-icon">5</span>Tecnologia e Sistemas</h3>
         <div class="form-grid">
           <div class="form-group"><label for="plataforma">Possui plataforma própria?</label>
-            <select id="plataforma" name="00NSG00000QGcb4"><option value="">Selecione</option><option value="Sim">Sim</option><option value="Não">Não</option></select>
+            <select id="plataforma" name="00NSG00000QGcb4"><option value="">Selecione</option><option value="Sim">Sim</option><option value="Não">Não</option><option value="Corretora">Corretora</option></select>
+          </div>
+          <div class="form-group"><label for="parceria_erp">Parceria com ERP?</label>
+            <select id="parceria_erp" name="parceria_erp"><option value="">Selecione</option><option value="Sim">Sim</option><option value="Não">Não</option></select>
           </div>
         </div>
       </div>
@@ -128,13 +171,7 @@
       <!-- 6 Agenda -->
       <div class="form-section agenda-section">
         <h3 class="section-title"><span class="section-icon">6</span>Agendamento</h3>
-        <div class="form-group">
-          <label>Deseja agendar uma reunião?</label>
-          <div class="radio-group">
-            <label><input type="radio" name="agendar_reuniao" value="sim"> Sim</label>
-            <label><input type="radio" name="agendar_reuniao" value="nao" checked> Não</label>
-          </div>
-        </div>
+
         <div id="calendarEmbedContainer" class="calendars-container">
           <p style="text-align:center;margin-bottom:20px;color:#6b7280;font-size:14px;">Escolha um horário:</p>
           <div class="calendars-grid">
@@ -150,12 +187,14 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/imask/6.6.1/imask.min.js"></script>
   <script>
-    const masks={cnpj:IMask(document.getElementById('cnpj'),{mask:'00.000.000/0000-00'}),cep:IMask(document.getElementById('cep'),{mask:'00000-000'})};
-    function showInlineError(input,message){let error=input.nextElementSibling;if(!error||!error.classList.contains('error-msg')){error=document.createElement('div');error.className='error-msg';input.parentNode.appendChild(error);}error.textContent=message;}
-    function clearInlineError(input){const error=input.nextElementSibling;if(error&&error.classList.contains('error-msg'))error.remove();}
-    async function buscarCNPJ(cnpj){const sanitized=cnpj.replace(/\D/g,"");if(sanitized.length!==14)return;const cnpjInput=document.getElementById('cnpj');cnpjInput.classList.add('loading');try{const res=await fetch(https://publica.cnpj.ws/cnpj/${sanitized});const data=await res.json();if(data.razao_social){document.getElementById('razao_social').value=data.razao_social||'';document.getElementById('fantasia').value=data.nome_fantasia||data.razao_social||'';document.getElementById('company').value=data.razao_social||'';clearInlineError(cnpjInput);}else{showInlineError(cnpjInput,"CNPJ não encontrado.");}}catch{showInlineError(cnpjInput,"Erro ao consultar CNPJ.");}finally{cnpjInput.classList.remove('loading');}}
-    async function buscarCEP(cep){const sanitized=cep.replace(/\D/g,"");if(sanitized.length!==8)return;const cepInput=document.getElementById('cep');cepInput.classList.add('loading');try{const res=await fetch(https://viacep.com.br/ws/${sanitized}/json/);const data=await res.json();if(!data.erro){document.getElementById('logradouro').value=data.logradouro||'';document.getElementById('bairro').value=data.bairro||'';document.getElementById('cidade').value=data.localidade||'';document.getElementById('estado').value=data.uf||'';clearInlineError(cepInput);}else{showInlineError(cepInput,"CEP inválido.");}}catch{showInlineError(cepInput,"Erro ao consultar CEP.");}finally{cepInput.classList.remove('loading');}}
-    document.addEventListener('DOMContentLoaded',()=>{document.getElementById('cnpj').addEventListener('blur',function(){buscarCNPJ(this.value);});document.getElementById('cep').addEventListener('blur',function(){buscarCEP(this.value);});document.querySelectorAll('input[name="agendar_reuniao"]').forEach(radio=>{radio.addEventListener('change',function(){const c=document.getElementById("calendarEmbedContainer");c.style.display=(this.value==='sim')?'block':'none';});});document.getElementById('leadForm').addEventListener('submit',function(e){const requiredFields=this.querySelectorAll('[required]');let hasError=false;requiredFields.forEach(field=>{if(!field.value.trim()){showInlineError(field,"Campo obrigatório.");hasError=true;}else{clearInlineError(field);}});if(hasError){e.preventDefault();return;}const btn=this.querySelector('.submit-button');btn.disabled=true;btn.textContent="Enviando...";});});
+    const masks={cnpj:IMask(document.getElementById("cnpj"),{mask:"00.000.000/0000-00"}),cep:IMask(document.getElementById("cep"),{mask:"00000-000"})};
+    function showInlineError(input,message){let error=input.nextElementSibling;if(!error||!error.classList.contains("error-msg")){error=document.createElement("div");error.className="error-msg";input.parentNode.appendChild(error);}error.textContent=message;}
+    function clearInlineError(input){const error=input.nextElementSibling;if(error&&error.classList.contains("error-msg"))error.remove();}
+    async function buscarCNPJ(cnpj){const sanitized=cnpj.replace(/\D/g,"");if(sanitized.length!==14)return;const cnpjInput=document.getElementById("cnpj");cnpjInput.classList.add("loading");try{const res=await fetch(`https://api.cnpja.com/cnpj/${sanitized}`);const data=await res.json();if(data.razao_social){document.getElementById("razao_social").value=data.razao_social||"";document.getElementById("fantasia").value=data.nome_fantasia||data.razao_social||"";document.getElementById("company").value=data.razao_social||"";clearInlineError(cnpjInput);}else{showInlineError(cnpjInput,"CNPJ não encontrado.");}}catch{showInlineError(cnpjInput,"Erro ao consultar CNPJ.");}finally{cnpjInput.classList.remove("loading");}}
+    async function buscarCEP(cep){const sanitized=cep.replace(/\D/g,"");if(sanitized.length!==8)return;const cepInput=document.getElementById("cep");cepInput.classList.add("loading");try{const res=await fetch(`https://viacep.com.br/ws/${sanitized}/json/`);const data=await res.json();if(!data.erro){document.getElementById("logradouro").value=data.logradouro||"";document.getElementById("bairro").value=data.bairro||"";document.getElementById("cidade").value=data.localidade||"";document.getElementById("estado").value=data.uf||"";clearInlineError(cepInput);}else{showInlineError(cepInput,"CEP inválido.");}}catch{showInlineError(cepInput,"Erro ao consultar CEP.");}finally{cepInput.classList.remove("loading");}}
+    document.addEventListener("DOMContentLoaded",()=>{document.getElementById("cnpj").addEventListener("blur",function(){buscarCNPJ(this.value);});document.getElementById("cep").addEventListener("blur",function(){buscarCEP(this.value);});document.getElementById("leadForm").addEventListener("submit",function(e){const requiredFields=this.querySelectorAll("[required]");let hasError=false;requiredFields.forEach(field=>{if(!field.value.trim()){showInlineError(field,"Campo obrigatório.");hasError=true;}else{clearInlineError(field);}});if(hasError){e.preventDefault();return;}const btn=this.querySelector(".submit-button");btn.disabled=true;btn.textContent="Enviando...";});});
   </script>
 </body>
 </html>
+
+
