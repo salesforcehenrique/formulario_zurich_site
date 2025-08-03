@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>Cadastro de Parceiros - Seg Imob</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box }
@@ -12,7 +12,7 @@
       padding: 20px; color: #333; min-height: 100vh;
     }
     .form-container {
-      max-width: 1200px; margin: 0 auto;
+      max-width: 1200px; margin: auto;
       background: #fff; border-radius: 12px;
       padding: 40px; box-shadow: 0 8px 32px rgba(0,0,0,0.1);
       position: relative;
@@ -23,105 +23,106 @@
       background: linear-gradient(90deg, #0073ff, #00c6ff);
     }
     .header { text-align: center; margin-bottom: 40px }
-    .header h1 { font-size: 28px; font-weight: 700; color: #222; }
-    .header .subheading { color: #0073ff; font-size: 16px; margin-top: 8px }
+    .header h1 { font-size:28px; font-weight:700; color:#222 }
+    .header .subheading { color:#0073ff; font-size:16px; margin-top:8px }
 
     .form-section {
-      margin-bottom: 40px; padding: 30px;
-      background: #f8fafc; border-radius: 10px;
-      border-left: 4px solid #0073ff;
+      margin-bottom:40px; padding:30px;
+      background:#f8fafc; border-radius:10px;
+      border-left:4px solid #0073ff;
     }
     .section-title {
-      display: flex; align-items: center; gap: 10px;
-      font-size: 20px; font-weight: 600; color: #222;
-      margin-bottom: 20px;
+      display:flex; align-items:center; gap:10px;
+      font-size:20px; font-weight:600; color:#222;
+      margin-bottom:20px;
     }
     .section-icon {
-      width: 24px; height: 24px;
-      background: #0073ff; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      color: #fff; font-size: 12px; font-weight: bold;
+      width:24px; height:24px;
+      background:#0073ff; border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      color:#fff; font-size:12px; font-weight:bold;
     }
 
-    .form-grid { display: grid; gap: 20px; }
-    .form-grid.two-columns { grid-template-columns: 1fr 1fr; }
-    .form-grid.single-column { grid-template-columns: 1fr; }
+    .form-grid { display:grid; gap:20px }
+    .form-grid.two-columns { grid-template-columns:1fr 1fr }
+    .form-grid.single-column { grid-template-columns:1fr }
 
-    .form-group { display: flex; flex-direction: column; }
+    .form-group { display:flex; flex-direction:column }
     .form-group label {
-      margin-bottom: 8px; font-size: 14px; font-weight: 600; color: #374151;
+      margin-bottom:8px; font-size:14px; font-weight:600; color:#374151;
     }
     .form-group input,
     .form-group select {
-      padding: 14px 16px; border-radius: 8px;
-      border: 2px solid #e5e7eb; background: #fff;
-      font-size: 14px; transition: all .3s ease; font-family: inherit;
+      padding:14px 16px; border-radius:8px;
+      border:2px solid #e5e7eb; background:#fff;
+      font-size:14px; font-family:inherit;
+      transition: all .3s ease;
     }
     .form-group input:focus,
     .form-group select:focus {
-      border-color: #0073ff;
-      box-shadow: 0 0 0 3px rgba(0,115,255,0.1);
-      outline: none; transform: translateY(-1px);
+      outline:none;
+      border-color:#0073ff;
+      box-shadow:0 0 0 3px rgba(0,115,255,0.1);
+      transform:translateY(-1px);
     }
 
     .radio-group {
-      display: flex; gap: 20px; margin-top: 10px; align-items: center;
+      display:flex; gap:20px; align-items:center; margin-top:10px;
     }
     .radio-group label {
-      display: flex; align-items: center; gap: 8px;
-      padding: 8px 12px; border-radius: 6px;
-      cursor: pointer; transition: background .2s ease;
-      font-weight: 500;
+      display:flex; align-items:center; gap:8px;
+      padding:8px 12px; border-radius:6px;
+      cursor:pointer; transition:background .2s ease;
+      font-weight:500;
     }
-    .radio-group label:hover { background: #f3f4f6 }
-    .radio-group input { width: 18px; height: 18px; margin: 0; }
+    .radio-group label:hover { background:#f3f4f6 }
+    .radio-group input { width:18px; height:18px; margin:0 }
 
     .submit-section {
-      text-align: center; padding-top: 30px; border-top: 2px solid #e5e7eb;
+      text-align:center; padding-top:30px; border-top:2px solid #e5e7eb;
     }
     .submit-button {
-      background: linear-gradient(135deg, #0073ff, #00c6ff);
-      color: #fff; padding: 16px 40px; font-size: 16px; font-weight: 600;
-      border: none; border-radius: 8px; cursor: pointer; transition: all .3s ease;
-      box-shadow: 0 4px 12px rgba(0,115,255,0.3);
+      background:linear-gradient(135deg,#0073ff,#00c6ff);
+      color:#fff; padding:16px 40px; font-size:16px; font-weight:600;
+      border:none; border-radius:8px; cursor:pointer;
+      transition:all .3s ease; box-shadow:0 4px 12px rgba(0,115,255,0.3);
     }
     .submit-button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(0,115,255,0.4);
+      transform:translateY(-2px);
+      box-shadow:0 6px 20px rgba(0,115,255,0.4);
     }
 
-    /* ========== Calendário em carousel ========== */
-    .calendars-container {
-      position: relative; margin-top: 20px;
-      overflow: visible; /* deixa ver a altura total */
-    }
-    .calendar-carousel {
-      display: flex; gap: 20px; transition: transform .4s ease;
-    }
+    /* Calendário em carousel */
+    .calendars-container { position:relative; margin-top:20px; overflow:visible }
+    .calendar-carousel { display:flex; gap:20px; transition:transform .4s ease }
     .calendar-card {
-      flex: 0 0 50%; /* cada card ocupa metade do container */
-      background: #fff;
-      border: 1px solid #e5e7eb; border-radius: 8px; padding: 20px;
+      flex:0 0 50%; background:#fff;
+      border:1px solid #e5e7eb; border-radius:8px;
+      padding:20px;
     }
     .calendar-title {
-      font-weight: 600; color: #374151; margin-bottom: 12px;
+      font-weight:600; color:#374151; margin-bottom:12px;
     }
     .calendar-card iframe {
-      width: 100%; height: 500px; border: none;
+      width:100%; height:700px; border:none;
     }
     .carousel-nav {
-      position: absolute; top: 50%; width: 100%;
-      display: flex; justify-content: space-between;
-      transform: translateY(-50%);
+      position:absolute; top:50%; width:100%;
+      display:flex; justify-content:space-between;
+      transform:translateY(-50%);
     }
     .carousel-nav button {
-      background: rgba(0,0,0,0.1); border: none;
-      width: 36px; height: 36px; border-radius: 50%;
-      cursor: pointer; display: flex; align-items: center; justify-content: center;
-      transition: background .2s;
+      background:rgba(0,0,0,0.1); border:none;
+      width:36px; height:36px; border-radius:50%;
+      cursor:pointer; display:flex;
+      align-items:center; justify-content:center;
+      transition:background .2s;
     }
-    .carousel-nav button:hover { background: rgba(0,0,0,0.2); }
-    .carousel-nav svg { width: 20px; height: 20px; fill: #333; }
+    .carousel-nav button:hover { background:rgba(0,0,0,0.2) }
+    .carousel-nav svg { width:20px; height:20px; fill:#333 }
+
+    .hidden { display:none }
+    .loading { opacity:0.6 }
   </style>
 </head>
 <body>
@@ -135,83 +136,82 @@
     <form id="leadForm"
           action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00D6A000002ImjZ"
           method="POST">
+      <!-- Salesforce -->
+      <input type="hidden" name="oid" value="00D6A000002ImjZ"/>
+      <input type="hidden" name="retURL" value="https://salesforcehenrique.github.io/"/>
+      <input type="hidden" id="company" name="company" value=""/>
 
-      <!-- hidden Salesforce -->
-      <input type="hidden" name="oid" value="00D6A000002ImjZ">
-      <input type="hidden" name="retURL" value="https://salesforcehenrique.github.io/">
-      <input type="hidden" id="company" name="company" value="">
-
-      <!-- 1. Identificação da Corretora -->
+      <!-- 1 -->
       <div class="form-section">
         <h3 class="section-title"><span class="section-icon">1</span>Identificação da Corretora</h3>
         <div class="form-grid single-column">
           <div class="form-group">
             <label for="cnpj">CNPJ *</label>
             <input id="cnpj" name="00NSG00000QKAKR" type="text" maxlength="18"
-                   placeholder="00.000.000/0000-00" required>
+                   placeholder="00.000.000/0000-00" required/>
           </div>
         </div>
         <div class="form-grid two-columns">
           <div class="form-group">
             <label for="razao_social">Razão Social *</label>
             <input id="razao_social" name="00NSG00000QKCIz" type="text"
-                   placeholder="Razão Social da empresa" readonly required>
+                   placeholder="Razão Social da empresa" readonly required/>
           </div>
           <div class="form-group">
             <label for="fantasia">Nome Fantasia *</label>
             <input id="fantasia" name="00NIa000000NlQQ" type="text"
-                   placeholder="Nome fantasia da empresa" readonly required>
+                   placeholder="Nome fantasia da empresa" readonly required/>
           </div>
           <div class="form-group">
             <label for="telefone_corretora">Telefone da Corretora *</label>
             <input id="telefone_corretora" name="telefone_corretora" type="tel"
-                   placeholder="(00) 0000-0000" required>
+                   placeholder="(00) 0000-0000" required/>
           </div>
           <div class="form-group">
             <label for="imobiliarias">Quantidade de Imobiliárias *</label>
             <input id="imobiliarias" name="00N6A00000NUmQa" type="number" min="1"
-                   placeholder="Número de imobiliárias" required>
+                   placeholder="Número de imobiliárias" required/>
           </div>
         </div>
       </div>
 
-      <!-- 2. Endereço da Corretora -->
+      <!-- 2 -->
       <div class="form-section">
         <h3 class="section-title"><span class="section-icon">2</span>Endereço da Corretora</h3>
         <div class="form-grid two-columns">
           <div class="form-group">
             <label for="cep">CEP *</label>
             <input id="cep" name="cep" type="text" maxlength="9"
-                   placeholder="00000-000" required>
+                   placeholder="00000-000" required/>
           </div>
           <div class="form-group">
             <label for="numero">Número *</label>
-            <input id="numero" name="numero" type="text" required>
+            <input id="numero" name="numero" type="text" required/>
           </div>
         </div>
         <div class="form-grid single-column">
           <div class="form-group">
             <label for="logradouro">Logradouro *</label>
-            <input id="logradouro" name="street" type="text" readonly required>
+            <input id="logradouro" name="street" type="text" readonly required/>
           </div>
         </div>
         <div class="form-grid two-columns">
           <div class="form-group">
             <label for="bairro">Bairro *</label>
-            <input id="bairro" name="bairro" type="text" readonly required>
+            <input id="bairro" name="bairro" type="text" readonly required/>
           </div>
           <div class="form-group">
             <label for="cidade">Cidade *</label>
-            <input id="cidade" name="cidade" type="text" readonly required>
+            <input id="cidade" name="cidade" type="text" readonly required/>
           </div>
           <div class="form-group">
             <label for="estado">Estado *</label>
-            <input id="estado" name="estado" type="text" readonly required>
+            <input id="estado" name="estado" type="text" readonly required/>
           </div>
         </div>
       </div>
 
-      <!-- 3. Dados do Responsável -->
+      <!-- 3 -->
       <div class="form-section">
         <h3 class="section-title"><span class="section-icon">3</span>Dados do Responsável</h3>
         <div class="form-grid two-columns">
@@ -227,31 +227,31 @@
           </div>
           <div class="form-group">
             <label for="responsavel">Nome *</label>
-            <input id="responsavel" name="00NSG00000QKgtm" type="text" required>
+            <input id="responsavel" name="00NSG00000QKgtm" type="text" required/>
           </div>
+        </div>
+        <div class="form-grid two-columns">
           <div class="form-group">
             <label for="tel_responsavel">Telefone *</label>
             <input id="tel_responsavel" name="00NSG00000XXXX1" type="tel"
-                   placeholder="(00) 0000-0000" required>
+                   placeholder="(00) 0000-0000" required/>
           </div>
-        </div>
-        <div class="form-grid single-column">
           <div class="form-group">
             <label for="email_responsavel">Email *</label>
             <input id="email_responsavel" name="00NSG00000XXXX2" type="email"
-                   placeholder="email@exemplo.com" required>
+                   placeholder="email@exemplo.com" required/>
           </div>
         </div>
       </div>
 
-      <!-- 4. Informações de Produção -->
+      <!-- 4 -->
       <div class="form-section">
         <h3 class="section-title"><span class="section-icon">4</span>Informações de Produção</h3>
         <div class="form-grid two-columns">
           <div class="form-group">
             <label for="incendio">Produção Mensal Incêndio</label>
             <input id="incendio" name="00NSG00000QGVKd" type="number" step="0.01"
-                   placeholder="Valor em R$">
+                   placeholder="Valor em R$"/>
           </div>
           <div class="form-group">
             <label for="seguradora_incendio">Seguradora Principal - Incêndio</label>
@@ -263,14 +263,17 @@
               <option>Sancor</option>
               <option>Tokio Marine</option>
               <option>Zurich</option>
+              <option value="Outros">Outros</option>
             </select>
+            <input id="seg_inc_outros" name="Seg_Inc_Outros__c" type="text"
+                   placeholder="Especifique outra seguradora" class="hidden"/>
           </div>
         </div>
         <div class="form-grid two-columns">
           <div class="form-group">
             <label for="fianca">Produção Mensal Fiança</label>
             <input id="fianca" name="00NSG00000QGgQv" type="number" step="0.01"
-                   placeholder="Valor em R$">
+                   placeholder="Valor em R$"/>
           </div>
           <div class="form-group">
             <label for="seguradora_fianca">Seguradora Principal - Fiança</label>
@@ -280,14 +283,17 @@
               <option>Pottencial</option>
               <option>TOO</option>
               <option>Tokio Marine</option>
+              <option value="Outros">Outros</option>
             </select>
+            <input id="seg_fianca_outros" name="Seg_Fianca_Outros__c" type="text"
+                   placeholder="Especifique outra seguradora" class="hidden"/>
           </div>
         </div>
         <div class="form-grid two-columns">
           <div class="form-group">
             <label for="capitalizacao">Produção Mensal Capitalização</label>
             <input id="capitalizacao" name="00NSG00000QGe4A" type="number" step="0.01"
-                   placeholder="Valor em R$">
+                   placeholder="Valor em R$"/>
           </div>
           <div class="form-group">
             <label for="seguradora_capitalizacao">Seguradora Principal - Capitalização</label>
@@ -295,12 +301,15 @@
               <option value="">Selecione</option>
               <option>Icatu</option>
               <option>Porto Seguro</option>
+              <option value="Outros">Outros</option>
             </select>
+            <input id="seg_cap_outros" name="Seg_Cap_Outros__c" type="text"
+                   placeholder="Especifique outra seguradora" class="hidden"/>
           </div>
         </div>
       </div>
 
-      <!-- 5. Tecnologia e Sistemas -->
+      <!-- 5 -->
       <div class="form-section">
         <h3 class="section-title"><span class="section-icon">5</span>Tecnologia e Sistemas</h3>
         <div class="form-grid single-column">
@@ -313,10 +322,11 @@
             </select>
           </div>
         </div>
-        <div class="form-grid single-column" id="siteField" style="display:none">
+        <div class="form-grid single-column hidden" id="siteField">
           <div class="form-group">
             <label for="site">Site</label>
-            <input id="site" name="00NSG00000QGcb8" type="url" placeholder="https://www.seusite.com">
+            <input id="site" name="00NSG00000QGcb8" type="url"
+                   placeholder="https://www.seusite.com"/>
           </div>
         </div>
         <div class="form-grid single-column">
@@ -329,32 +339,32 @@
             </select>
           </div>
         </div>
-        <div id="erpFields" class="form-grid two-columns" style="display:none">
+        <div class="form-grid two-columns hidden" id="erpFields">
           <div class="form-group">
             <label for="erp_utilizado">ERP Utilizado</label>
             <input id="erp_utilizado" name="00NSG00000QGcb6" type="text"
-                   placeholder="ERP Utilizado - Corretora">
+                   placeholder="ERP Utilizado - Corretora"/>
           </div>
           <div class="form-group">
             <label for="erp_seguros">ERP p/ gerenciamento de seguros</label>
             <input id="erp_seguros" name="00NSG00000QGcb7" type="text"
-                   placeholder="ERP para gerenciamento de seguros - Corretora">
+                   placeholder="ERP para gerenciamento de seguros - Corretora"/>
           </div>
         </div>
       </div>
 
-      <!-- 6. Agendamento -->
+      <!-- 6 -->
       <div class="form-section">
         <h3 class="section-title"><span class="section-icon">6</span>Agendamento</h3>
         <div class="form-group">
           <label>Deseja agendar uma reunião?</label>
           <div class="radio-group">
-            <label><input type="radio" name="agendar_reuniao" value="sim"> Sim</label>
-            <label><input type="radio" name="agendar_reuniao" value="nao" checked> Não</label>
+            <label><input type="radio" name="agendar_reuniao" value="sim"/> Sim</label>
+            <label><input type="radio" name="agendar_reuniao" value="nao" checked/> Não</label>
           </div>
         </div>
-        <div id="calendarEmbedContainer" class="calendars-container" style="display:none">
-          <p style="text-align:center; margin-bottom:20px; color:#6b7280; font-size:14px">
+        <div id="calendarEmbedContainer" class="calendars-container hidden">
+          <p style="text-align:center; font-size:14px; color:#6b7280; margin-bottom:20px">
             Escolha um horário:
           </p>
           <div class="calendar-carousel" id="carousel">
@@ -384,83 +394,86 @@
     </form>
   </div>
 
-  <!-- Scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/imask/6.6.1/imask.min.js"></script>
   <script>
     // Máscaras
-    IMask(document.getElementById('cnpj'), { mask: '00.000.000/0000-00' });
-    IMask(document.getElementById('telefone_corretora'), { mask: '(00) 0000-0000' });
-    IMask(document.getElementById('tel_responsavel'), { mask: '(00) 0000-0000' });
-    IMask(document.getElementById('cep'), { mask: '00000-000' });
+    IMask(document.getElementById('cnpj'), { mask:'00.000.000/0000-00' });
+    IMask(document.getElementById('telefone_corretora'), { mask:'(00) 0000-0000' });
+    IMask(document.getElementById('tel_responsavel'), { mask:'(00) 0000-0000' });
+    IMask(document.getElementById('cep'), { mask:'00000-000' });
 
-    // Busca CNPJ
-    async function buscarCNPJ(v) {
-      const c = v.replace(/\D/g, '');
-      if (c.length !== 14) return;
-      try {
-        const res = await fetch(`https://brasilapi.com.br/api/cnpj/v1/${c}`);
-        const d = await res.json();
-        if (d.razao_social) {
+    // Busca CNPJ e CEP
+    async function buscarCNPJ(v){
+      const c=v.replace(/\D/g,'');
+      if(c.length!==14) return;
+      try{
+        const res=await fetch(`https://brasilapi.com.br/api/cnpj/v1/${c}`);
+        const d=await res.json();
+        if(d.razao_social){
           document.getElementById('razao_social').value = d.razao_social;
-          document.getElementById('fantasia').value = d.nome_fantasia || d.razao_social;
+          document.getElementById('fantasia').value = d.nome_fantasia||d.razao_social;
           document.getElementById('company').value = d.razao_social;
         }
-      } catch { alert('Erro ao consultar CNPJ'); }
+      }catch{}
     }
-    document.getElementById('cnpj').addEventListener('blur', e => buscarCNPJ(e.target.value));
-
-    // Busca CEP
-    async function buscarCEP(v) {
-      const c = v.replace(/\D/g, '');
-      if (c.length !== 8) return;
-      try {
-        const res = await fetch(`https://viacep.com.br/ws/${c}/json/`);
-        const d = await res.json();
-        if (!d.erro) {
-          document.getElementById('logradouro').value = d.logradouro;
-          document.getElementById('bairro').value = d.bairro;
-          document.getElementById('cidade').value = d.localidade;
-          document.getElementById('estado').value = d.uf;
+    async function buscarCEP(v){
+      const c=v.replace(/\D/g,'');
+      if(c.length!==8) return;
+      try{
+        const res=await fetch(`https://viacep.com.br/ws/${c}/json/`);
+        const d=await res.json();
+        if(!d.erro){
+          document.getElementById('logradouro').value=d.logradouro;
+          document.getElementById('bairro').value=d.bairro;
+          document.getElementById('cidade').value=d.localidade;
+          document.getElementById('estado').value=d.uf;
         }
-      } catch { alert('Erro ao consultar CEP'); }
+      }catch{}
     }
-    document.getElementById('cep').addEventListener('blur', e => buscarCEP(e.target.value));
+    document.getElementById('cnpj').addEventListener('blur', e=>buscarCNPJ(e.target.value));
+    document.getElementById('cep').addEventListener('blur', e=>buscarCEP(e.target.value));
 
-    // Show/hide Site
-    document.getElementById('plataforma').addEventListener('change', function() {
-      document.getElementById('siteField').style.display =
-        this.value === 'Sim' ? 'block' : 'none';
+    // Show/hide campos
+    document.getElementById('plataforma').addEventListener('change',function(){
+      document.getElementById('siteField').classList.toggle('hidden', this.value!=='Sim');
+    });
+    document.getElementById('parceria_erp').addEventListener('change',function(){
+      document.getElementById('erpFields').classList.toggle('hidden', this.value!=='Sim');
     });
 
-    // Show/hide ERP
-    document.getElementById('parceria_erp').addEventListener('change', function() {
-      document.getElementById('erpFields').style.display =
-        this.value === 'Sim' ? 'grid' : 'none';
-    });
+    // Outros seguradoras
+    function attachOutros(selectId, inputId){
+      const sel=document.getElementById(selectId);
+      const inp=document.getElementById(inputId);
+      sel.addEventListener('change',()=>{
+        inp.classList.toggle('hidden', sel.value!=='Outros');
+      });
+    }
+    attachOutros('seguradora_incendio','seg_inc_outros');
+    attachOutros('seguradora_fianca','seg_fianca_outros');
+    attachOutros('seguradora_capitalizacao','seg_cap_outros');
 
-    // Carousel Agendas
-    const radios = document.querySelectorAll('input[name="agendar_reuniao"]');
-    const container = document.getElementById('calendarEmbedContainer');
-    const carousel = document.getElementById('carousel');
-    let idx = 0;
-
-    radios.forEach(r => r.addEventListener('change', () => {
-      if (r.value === 'sim') {
-        container.style.display = 'block';
+    // Carousel
+    const radios=document.querySelectorAll('input[name="agendar_reuniao"]');
+    const container=document.getElementById('calendarEmbedContainer');
+    const carousel=document.getElementById('carousel');
+    let idx=0;
+    radios.forEach(r=>r.addEventListener('change',()=>{
+      if(r.value==='sim'){
+        container.classList.remove('hidden');
       } else {
-        container.style.display = 'none';
-        idx = 0;
-        carousel.style.transform = 'translateX(0)';
+        container.classList.add('hidden');
+        idx=0;
+        carousel.style.transform='translateX(0)';
       }
     }));
-
-    document.getElementById('prevBtn').addEventListener('click', () => {
-      idx = Math.max(0, idx - 1);
-      carousel.style.transform = `translateX(-${idx * 100}%)`;
+    document.getElementById('prevBtn').addEventListener('click',()=>{
+      idx=Math.max(0,idx-1);
+      carousel.style.transform=`translateX(-${idx*100}%)`;
     });
-    document.getElementById('nextBtn').addEventListener('click', () => {
-      idx = Math.min(carousel.children.length - 1, idx + 1);
-      carousel.style.transform = `translateX(-${idx * 100}%)`;
+    document.getElementById('nextBtn').addEventListener('click',()=>{
+      idx=Math.min(carousel.children.length-1,idx+1);
+      carousel.style.transform=`translateX(-${idx*100}%)`;
     });
   </script>
 </body>
