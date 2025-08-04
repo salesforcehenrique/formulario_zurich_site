@@ -1,8 +1,8 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
   <title>Cadastro de Parceiros - Seg Imob</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box }
@@ -47,7 +47,7 @@
     .form-grid.two-columns { grid-template-columns:1fr 1fr }
     .form-grid.single-column { grid-template-columns:1fr }
 
-    .form-group { display:flex; flex-direction:column }
+    .form-group { display:flex; flex-direction:column; min-width:0 }
     .form-group label {
       margin-bottom:8px; font-size:14px; font-weight:600; color:#374151;
     }
@@ -68,6 +68,7 @@
 
     .radio-group {
       display:flex; gap:20px; align-items:center; margin-top:10px;
+      flex-wrap: wrap;
     }
     .radio-group label {
       display:flex; align-items:center; gap:8px;
@@ -94,11 +95,17 @@
 
     /* Calendário em carousel */
     .calendars-container { position:relative; margin-top:20px; overflow:visible }
-    .calendar-carousel { display:flex; gap:20px; transition:transform .4s ease }
+    .calendar-carousel {
+      display:flex; gap:20px; transition:transform .4s ease;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
     .calendar-card {
       flex:0 0 50%; background:#fff;
       border:1px solid #e5e7eb; border-radius:8px;
       padding:20px;
+      scroll-snap-align:start;
     }
     .calendar-title {
       font-weight:600; color:#374151; margin-bottom:12px;
@@ -121,8 +128,29 @@
     .carousel-nav button:hover { background:rgba(0,0,0,0.2) }
     .carousel-nav svg { width:20px; height:20px; fill:#333 }
 
+    .scroll-hint {
+      font-size:12px; color:#6b7280; text-align:center;
+      margin-top:8px;
+    }
+
     .hidden { display:none }
     .loading { opacity:0.6 }
+
+    /* responsividade simples */
+    @media (max-width: 1024px){
+      .form-grid.two-columns { grid-template-columns:1fr; }
+      .calendar-card { flex:0 0 100%; }
+      .header h1 { font-size:24px; }
+      .header .subheading { font-size:14px; }
+      .submit-button { width:100%; padding:14px; }
+      .calendar-carousel { gap:16px; }
+    }
+    @media (max-width: 768px){
+      body { padding:10px; }
+      .form-container { padding:20px; }
+      .section-title { font-size:18px; }
+      .calendar-card iframe { height:500px; }
+    }
   </style>
 </head>
 <body>
@@ -377,6 +405,7 @@
               <iframe src="https://calendar.app.google/U5oztqWefrCVZr6z9" allowfullscreen></iframe>
             </div>
           </div>
+          <div class="scroll-hint">Arraste para ver mais</div>
           <div class="carousel-nav">
             <button type="button" id="prevBtn">
               <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
@@ -453,28 +482,54 @@
     attachOutros('seguradora_fianca','seg_fianca_outros');
     attachOutros('seguradora_capitalizacao','seg_cap_outros');
 
-    // Carousel
-    const radios=document.querySelectorAll('input[name="agendar_reuniao"]');
-    const container=document.getElementById('calendarEmbedContainer');
-    const carousel=document.getElementById('carousel');
-    let idx=0;
-    radios.forEach(r=>r.addEventListener('change',()=>{
-      if(r.value==='sim'){
+    // Carousel refinado mantendo tudo intacto
+    const radios = document.querySelectorAll('input[name="agendar_reuniao"]');
+    const container = document.getElementById('calendarEmbedContainer');
+    const carousel = document.getElementById('carousel');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    function updateNavButtons() {
+      if (!carousel) return;
+      const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+      prevBtn.disabled = carousel.scrollLeft <= 0;
+      nextBtn.disabled = carousel.scrollLeft >= maxScroll - 1;
+    }
+
+    // mostrar/ocultar container como antes
+    radios.forEach(r => r.addEventListener('change', () => {
+      if (r.value === 'sim') {
         container.classList.remove('hidden');
       } else {
         container.classList.add('hidden');
-        idx=0;
-        carousel.style.transform='translateX(0)';
+        carousel.scrollTo({ left: 0, behavior: 'smooth' });
       }
+      setTimeout(updateNavButtons, 100);
     }));
-    document.getElementById('prevBtn').addEventListener('click',()=>{
-      idx=Math.max(0,idx-1);
-      carousel.style.transform=`translateX(-${idx*100}%)`;
+
+    // navegação com scrollBy baseado na largura do card + gap
+    function getScrollStep() {
+      const card = carousel.querySelector('.calendar-card');
+      if (!card) return 0;
+      const gap = parseFloat(getComputedStyle(carousel).gap) || 0;
+      return card.getBoundingClientRect().width + gap;
+    }
+
+    prevBtn.addEventListener('click', () => {
+      const step = getScrollStep();
+      carousel.scrollBy({ left: -step, behavior: 'smooth' });
     });
-    document.getElementById('nextBtn').addEventListener('click',()=>{
-      idx=Math.min(carousel.children.length-1,idx+1);
-      carousel.style.transform=`translateX(-${idx*100}%)`;
+    nextBtn.addEventListener('click', () => {
+      const step = getScrollStep();
+      carousel.scrollBy({ left: step, behavior: 'smooth' });
     });
+
+    // atualizar estados ao rolar e redimensionar
+    carousel.addEventListener('scroll', updateNavButtons);
+    window.addEventListener('resize', updateNavButtons);
+
+    // inicializa
+    updateNavButtons();
   </script>
 </body>
 </html>
