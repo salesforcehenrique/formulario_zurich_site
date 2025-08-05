@@ -38,7 +38,6 @@
     .form-section {
       margin-bottom:40px; padding:30px;
       background:#f8fafc; border-radius:10px;
-      /*border-left:4px solid #0073ff;*/
     }
     .section-title {
       display:flex; align-items:center; gap:10px;
@@ -76,8 +75,8 @@
     }
     
     .form-group input[readonly] {
-      background-color: #f3f4f6; /* mesma cor do hover e borda clara */
-      color: #6b7280; /* cor de texto cinza para indicar bloqueio */
+      background-color: #f3f4f6;
+      color: #6b7280;
       cursor: not-allowed;
     }
     
@@ -134,7 +133,6 @@
       height: 18px;
       margin: 0;
     }
-
 
     .submit-section {
       text-align:center; padding-top:30px; border-top:2px solid #e5e7eb;
@@ -225,6 +223,10 @@
       <input type="hidden" name="oid" value="00D6A000002ImjZ"/>
       <input type="hidden" name="retURL" value="https://salesforcehenrique.github.io/"/>
       <input type="hidden" id="company" name="company" value=""/>
+
+      <!-- campos padrão para Web-to-Lead: estado e país -->
+      <input type="hidden" name="state" id="state_std" value=""/>
+      <input type="hidden" name="country" value="Brasil"/>
 
       <!-- 1: Identificação da Corretora -->
       <div class="form-section">
@@ -510,7 +512,6 @@
         }
       }
     };
-
     IMask(document.getElementById('incendio'), currencyMaskOptions);
     IMask(document.getElementById('fianca'), currencyMaskOptions);
     IMask(document.getElementById('capitalizacao'), currencyMaskOptions);
@@ -530,37 +531,26 @@
       }catch{}
     }
     async function buscarCEP(v){
-      const c = v.replace(/\D/g, '');
-      const logEl = document.getElementById('logradouro');
-      const bairroEl = document.getElementById('bairro');
-      const cidadeEl = document.getElementById('cidade');
-      const estadoEl = document.getElementById('estado');
-
-      if (c.length !== 8) {
-        // Limpa os campos se o CEP for apagado ou inválido
-        logEl.value = '';
-        bairroEl.value = '';
-        cidadeEl.value = '';
-        estadoEl.value = '';
+      const c=v.replace(/\D/g,'');
+      const logEl=document.getElementById('logradouro');
+      const bairroEl=document.getElementById('bairro');
+      const cidadeEl=document.getElementById('cidade');
+      const estadoEl=document.getElementById('estado');
+      if(c.length!==8){
+        logEl.value=bairroEl.value=cidadeEl.value=estadoEl.value='';
         return;
       }
-
-      try {
-        const res = await fetch(`https://viacep.com.br/ws/${c}/json/`);
-        const d = await res.json();
-
-        if (!d.erro) {
-          logEl.value = d.logradouro || '';
-          bairroEl.value = d.bairro || '';
-          cidadeEl.value = d.localidade || '';
-          estadoEl.value = d.uf || '';
+      try{
+        const res=await fetch(`https://viacep.com.br/ws/${c}/json/`);
+        const d=await res.json();
+        if(!d.erro){
+          logEl.value=d.logradouro||'';
+          bairroEl.value=d.bairro||'';
+          cidadeEl.value=d.localidade||'';
+          estadoEl.value=d.uf||'';
         }
-      } catch {
-        // Limpa os campos também em caso de erro de rede
-        logEl.value = '';
-        bairroEl.value = '';
-        cidadeEl.value = '';
-        estadoEl.value = '';
+      }catch{
+        logEl.value=bairroEl.value=cidadeEl.value=estadoEl.value='';
       }
     }
     document.getElementById('cnpj').addEventListener('blur', e=>buscarCNPJ(e.target.value));
@@ -573,14 +563,9 @@
     document.getElementById('parceria_erp').addEventListener('change', function(){
       document.getElementById('erpFields').classList.toggle('hidden', this.value!=='Sim');
     });
-
-    // Outros seguradoras
     function attachOutros(selectId, inputId){
-      const sel=document.getElementById(selectId);
-      const inp=document.getElementById(inputId);
-      sel.addEventListener('change',()=>{
-        inp.classList.toggle('hidden', sel.value!=='Outros');
-      });
+      const sel=document.getElementById(selectId), inp=document.getElementById(inputId);
+      sel.addEventListener('change', ()=> inp.classList.toggle('hidden', sel.value!=='Outros'));
     }
     attachOutros('seguradora_incendio','seg_inc_outros');
     attachOutros('seguradora_fianca','seg_fianca_outros');
@@ -592,50 +577,78 @@
     const carousel = document.getElementById('carousel');
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
-
     function updateNavButtons() {
       if (!carousel) return;
       const maxScroll = carousel.scrollWidth - carousel.clientWidth;
       prevBtn.disabled = carousel.scrollLeft <= 0;
       nextBtn.disabled = carousel.scrollLeft >= maxScroll - 1;
     }
-
     radios.forEach(r => r.addEventListener('change', () => {
-      if (r.value === 'sim') {
-        container.classList.remove('hidden');
-      } else {
+      if (r.value === 'sim') container.classList.remove('hidden');
+      else {
         container.classList.add('hidden');
         carousel.scrollTo({ left: 0, behavior: 'smooth' });
       }
       setTimeout(updateNavButtons, 100);
     }));
-
     function getScrollStep() {
       const card = carousel.querySelector('.calendar-card');
-      if (!card) return 0;
       const gap = parseFloat(getComputedStyle(carousel).gap) || 0;
-      return card.getBoundingClientRect().width + gap;
+      return card ? card.getBoundingClientRect().width + gap : 0;
     }
-
     prevBtn.addEventListener('click', () => {
-      const step = getScrollStep();
-      carousel.scrollBy({ left: -step, behavior: 'smooth' });
+      carousel.scrollBy({ left: -getScrollStep(), behavior: 'smooth' });
     });
     nextBtn.addEventListener('click', () => {
-      const step = getScrollStep();
-      carousel.scrollBy({ left: step, behavior: 'smooth' });
+      carousel.scrollBy({ left: getScrollStep(), behavior: 'smooth' });
     });
-
     carousel.addEventListener('scroll', updateNavButtons);
     window.addEventListener('resize', updateNavButtons);
-    updateNavButtons();
-
-    // Garante que o calendário apareça ao carregar
     document.addEventListener('DOMContentLoaded', () => {
       container.classList.remove('hidden');
+      updateNavButtons();
     });
-    
-    
+
+    // Envio + fallback para email
+    (function(){
+      const form = document.getElementById('leadForm');
+      function mapFields(){
+        // nome completo dividido
+        const nome = document.getElementById('responsavel').value.trim().split(' ');
+        document.getElementById('first_name').value = nome.shift()||'';
+        document.getElementById('last_name').value  = nome.join(' ')||'';
+        document.getElementById('email_sf').value   = document.getElementById('email_responsavel').value;
+        document.getElementById('city_sf').value    = document.getElementById('cidade').value;
+        document.getElementById('state_code').value= document.getElementById('estado').value;
+        document.getElementById('salutation').value= document.getElementById('cargo').value;
+        document.getElementById('phone_sf').value   = document.getElementById('tel_responsavel').value;
+        document.getElementById('street_sf').value  = document.getElementById('logradouro').value;
+        document.getElementById('zip_sf').value     = document.getElementById('cep').value;
+        document.getElementById('lead_source').value= 'Site-SegImob';
+        // **popula o hidden padrão state**
+        document.getElementById('state_std').value  = document.getElementById('estado').value;
+      }
+      form.addEventListener('submit', function(evt){
+        evt.preventDefault();
+        mapFields();
+        const data = new FormData(form);
+        fetch(form.action,{
+          method:'POST',
+          body:data,
+          mode:'no-cors'
+        })
+        .then(()=> form.submit())
+        .catch(()=>{
+          const subject = encodeURIComponent('Falha no envio Web-to-Lead');
+          const body    = encodeURIComponent(
+            'Falha no envio para CNPJ: ' + document.getElementById('cnpj').value +
+            '\nResponsável: ' + document.getElementById('responsavel').value
+          );
+          window.open(`mailto:henrique@cscorp.tec.br?subject=${subject}&body=${body}`, '_blank');
+          form.submit();
+        });
+      });
+    })();
   </script>
 </body>
 </html>
