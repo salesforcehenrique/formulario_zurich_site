@@ -209,7 +209,6 @@
         <div class="form-grid single-column">
           <div class="form-group">
             <label for="logradouro">Logradouro *</label>
-            <!-- removido name="street" daqui -->
             <input id="logradouro" type="text" readonly required/>
           </div>
         </div>
@@ -372,9 +371,8 @@
         <div class="form-group">
           <label>Deseja agendar uma reunião?</label>
           <div class="radio-group">
-            <!-- name alterado para o campo customizado em SFDC -->
-            <label><input type="radio" name="Deseja_Agendar_Reuniao__c" value="Sim" checked/> Sim</label>
-            <label><input type="radio" name="Deseja_Agendar_Reuniao__c" value="Não"/> Não</label>
+            <label><input type="radio" name="Deseja_agendar_reuniao_SI__c" value="Sim" checked/> Sim</label>
+            <label><input type="radio" name="Deseja_agendar_reuniao_SI__c" value="Não"/> Não</label>
           </div>
         </div>
         <div id="calendarEmbedContainer" class="calendars-container">
@@ -461,57 +459,61 @@
     ['seguradora_incendio','seguradora_fianca','seguradora_capitalizacao'].forEach(id=>{
       attachOutros(id,id.replace('seguradora_','seg_')+'_outros');
     });
-    const radios=document.querySelectorAll('input[name="Deseja_Agendar_Reuniao__c"]'),
-          container=document.getElementById('calendarEmbedContainer'),
-          carousel=document.getElementById('carousel'),
-          prevBtn=document.getElementById('prevBtn'),
-          nextBtn=document.getElementById('nextBtn');
+    const radios = document.querySelectorAll('input[name="Deseja_agendar_reuniao_SI__c"]'),
+          container = document.getElementById('calendarEmbedContainer'),
+          carousel  = document.getElementById('carousel'),
+          prevBtn   = document.getElementById('prevBtn'),
+          nextBtn   = document.getElementById('nextBtn');
     function updateNavButtons(){
-      const max=carousel.scrollWidth-carousel.clientWidth;
-      prevBtn.disabled=carousel.scrollLeft<=0;
-      nextBtn.disabled=carousel.scrollLeft>=max-1;
+      const max = carousel.scrollWidth - carousel.clientWidth;
+      prevBtn.disabled = carousel.scrollLeft <= 0;
+      nextBtn.disabled = carousel.scrollLeft >= max - 1;
     }
     radios.forEach(r=>r.addEventListener('change',()=>{
-      if(r.value==='Sim')container.classList.remove('hidden');
-      else{container.classList.add('hidden');carousel.scrollTo({left:0});}
+      if(r.value==='Sim') container.classList.remove('hidden');
+      else {
+        container.classList.add('hidden');
+        carousel.scrollTo({left:0});
+      }
       setTimeout(updateNavButtons,100);
     }));
-    prevBtn.addEventListener('click',()=>carousel.scrollBy({left:-(carousel.querySelector('.calendar-card').offsetWidth+parseFloat(getComputedStyle(carousel).gap)),behavior:'smooth'}));
-    nextBtn.addEventListener('click',()=>carousel.scrollBy({left:(carousel.querySelector('.calendar-card').offsetWidth+parseFloat(getComputedStyle(carousel).gap)),behavior:'smooth'}));
-    carousel.addEventListener('scroll',updateNavButtons);
-    window.addEventListener('resize',updateNavButtons);
-    document.addEventListener('DOMContentLoaded',()=>{
-      container.classList.remove('hidden'); updateNavButtons();
+    prevBtn.addEventListener('click',()=>carousel.scrollBy({left:-(carousel.querySelector('.calendar-card').offsetWidth + parseFloat(getComputedStyle(carousel).gap)), behavior:'smooth'}));
+    nextBtn.addEventListener('click',()=>carousel.scrollBy({left:(carousel.querySelector('.calendar-card').offsetWidth + parseFloat(getComputedStyle(carousel).gap)), behavior:'smooth'}));
+    carousel.addEventListener('scroll', updateNavButtons);
+    window.addEventListener('resize', updateNavButtons);
+    document.addEventListener('DOMContentLoaded', ()=>{
+      container.classList.remove('hidden');
+      updateNavButtons();
     });
   </script>
 
   <!-- Submit: popula campos ocultos, dispara email e submete -->
   <script>
     (function(){
-      const form=document.getElementById('leadForm');
+      const form = document.getElementById('leadForm');
       function mapFields(){
-        const p=document.getElementById('responsavel').value.trim().split(' ');
-        document.getElementById('first_name').value=p.shift()||'';
-        document.getElementById('last_name').value=p.join(' ')||'';
-        document.getElementById('email_sf').value=document.getElementById('email_responsavel').value;
-        document.getElementById('city_sf').value=document.getElementById('cidade').value;
-        document.getElementById('street_sf').value=document.getElementById('logradouro').value;
-        document.getElementById('zip_sf').value=document.getElementById('cep').value;
-        document.getElementById('salutation').value=document.getElementById('cargo').value;
-        document.getElementById('phone_sf').value=document.getElementById('tel_responsavel').value;
-        document.getElementById('mobile_sf').value='';
-        document.getElementById('lead_source').value='Zurich';
-        document.getElementById('state_std').value=document.getElementById('estado').value;
+        const p = document.getElementById('responsavel').value.trim().split(' ');
+        document.getElementById('first_name').value = p.shift()||'';
+        document.getElementById('last_name').value  = p.join(' ')||'';
+        document.getElementById('email_sf').value   = document.getElementById('email_responsavel').value;
+        document.getElementById('city_sf').value    = document.getElementById('cidade').value;
+        document.getElementById('street_sf').value  = document.getElementById('logradouro').value;
+        document.getElementById('zip_sf').value     = document.getElementById('cep').value;
+        document.getElementById('salutation').value = document.getElementById('cargo').value;
+        document.getElementById('phone_sf').value   = document.getElementById('tel_responsavel').value;
+        document.getElementById('mobile_sf').value  = '';
+        document.getElementById('lead_source').value= 'Zurich';
+        document.getElementById('state_std').value  = document.getElementById('estado').value;
       }
-      form.addEventListener('submit',function(evt){
+      form.addEventListener('submit', function(evt){
         mapFields();
-        const subject=encodeURIComponent('Novo lead Seg Imob');
-        const body=encodeURIComponent(
+        const subject = encodeURIComponent('Novo lead Seg Imob');
+        const body    = encodeURIComponent(
           'CNPJ: '+document.getElementById('cnpj').value+'\n'+
           'Responsável: '+document.getElementById('responsavel').value+'\n'+
           'Email: '+document.getElementById('email_responsavel').value
         );
-        window.open(`mailto:henrique@cscorp.tec.br?subject=${subject}&body=${body}`,'_blank');
+        window.open(`mailto:henrique@cscorp.tec.br?subject=${subject}&body=${body}`, '_blank');
         alert('✅ Seu lead está a caminho! Nossa equipe já foi notificada e entrará em contato em breve.');
         // formulário segue ao Salesforce
       });
