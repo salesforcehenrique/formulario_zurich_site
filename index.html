@@ -8,19 +8,18 @@
     * { margin: 0; padding: 0; box-sizing: border-box }
     body {
       font-family:"Segoe UI", Roboto, Arial, sans-serif;
-      background: linear-gradient(135deg, #f4f6f9 0%, #e8ecf3 100%); color: #333; min-height: 100vh;
+      background: linear-gradient(135deg, #f4f6f9 0%, #e8ecf3 100%);
+      color: #333; min-height: 100vh;
     }
     .form-container {
-      width: 100%;
-      margin: 0 auto;
+      width: 100%; margin: 0 auto;
       background: #fff; border-radius: 16px;
       padding: 40px; box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-      position: relative;
-      overflow: hidden;
+      position: relative; overflow: hidden;
     }
     .form-container::before {
-      content: '';
-      position: absolute; top: 0; left: 0; height: 5px; width: 100%;
+      content: ''; position: absolute; top: 0; left: 0;
+      height: 5px; width: 100%;
       background: linear-gradient(90deg, #0073ff, #00c6ff);
       border-top-left-radius: 16px; border-top-right-radius: 16px;
     }
@@ -31,8 +30,8 @@
       margin-bottom:40px; padding:30px; background:#f8fafc; border-radius:10px;
     }
     .section-title {
-      display:flex; align-items:center; gap:10px; font-size:20px; font-weight:600; color:#222;
-      margin-bottom:20px;
+      display:flex; align-items:center; gap:10px;
+      font-size:20px; font-weight:600; color:#222; margin-bottom:20px;
     }
     .section-icon {
       width:24px; height:24px; background:#0073ff; border-radius:50%;
@@ -256,52 +255,67 @@
         </div>
       </div>
 
-      <!-- 4: Produção -->
+      <!-- 4: Informações de Produção -->
       <div class="form-section">
         <h3 class="section-title"><span class="section-icon">4</span>Informações de Produção</h3>
         <div class="form-grid single-column">
           <div class="form-group">
-            <label for="imobiliarias_parceiras">Quantidade de Imobiliarias Parceiras *</label>
-            <input id="imobiliarias_parceiras" name="00N6A00000NUmQa" type="number" min="1" required/>
+            <label for="imobiliarias_parceiras">Quantidade de Imobiliárias Parceiras *</label>
+            <input id="imobiliarias_parceiras" name="00N6A00000NUmQa" type="number" min="1" placeholder="Número de imobiliárias" required/>
           </div>
         </div>
         <div class="form-grid two-columns">
           <div class="form-group">
             <label for="incendio">Produção Mensal - Incêndio</label>
-            <input id="incendio" name="00NSG00000QGVKd" type="text"/>
+            <input id="incendio" name="00NSG00000QGVKd" type="text" placeholder="Valor em R$"/>
           </div>
           <div class="form-group">
-            <label for="seguradora_incendio">Seguradora - Incêndio</label>
+            <label for="seguradora_incendio">Seguradora Principal - Incêndio</label>
             <select id="seguradora_incendio" name="Seguradora_principal_Incendio__c">
-              <option value="">Selecione</option><option>Alfa/Safra</option><option>Mapfre</option><option>Porto Seguro</option><option>Sancor</option><option>Tokio Marine</option><option>Zurich</option><option value="Outros">Outros</option>
+              <option value="">Selecione</option>
+              <option>Alfa/Safra</option>
+              <option>Mapfre</option>
+              <option>Porto Seguro</option>
+              <option>Sancor</option>
+              <option>Tokio Marine</option>
+              <option>Zurich</option>
+              <option value="Outros">Outros</option>
             </select>
-            <input id="seg_inc_outros" name="Seg_Inc_Outros__c" type="text" class="hidden"/>
+            <input id="seg_inc_outros" name="Seg_Inc_Outros__c" type="text" placeholder="Especifique outra seguradora" class="hidden"/>
           </div>
         </div>
         <div class="form-grid two-columns">
           <div class="form-group">
-            <label for="fianca">Produção - Fiança</label>
-            <input id="fianca" name="00NSG00000QGgQv" type="text"/>
+            <label for="fianca">Produção Mensal - Fiança Locatícia</label>
+            <input id="fianca" name="00NSG00000QGgQv" type="text" placeholder="Valor em R$"/>
           </div>
           <div class="form-group">
-            <label for="seguradora_fianca">Seguradora - Fiança</label>
+            <label for="seguradora_fianca">Seguradora Principal - Fiança Locatícia</label>
             <select id="seguradora_fianca" name="Seguradora_principal_Fianca__c">
-              <option value="">Selecione</option><option>Porto Seguro</option><option>Pottencial</option><option>Too</option><option>Tokio Marine</option><option value="Outros">Outros</option>
+              <option value="">Selecione</option>
+              <option>Porto Seguro</option>
+              <option>Pottencial</option>
+              <option>Too</option>
+              <option>Tokio Marine</option>
+              <option value="Outros">Outros</option>
             </select>
-            <input id="seg_fianca_outros" name="Seg_Fianca_Outros__c" type="text" class="hidden"/>
+            <input id="seg_fianca_outros" name="Seg_Fianca_Outros__c" type="text" placeholder="Especifique outra seguradora" class="hidden"/>
           </div>
         </div>
         <div class="form-grid two-columns">
           <div class="form-group">
-            <label for="capitalizacao">Produção - Capitalização</label>
-            <input id="capitalizacao" name="00NSG00000QGe4A" type="text"/>
+            <label for="capitalizacao">Produção Mensal - Capitalização</label>
+            <input id="capitalizacao" name="00NSG00000QGe4A" type="text" placeholder="Valor em R$"/>
           </div>
           <div class="form-group">
-            <label for="seguradora_capitalizacao">Seguradora - Capitalização</label>
+            <label for="seguradora_capitalizacao">Seguradora Principal - Capitalização</label>
             <select id="seguradora_capitalizacao" name="Seguradora_principal_Tit_Capitalizacao__c">
-              <option value="">Selecione</option><option>Icatu</option><option>Porto Seguro</option><option value="Outros">Outros</option>
+              <option value="">Selecione</option>
+              <option>Icatu</option>
+              <option>Porto Seguro</option>
+              <option value="Outros">Outros</option>
             </select>
-            <input id="seg_cap_outros" name="Seg_Cap_Outros__c" type="text" class="hidden"/>
+            <input id="seg_cap_outros" name="Seg_Cap_Outros__c" type="text" placeholder="Especifique outra seguradora" class="hidden"/>
           </div>
         </div>
       </div>
@@ -312,47 +326,107 @@
         <div class="form-grid single-column">
           <div class="form-group">
             <label for="plataforma">Possui plataforma própria?</label>
-            <select id="plataforma" name="00NSG00000QGcb4" required><option value="">Selecione</option><option value="Sim">Sim</option><option value="Não">Não</option></select>
+            <select id="plataforma" name="00NSG00000QGcb4" required>
+              <option value="">Selecione</option>
+              <option value="Sim">Sim</option>
+              <option value="Não">Não</option>
+            </select>
           </div>
         </div>
-        <div class="form-grid single-column hidden" id="siteField"><div class="form-group"><label for="site">Site</label><input id="site" name="00NSG00000QGcb8" type="url"/></div></div>
-        <div class="form-grid single-column"><div class="form-group"><label for="parceria_erp">Parceria com ERP?</label><select id="parceria_erp" name="00NSG00000QGcb5" required><option value="">Selecione</option><option value="Sim">Sim</option><option value="Não">Não</option></select></div></div>
-        <div class="form-grid two-columns hidden" id="erpFields"><div class="form-group"><label for="erp_utilizado">ERP Utilizado</label><input id="erp_utilizado" name="00NSG00000QGcb6" type="text"/></div><div class="form-group"><label for="erp_seguros">ERP de seguros</label><input id="erp_seguros" name="00NSG00000QGcb7" type="text"/></div></div>
+        <div class="form-grid single-column hidden" id="siteField">
+          <div class="form-group">
+            <label for="site">Site</label>
+            <input id="site" name="00NSG00000QGcb8" type="url" placeholder="https://www.seusite.com"/>
+          </div>
+        </div>
+        <div class="form-grid single-column">
+          <div class="form-group">
+            <label for="parceria_erp">Parceria com ERP?</label>
+            <select id="parceria_erp" name="00NSG00000QGcb5" required>
+              <option value="">Selecione</option>
+              <option value="Sim">Sim</option>
+              <option value="Não">Não</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-grid two-columns hidden" id="erpFields">
+          <div class="form-group">
+            <label for="erp_utilizado">ERP Utilizado</label>
+            <input id="erp_utilizado" name="00NSG00000QGcb6" type="text" placeholder="ERP Utilizado - Corretora"/>
+          </div>
+          <div class="form-group">
+            <label for="erp_seguros">ERP p/ gerenciamento de seguros</label>
+            <input id="erp_seguros" name="00NSG00000QGcb7" type="text" placeholder="ERP para gerenciamento de seguros - Corretora"/>
+          </div>
+        </div>
       </div>
 
       <!-- 6: Agendamento -->
-      <div class="form-section"><h3 class="section-title"><span class="section-icon">6</span>Agendamento</h3>
-        <div class="form-group"><label>Deseja agendar uma reunião?</label><div class="radio-group"><label><input type="radio" name="agendar_reuniao" value="sim" checked/> Sim</label><label><input type="radio" name="agendar_reuniao" value="nao"/> Não</label></div></div>
-        <div id="calendarEmbedContainer" class="calendars-container"><p style="text-align:center;color:#6b7280;">Escolha um horário:</p><div class="calendar-carousel" id="carousel"><div class="calendar-card"><div class="calendar-title">Agenda Henrique Novaes</div><iframe src="https://calendar.app.google/B54Z6pKjMCbgjTUv9"></iframe></div><div class="calendar-card"><div class="calendar-title">Agenda Satomi</div><iframe src="https://calendar.app.google/U5oztqWefrCVZr6z9"></iframe></div></div><div class="scroll-hint">Arraste para ver mais</div><div class="carousel-nav"><button id="prevBtn"><svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6"/></svg></button><button id="nextBtn"><svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41"/></svg></button></div></div>
+      <div class="form-section">
+        <h3 class="section-title"><span class="section-icon">6</span>Agendamento</h3>
+        <div class="form-group">
+          <label>Deseja agendar uma reunião?</label>
+          <div class="radio-group">
+            <label><input type="radio" name="agendar_reuniao" value="sim" checked/> Sim</label>
+            <label><input type="radio" name="agendar_reuniao" value="nao"/> Não</label>
+          </div>
+        </div>
+        <div id="calendarEmbedContainer" class="calendars-container">
+          <p style="text-align:center; font-size:14px; color:#6b7280; margin-bottom:20px">
+            Escolha um horário:
+          </p>
+          <div class="calendar-carousel" id="carousel">
+            <div class="calendar-card">
+              <div class="calendar-title">Agenda Henrique Novaes</div>
+              <iframe src="https://calendar.app.google/B54Z6pKjMCbgjTUv9" allowfullscreen></iframe>
+            </div>
+            <div class="calendar-card">
+              <div class="calendar-title">Agenda Satomi</div>
+              <iframe src="https://calendar.app.google/U5oztqWefrCVZr6z9" allowfullscreen></iframe>
+            </div>
+          </div>
+          <div class="scroll-hint">Arraste para ver mais</div>
+          <div class="carousel-nav">
+            <button type="button" id="prevBtn"><svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6"/></svg></button>
+            <button type="button" id="nextBtn"><svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41"/></svg></button>
+          </div>
+        </div>
       </div>
 
-      <div class="submit-section"><button type="submit" class="submit-button">Enviar Cadastro</button></div>
+      <div class="submit-section">
+        <button type="submit" class="submit-button">Enviar Cadastro</button>
+      </div>
     </form>
   </div>
 
-  <!-- Scripts originais -->
+  <!-- Scripts originais (IMask, CEP/CNPJ, lookup, carrossel) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/imask/6.6.1/imask.min.js"></script>
   <script>
+    // Máscaras
     IMask(document.getElementById('cnpj'),{mask:'00.000.000/0000-00'});
     IMask(document.getElementById('telefone_corretora'),{mask:'(00) 0000-0000'});
     IMask(document.getElementById('tel_responsavel'),{mask:'(00) 0000-0000'});
     IMask(document.getElementById('cep'),{mask:'00000-000'});
+
+    // Máscaras R$
     const currencyMaskOptions={mask:'R$ num',blocks:{num:{mask:Number,scale:2,signed:false,thousandsSeparator:'.',padFractionalZeros:true,normalizeZeros:true,radix:',',mapToRadix:['.']}}};
     IMask(document.getElementById('incendio'),currencyMaskOptions);
     IMask(document.getElementById('fianca'),currencyMaskOptions);
     IMask(document.getElementById('capitalizacao'),currencyMaskOptions);
 
+    // lookup CNPJ
     async function buscarCNPJ(v){
-      const c=v.replace(/\D/g,''); if(c.length!==14) return;
+      const c=v.replace(/\D/g,''); if(c.length!==14)return;
       try{
         const res=await fetch(`https://brasilapi.com.br/api/cnpj/v1/${c}`);
-        if(!res.ok) throw '';
+        if(!res.ok)throw'';
         const d=await res.json();
         document.getElementById('razao_social').value=d.razao_social||'';
         document.getElementById('fantasia').value=d.nome_fantasia||'';
         document.getElementById('company').value=d.razao_social||'';
       }catch{}
     }
+    // lookup CEP
     async function buscarCEP(v){
       const c=v.replace(/\D/g,'');
       const els=['logradouro','bairro','cidade','estado'].map(id=>document.getElementById(id));
@@ -369,13 +443,15 @@
     }
     document.getElementById('cnpj').addEventListener('blur',e=>buscarCNPJ(e.target.value));
     document.getElementById('cep').addEventListener('blur',e=>buscarCEP(e.target.value));
+
+    // dinamismos e carousel
     document.getElementById('plataforma').addEventListener('change',function(){
       document.getElementById('siteField').classList.toggle('hidden',this.value!=='Sim');
     });
     document.getElementById('parceria_erp').addEventListener('change',function(){
       document.getElementById('erpFields').classList.toggle('hidden',this.value!=='Sim');
     });
-    function attachOutros(s,i){const sel=document.getElementById(s),inp=document.getElementById(i);sel.addEventListener('change',()=>inp.classList.toggle('hidden',sel.value!=='Outros'));};
+    function attachOutros(s,i){const sel=document.getElementById(s),inp=document.getElementById(i);sel.addEventListener('change',()=>inp.classList.toggle('hidden',sel.value!=='Outros'));}  
     ['seguradora_incendio','seguradora_fianca','seguradora_capitalizacao'].forEach(id=>{
       attachOutros(id,id.replace('seguradora_','seg_')+'_outros');
     });
@@ -394,19 +470,18 @@
       else{container.classList.add('hidden');carousel.scrollTo({left:0});}
       setTimeout(updateNavButtons,100);
     }));
-    prevBtn.addEventListener('click',()=>carousel.scrollBy({left:- (carousel.querySelector('.calendar-card').offsetWidth + parseFloat(getComputedStyle(carousel).gap)),behavior:'smooth'}));
-    nextBtn.addEventListener('click',()=>carousel.scrollBy({left:+ (carousel.querySelector('.calendar-card').offsetWidth + parseFloat(getComputedStyle(carousel).gap)),behavior:'smooth'}));
+    prevBtn.addEventListener('click',()=>carousel.scrollBy({left:-(carousel.querySelector('.calendar-card').offsetWidth+parseFloat(getComputedStyle(carousel).gap)),behavior:'smooth'}));
+    nextBtn.addEventListener('click',()=>carousel.scrollBy({left:(carousel.querySelector('.calendar-card').offsetWidth+parseFloat(getComputedStyle(carousel).gap)),behavior:'smooth'}));
     carousel.addEventListener('scroll',updateNavButtons);
     window.addEventListener('resize',updateNavButtons);
     document.addEventListener('DOMContentLoaded',()=>{
-      container.classList.remove('hidden');
-      updateNavButtons();
+      container.classList.remove('hidden'); updateNavButtons();
     });
   </script>
 
-  <!-- Submit: popula campos ocultos e exibe alerta -->
+  <!-- Submit: popula campos ocultos, dispara email e submete -->
   <script>
-    ;(function(){
+    (function(){
       const form=document.getElementById('leadForm');
       function mapFields(){
         const p=document.getElementById('responsavel').value.trim().split(' ');
@@ -422,10 +497,17 @@
         document.getElementById('lead_source').value='Site-SegImob';
         document.getElementById('state_std').value=document.getElementById('estado').value;
       }
-      form.addEventListener('submit',e=>{
+      form.addEventListener('submit',function(evt){
         mapFields();
-        alert('✅ Seu lead foi enviado com sucesso! Em breve nossa equipe entrará em contato.');
-        // não impede o submit: o navegador manda ao Salesforce
+        const subject=encodeURIComponent('Novo lead Seg Imob');
+        const body=encodeURIComponent(
+          'CNPJ: '+document.getElementById('cnpj').value+'\n'+
+          'Responsável: '+document.getElementById('responsavel').value+'\n'+
+          'Email: '+document.getElementById('email_responsavel').value
+        );
+        window.open(`mailto:henrique@cscorp.tec.br?subject=${subject}&body=${body}`,'_blank');
+        alert('✅ Seu lead está a caminho! Nossa equipe já foi notificada e entrará em contato em breve.');
+        // formulário segue ao Salesforce
       });
     })();
   </script>
