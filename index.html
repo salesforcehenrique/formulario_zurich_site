@@ -1,375 +1,324 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+  <!-- Charset e viewport -->
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <title>Cadastro de Parceiros - Seg Imob</title>
+
+  <!-- Seu CSS (copiado integralmente do seu projeto original) -->
   <style>
-    /* … seus estilos existentes … */
+    * { margin: 0; padding: 0; box-sizing: border-box }
+    body {
+      font-family:"Segoe UI", Roboto, Arial, sans-serif;
+      background: linear-gradient(135deg, #f4f6f9 0%, #e8ecf3 100%);
+      color: #333; min-height: 100vh;
+    }
+    .form-container {
+      width: 100%; max-width: 800px; margin: 40px auto;
+      background: #fff; border-radius: 16px;
+      padding: 40px; box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+      position: relative; overflow: hidden;
+    }
+    .form-container::before {
+      content: ''; position: absolute; top: 0; left: 0;
+      height: 5px; width: 100%;
+      background: linear-gradient(90deg, #0073ff, #00c6ff);
+      border-top-left-radius: 16px; border-top-right-radius: 16px;
+    }
+    h1 { text-align:center; margin-bottom:24px; color:#222; }
+    form { display:grid; gap:24px }
+    label { display:block; margin-bottom:4px; font-weight:600; color:#374151 }
+    input[type=text], input[type=email], input[type=tel], input[type=url],
+    textarea, select {
+      width:100%; padding:12px; border:1px solid #e5e7eb; border-radius:6px;
+      font-family:inherit; font-size:14px;
+    }
+    input[readonly], textarea[readonly] {
+      background:#f3f4f6; cursor:not-allowed; color:#6b7280;
+    }
+    .radio-group { display:flex; gap:16px; margin-top:8px }
+    .radio-group label { cursor:pointer; }
+    .submit-button {
+      background: linear-gradient(135deg,#0073ff,#00c6ff);
+      color: #fff; font-size:16px; font-weight:600;
+      padding:14px; border:none; border-radius:8px;
+      cursor:pointer; width:100%;
+    }
+    .submit-button:hover { opacity:0.9 }
   </style>
 </head>
 <body>
 
   <div class="form-container">
-    <div class="header">
-      <h1>Cadastro de Parceiros</h1>
-      <div class="subheading">Conecte-se conosco e faça parte da nossa rede</div>
-    </div>
+    <h1>Cadastro de Parceiros</h1>
 
     <form id="leadForm"
-          action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&amp;orgId=00D6A000002ImjZ"
+          action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00D6A000002ImjZ"
           method="POST">
 
-      <!-- Salesforce hidden fields padrão -->
-      <input type="hidden" name="oid" value="00D6A000002ImjZ"/>
-      <input type="hidden" name="retURL" value="https://salesforcehenrique.github.io/"/>
+      <!-- 1) Hidden Salesforce padrão -->
+      <input type="hidden" name="oid"       value="00D6A000002ImjZ">
+      <input type="hidden" name="retURL"    value="https://segimob.com/produto-zurich-formulario/">
 
-      <!-- Fixed Record Type e Status -->
-      <input type="hidden" name="recordType" value="012SG00000iKknhYAC"/>
-      <input type="hidden" name="status"     value="Sem Contato"/>
+      <!-- 2) Record Type + Status + Country -->
+      <input type="hidden" name="recordType" value="012SG00000iKknhYAC">
+      <input type="hidden" name="status"     value="Sem Contato">
+      <input type="hidden" name="country"    value="Brasil">
 
-      <!-- Standard Web-to-Lead: estado e país -->
-      <input type="hidden" name="state" id="state_std" value=""/>
-      <input type="hidden" name="country" value="Brasil"/>
+      <!-- 3) Campos ocultos para mapFields() -->
+      <input type="hidden" id="first_name"  name="first_name"  value="">
+      <input type="hidden" id="last_name"   name="last_name"   value="">
+      <input type="hidden" id="email_sf"    name="email"       value="">
+      <input type="hidden" id="city_sf"     name="city"        value="">
+      <input type="hidden" id="state_std"   name="state"       value="">
+      <input type="hidden" id="street_sf"   name="street"      value="">
+      <input type="hidden" id="zip_sf"      name="zip"         value="">
+      <input type="hidden" id="salutation"  name="salutation"  value="">
+      <input type="hidden" id="phone_sf"    name="phone"       value="">
+      <input type="hidden" id="mobile_sf"   name="mobile"      value="">
+      <input type="hidden" id="lead_source" name="lead_source" value="Zurich">
 
-      <!-- Hidden para mapFields() -->
-      <input type="hidden" id="first_name"  name="first_name"  value=""/>
-      <input type="hidden" id="last_name"   name="last_name"   value=""/>
-      <input type="hidden" id="email_sf"    name="email"       value=""/>
-      <input type="hidden" id="city_sf"     name="city"        value=""/>
-      <input type="hidden" id="street_sf"   name="street"      value=""/>
-      <input type="hidden" id="zip_sf"      name="zip"         value=""/>
-      <input type="hidden" id="salutation"  name="salutation"  value=""/>
-      <input type="hidden" id="phone_sf"    name="phone"       value=""/>
-      <input type="hidden" id="mobile_sf"   name="mobile"      value=""/>
-      <input type="hidden" id="lead_source" name="lead_source" value="Zurich"/>
+      <!-- 4) Primeiro Nome / Sobrenome -->
+      <label for="nome">Nome Completo *</label>
+      <input id="nome" type="text" placeholder="João da Silva" required>
 
-      <!-- 1: Identificação da Corretora -->
-      <div class="form-section">
-        <h3 class="section-title"><span class="section-icon">1</span>Identificação da Corretora</h3>
-        <div class="form-grid single-column">
-          <div class="form-group">
-            <label for="cnpj">CNPJ *</label>
-            <input id="cnpj"
-                   name="CNPJ_SegImob__c"
-                   type="text" maxlength="18"
-                   placeholder="00.000.000/0000-00"
-                   required/>
-          </div>
-        </div>
-        <div class="form-grid two-columns">
-          <div class="form-group hidden">
-            <label for="razao_social">Razão Social *</label>
-            <input id="razao_social"
-                   name="Razao_social_SI__c"
-                   type="text"
-                   readonly
-                   required/>
-          </div>
-          <div class="form-group">
-            <label for="fantasia">Nome Fantasia *</label>
-            <input id="fantasia"
-                   name="Nome_Fantasia__c"
-                   type="text"
-                   readonly
-                   required/>
-          </div>
-          <div class="form-group">
-            <label for="telefone_corretora">Telefone da Corretora *</label>
-            <input id="telefone_corretora"
-                   name="Telefone_SegPag__c"
-                   type="tel"
-                   required/>
-          </div>
-        </div>
+      <!-- 5) Email / Telefone / Celular -->
+      <label for="email_responsavel">Email *</label>
+      <input id="email_responsavel" type="email" required>
+
+      <label for="phone">Telefone</label>
+      <input id="phone" type="tel">
+
+      <label for="mobile">Celular</label>
+      <input id="mobile" type="tel">
+
+      <!-- 6) Cidade / Estado -->
+      <label for="city">Cidade *</label>
+      <input id="city" type="text" required>
+
+      <label for="state_code">Estado *</label>
+      <select id="state_code" required>
+        <option value="">-- Selecione --</option>
+        <option value="MG">Minas Gerais</option>
+        <option value="SP">São Paulo</option>
+        <!-- … demais estados … -->
+      </select>
+
+      <!-- 7) Tratamento -->
+      <label for="salutation">Cargo/Tratamento *</label>
+      <select id="salutation" required>
+        <option value="">-- Selecione --</option>
+        <option value="Presidente">Presidente</option>
+        <option value="Diretor">Diretor</option>
+        <option value="Gerente">Gerente</option>
+        <option value="Proprietario">Proprietário</option>
+        <option value="Funcionario">Funcionário</option>
+      </select>
+
+      <!-- 8) Endereço (CEP + Rua + Número + Complemento) -->
+      <label for="zip">CEP *</label>
+      <input id="zip" type="text" maxlength="9" placeholder="00000-000" required>
+
+      <label for="logradouro">Logradouro *</label>
+      <textarea id="logradouro" rows="2" readonly></textarea>
+
+      <label for="numero">Número *</label>
+      <input id="numero" type="text" required>
+
+      <label for="complemento">Complemento</label>
+      <input id="complemento" type="text">
+
+      <!-- 9) Dados da Corretora -->
+      <label for="00NSG000009jfqg">CNPJ *</label>
+      <input id="00NSG000009jfqg" name="00NSG000009jfqg" type="text" maxlength="18" placeholder="00.000.000/0000-00" required>
+
+      <label for="00NIa000000NlQQ">Nome Fantasia *</label>
+      <input id="00NIa000000NlQQ" name="00NIa000000NlQQ" type="text" readonly required>
+
+      <label for="00N6A00000NUFGx">Razão Social *</label>
+      <input id="00N6A00000NUFGx" name="00N6A00000NUFGx" type="text" readonly required>
+
+      <!-- 10) Produção -->
+      <label for="00N6A00000NUmQa">Quantidade de Imobiliárias Parceiras *</label>
+      <input id="00N6A00000NUmQa" name="00N6A00000NUmQa" type="number" min="1" required>
+
+      <label for="00NSG00000QGVKd">Produção Mensal - Incêndio</label>
+      <input id="00NSG00000QGVKd" name="00NSG00000QGVKd" type="text">
+
+      <label for="00NSG00000QGgQv">Produção Mensal - Fiança Locatícia</label>
+      <input id="00NSG00000QGgQv" name="00NSG00000QGgQv" type="text">
+
+      <label for="00NSG00000QGe4A">Produção Mensal - Capitalização</label>
+      <input id="00NSG00000QGe4A" name="00NSG00000QGe4A" type="text">
+
+      <label for="seguradora_incendio">Seguradora Principal - Incêndio</label>
+      <select id="seguradora_incendio" name="Seguradora_principal_Incendio__c">
+        <option value="">-- Selecione --</option>
+        <option>Alfa/Safra</option>
+        <option>Mapfre</option>
+        <option>Porto Seguro</option>
+        <option>Sancor</option>
+        <option>Tokio Marine</option>
+        <option>Zurich</option>
+        <option value="Outros">Outros</option>
+      </select>
+      <input id="seg_inc_outros" name="Seg_Inc_Outros__c" type="text" placeholder="Especifique outra" class="hidden">
+
+      <!-- … e assim por diante para as demais seguradoras … -->
+
+      <!-- 11) Tecnologia e ERP -->
+      <label for="00NSG00000QGcb4">Possui plataforma própria?</label>
+      <select id="00NSG00000QGcb4" name="00NSG00000QGcb4" required>
+        <option value="">-- Selecione --</option>
+        <option value="Sim">Sim</option>
+        <option value="Não">Não</option>
+      </select>
+
+      <div id="siteField" class="hidden">
+        <label for="00NSG00000QGjlN">Endereço do site</label>
+        <input id="00NSG00000QGjlN" name="00NSG00000QGjlN" type="url">
       </div>
 
-      <!-- 2: Endereço da Corretora -->
-      <div class="form-section">
-        <h3 class="section-title"><span class="section-icon">2</span>Endereço da Corretora</h3>
-        <div class="form-grid two-columns">
-          <div class="form-group">
-            <label for="cep">CEP *</label>
-            <input id="cep"
-                   name="CEP__c"
-                   type="text"
-                   maxlength="9"
-                   placeholder="00000-000"
-                   required/>
-          </div>
-          <div class="form-group">
-            <label for="numero">Número *</label>
-            <!-- Substitua por seu Field API Name real, ex: Endereco_Numero__c -->
-            <input id="numero"
-                   name="Endereco_Numero__c"
-                   type="text"
-                   required/>
-          </div>
-        </div>
-        <div class="form-grid single-column">
-          <div class="form-group">
-            <label for="complemento">Complemento</label>
-            <!-- Substitua por seu Field API Name real, ex: Endereco_Complemento__c -->
-            <input id="complemento"
-                   name="Endereco_Complemento__c"
-                   type="text"
-                   placeholder="Apartamento, sala, bloco etc."/>
-          </div>
-        </div>
-        <div class="form-grid single-column">
-          <div class="form-group">
-            <label for="logradouro">Logradouro *</label>
-            <input id="logradouro"
-                   type="text"
-                   readonly
-                   required/>
-          </div>
-        </div>
-        <div class="form-grid two-columns">
-          <div class="form-group">
-            <label for="bairro">Bairro *</label>
-            <input id="bairro"
-                   type="text"
-                   readonly
-                   required/>
-          </div>
-          <div class="form-group">
-            <label for="cidade">Cidade *</label>
-            <input id="cidade"
-                   type="text"
-                   readonly
-                   required/>
-          </div>
-          <div class="form-group">
-            <label for="estado">Estado *</label>
-            <input id="estado"
-                   type="text"
-                   readonly
-                   required/>
-          </div>
-        </div>
+      <label for="00NSG00000QGYvd">Parceria com ERP?</label>
+      <select id="00NSG00000QGYvd" name="00NSG00000QGYvd" required>
+        <option value="">-- Selecione --</option>
+        <option value="Sim">Sim</option>
+        <option value="Não">Não</option>
+      </select>
+
+      <div id="erpFields" class="hidden">
+        <label for="00NSG00000QGkzB">Endereço ERP</label>
+        <input id="00NSG00000QGkzB" name="00NSG00000QGkzB" type="text">
+
+        <label for="00NSG00000QGgKU">ERP para gestão de seguros</label>
+        <input id="00NSG00000QGgKU" name="00NSG00000QGgKU" type="text">
       </div>
 
-      <!-- 3: Dados do Responsável -->
-      <div class="form-section">
-        <h3 class="section-title"><span class="section-icon">3</span>Dados do Responsável</h3>
-        <div class="form-grid two-columns">
-          <div class="form-group">
-            <label for="cargo">Cargo *</label>
-            <select id="cargo"
-                    name="Cargo_SI__c"
-                    required>
-              <option value="">Selecione</option>
-              <option>Proprietário</option>
-              <option>Diretor</option>
-              <option>Gerente</option>
-              <option>Funcionário</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="responsavel">Nome *</label>
-            <input id="responsavel"
-                   name="Responsavel_SI__c"
-                   type="text"
-                   required/>
-          </div>
-        </div>
-        <div class="form-grid two-columns">
-          <div class="form-group">
-            <label for="tel_responsavel">Telefone *</label>
-            <input id="tel_responsavel"
-                   type="tel"
-                   required/>
-          </div>
-          <div class="form-group">
-            <label for="email_responsavel">Email *</label>
-            <input id="email_responsavel"
-                   type="email"
-                   required/>
-          </div>
-        </div>
+      <!-- 12) Agendamento -->
+      <label>Deseja agendar reunião?</label>
+      <div class="radio-group">
+        <label><input type="radio" name="Deseja_agendar_reuniao_SI__c" value="Sim" checked> Sim</label>
+        <label><input type="radio" name="Deseja_agendar_reuniao_SI__c" value="Não"> Não</label>
       </div>
 
-      <!-- 4: Informações de Produção -->
-      <div class="form-section">
-        <h3 class="section-title"><span class="section-icon">4</span>Informações de Produção</h3>
-        <div class="form-grid single-column">
-          <div class="form-group">
-            <label for="imobiliarias_parceiras">Quantidade de Imobiliárias Parceiras *</label>
-            <input id="imobiliarias_parceiras"
-                   name="Quantidade_de_Imobiliarias__c"
-                   type="number"
-                   min="1"
-                   placeholder="Número de imobiliárias"
-                   required/>
-          </div>
-        </div>
-        <div class="form-grid two-columns">
-          <div class="form-group">
-            <label for="incendio">Produção Mensal - Incêndio</label>
-            <input id="incendio"
-                   name="Producao_mensal_de_incendio__c"
-                   type="text"
-                   placeholder="Valor em R$"/>
-          </div>
-          <div class="form-group">
-            <label for="seguradora_incendio">Seguradora Principal - Incêndio</label>
-            <select id="seguradora_incendio"
-                    name="Seguradora_principal_Incendio__c">
-              <option value="">Selecione</option>
-              <option>Alfa/Safra</option>
-              <option>Mapfre</option>
-              <option>Porto Seguro</option>
-              <option>Sancor</option>
-              <option>Tokio Marine</option>
-              <option>Zurich</option>
-              <option value="Outros">Outros</option>
-            </select>
-            <input id="seg_inc_outros"
-                   name="Seg_Inc_Outros__c"
-                   type="text"
-                   placeholder="Especifique outra seguradora"
-                   class="hidden"/>
-          </div>
-        </div>
-        <div class="form-grid two-columns">
-          <div class="form-group">
-            <label for="fianca">Produção Mensal - Fiança Locatícia</label>
-            <input id="fianca"
-                   name="Producao_mensal_de_fianca_SI__c"
-                   type="text"
-                   placeholder="Valor em R$"/>
-          </div>
-          <div class="form-group">
-            <label for="seguradora_fianca">Seguradora Principal - Fiança Locatícia</label>
-            <select id="seguradora_fianca"
-                    name="Seguradora_principal_Fianca__c">
-              <option value="">Selecione</option>
-              <option>Porto Seguro</option>
-              <option>Pottencial</option>
-              <option>Too</option>
-              <option>Tokio Marine</option>
-              <option value="Outros">Outros</option>
-            </select>
-            <input id="seg_fianca_outros"
-                   name="Seg_Fianca_Outros__c"
-                   type="text"
-                   placeholder="Especifique outra seguradora"
-                   class="hidden"/>
-          </div>
-        </div>
-        <div class="form-grid two-columns">
-          <div class="form-group">
-            <label for="capitalizacao">Produção Mensal - Capitalização</label>
-            <input id="capitalizacao"
-                   name="Producao_mensal_de_Titulo_de_capitalizac__c"
-                   type="text"
-                   placeholder="Valor em R$"/>
-          </div>
-          <div class="form-group">
-            <label for="seguradora_capitalizacao">Seguradora Principal - Capitalização</label>
-            <select id="seguradora_capitalizacao"
-                    name="Seguradora_principal_Tit_Capitalizacao__c">
-              <option value="">Selecione</option>
-              <option>Icatu</option>
-              <option>Porto Seguro</option>
-              <option value="Outros">Outros</option>
-            </select>
-            <input id="seg_cap_outros"
-                   name="Seg_Cap_Outros__c"
-                   type="text"
-                   placeholder="Especifique outra seguradora"
-                   class="hidden"/>
-          </div>
-        </div>
+      <div id="calendarEmbedContainer" class="hidden">
+        <!-- seu carrossel de iframes -->
       </div>
 
-      <!-- 5: Tecnologia e Sistemas -->
-      <div class="form-section">
-        <h3 class="section-title"><span class="section-icon">5</span>Tecnologia e Sistemas</h3>
-        <div class="form-grid single-column">
-          <div class="form-group">
-            <label for="plataforma">Possui plataforma própria?</label>
-            <select id="plataforma"
-                    name="Tem_plataforma_propria_SI__c"
-                    required>
-              <option value="">Selecione</option>
-              <option value="Sim">Sim</option>
-              <option value="Não">Não</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-grid single-column hidden" id="siteField">
-          <div class="form-group">
-            <label for="site">Site</label>
-            <input id="site"
-                   name="Site__c"
-                   type="url"
-                   placeholder="https://www.seusite.com"/>
-          </div>
-        </div>
-        <div class="form-grid single-column">
-          <div class="form-group">
-            <label for="parceria_erp">Parceria com ERP?</label>
-            <select id="parceria_erp"
-                    name="Tem_parceria_com_ERP__c"
-                    required>
-              <option value="">Selecione</option>
-              <option value="Sim">Sim</option>
-              <option value="Não">Não</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-grid two-columns hidden" id="erpFields">
-          <div class="form-group">
-            <label for="erp_utilizado">ERP Utilizado</label>
-            <input id="erp_utilizado"
-                   name="UtilizedErpSystem__c"
-                   type="text"
-                   placeholder="ERP Utilizado - Corretora"/>
-          </div>
-          <div class="form-group">
-            <label for="erp_seguros">ERP p/ gerenciamento de seguros</label>
-            <input id="erp_seguros"
-                   name="ERP_que_usa_na_gestao_de_seguros__c"
-                   type="text"
-                   placeholder="ERP para gerenciamento de seguros"/>
-          </div>
-        </div>
-      </div>
-
-      <!-- 6: Agendamento -->
-      <div class="form-section">
-        <h3 class="section-title"><span class="section-icon">6</span>Agendamento</h3>
-        <div class="form-group">
-          <label>Deseja agendar uma reunião?</label>
-          <div class="radio-group">
-            <label><input type="radio" name="Deseja_agendar_reuniao_SI__c" value="Sim" checked/> Sim</label>
-            <label><input type="radio" name="Deseja_agendar_reuniao_SI__c" value="Não"/> Não</label>
-          </div>
-        </div>
-        <div id="calendarEmbedContainer" class="calendars-container">
-          <p style="text-align:center; font-size:14px; color:#6b7280; margin-bottom:20px">
-            Escolha um horário:
-          </p>
-          <div class="calendar-carousel" id="carousel">
-            <!-- seus iframes de agendamento -->
-          </div>
-          <!-- navegação etc. -->
-        </div>
-      </div>
-
-      <div class="submit-section">
-        <button type="submit" class="submit-button">Enviar Cadastro</button>
-      </div>
+      <button type="submit" class="submit-button">Enviar Cadastro</button>
     </form>
   </div>
 
-  <!-- Seus scripts de máscara, lookup e carousel (sem alteração) -->
+  <!-- JS: IMask, lookup CNPJ/CEP, dinamismos e mapFields -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/imask/6.6.1/imask.min.js"></script>
   <script>
-    // … seu JS existente de máscaras, buscarCNPJ(), buscarCEP(), dinamismos, mapFields(), submit …
-  </script>
+  // 1) Máscaras
+  IMask(document.getElementById('00NSG000009jfqg'), { mask: '00.000.000/0000-00' });
+  IMask(document.getElementById('phone'),               { mask: '(00) 0000-0000' });
+  IMask(document.getElementById('mobile'),              { mask: '(00) 0000-0000' });
+  IMask(document.getElementById('zip'),                 { mask: '00000-000' });
+  const currencyOpts = {
+    mask: 'R$ num',
+    blocks: {
+      num: {
+        mask: Number, scale:2, thousandsSeparator:'.', radix:',',
+        padFractionalZeros:true, normalizeZeros:true
+      }
+    }
+  };
+  IMask(document.getElementById('00NSG00000QGVKd'), currencyOpts);
+  IMask(document.getElementById('00NSG00000QGgQv'), currencyOpts);
+  IMask(document.getElementById('00NSG00000QGe4A'), currencyOpts);
 
+  // 2) Lookup CNPJ → Razão / Fantasia + company hidden
+  async function buscarCNPJ(v){
+    const c = v.replace(/\D/g,'');
+    if(c.length!==14) return;
+    try {
+      const res = await fetch(`https://brasilapi.com.br/api/cnpj/v1/${c}`);
+      if(!res.ok) throw '';
+      const d = await res.json();
+      document.getElementById('00NIa000000NlQQ').value = d.nome_fantasia || '';
+      document.getElementById('00N6A00000NUFGx').value     = d.razao_social  || '';
+    } catch {}
+  }
+  document.getElementById('00NSG000009jfqg')
+          .addEventListener('blur', e=> buscarCNPJ(e.target.value));
+
+  // 3) Lookup CEP → logradouro / bairro / cidade / estado
+  async function buscarCEP(v){
+    const c = v.replace(/\D/g,'');
+    if(c.length!==8) {
+      document.getElementById('logradouro').value = '';
+      return;
+    }
+    try {
+      const d = await (await fetch(`https://viacep.com.br/ws/${c}/json/`)).json();
+      if(!d.erro) {
+        document.getElementById('logradouro').value = d.logradouro;
+        document.getElementById('city').value      = d.localidade;
+        document.getElementById('state_code').value= d.uf;
+      }
+    } catch {}
+  }
+  document.getElementById('zip')
+          .addEventListener('blur', e=> buscarCEP(e.target.value));
+
+  // 4) Dinamismos de plataforma/ERP/outros seguradoras
+  document.getElementById('00NSG00000QGcb4')
+          .addEventListener('change', e=>{
+    document.getElementById('siteField').classList.toggle('hidden', e.target.value!=='Sim');
+  });
+  document.getElementById('00NSG00000QGYvd')
+          .addEventListener('change', e=>{
+    document.getElementById('erpFields').classList.toggle('hidden', e.target.value!=='Sim');
+  });
+  function attachOutros(selId, inpId){
+    const sel = document.getElementById(selId),
+          inp = document.getElementById(inpId);
+    sel.addEventListener('change', ()=> {
+      inp.classList.toggle('hidden', sel.value!=='Outros');
+    });
+  }
+  ['seguradora_incendio' /*,…*/].forEach(id=>{
+    attachOutros(id, id.replace('seguradora_','seg_')+'_outros');
+  });
+
+  // 5) MapFields + envio
+  (function(){
+    const form = document.getElementById('leadForm');
+    function mapFields(){
+      // quebre o "nome completo" em first/last
+      const full = document.getElementById('nome').value.trim().split(' ');
+      document.getElementById('first_name').value = full.shift() || '';
+      document.getElementById('last_name').value  = full.join(' ')  || '';
+
+      document.getElementById('email_sf').value    = document.getElementById('email_responsavel').value;
+      document.getElementById('phone_sf').value    = document.getElementById('phone').value;
+      document.getElementById('mobile_sf').value   = document.getElementById('mobile').value;
+      document.getElementById('city_sf').value     = document.getElementById('city').value;
+      document.getElementById('state_std').value   = document.getElementById('state_code').value;
+      document.getElementById('street_sf').value   = document.getElementById('logradouro').value;
+      document.getElementById('zip_sf').value      = document.getElementById('zip').value;
+      document.getElementById('salutation').value  = document.getElementById('salutation').value;
+      document.getElementById('lead_source').value = 'Zurich';
+    }
+    form.addEventListener('submit', function(evt){
+      mapFields();
+      // dispara mailto opcional
+      const subj = encodeURIComponent('Novo lead Seg Imob'),
+            body = encodeURIComponent(
+              'Nome: '+document.getElementById('nome').value+'\n'+
+              'CNPJ: '+document.getElementById('00NSG000009jfqg').value+'\n'+
+              'Email: '+document.getElementById('email_responsavel').value
+            );
+      window.open(`mailto:henrique@cscorp.tec.br?subject=${subj}&body=${body}`, '_blank');
+      alert('✅ Seu lead está a caminho!');
+      // após o alert, o form continua e envia ao Salesforce
+    });
+  })();
+  </script>
 </body>
 </html>
