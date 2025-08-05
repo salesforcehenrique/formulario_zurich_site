@@ -141,6 +141,10 @@
       <input type="hidden" name="retURL" value="https://salesforcehenrique.github.io/"/>
       <input type="hidden" id="company" name="company" value=""/>
 
+      <!-- Forçar Record Type e Status -->
+      <input type="hidden" name="recordType" value="012SG00000iKknhYAC"/>
+      <input type="hidden" name="status"     value="Sem Contato"/>
+
       <!-- Web-to-Lead padrão: estado e país -->
       <input type="hidden" name="state" id="state_std" value=""/>
       <input type="hidden" name="country" value="Brasil"/>
@@ -155,7 +159,7 @@
       <input type="hidden" id="salutation"  name="salutation"  value=""/>
       <input type="hidden" id="phone_sf"    name="phone"       value=""/>
       <input type="hidden" id="mobile_sf"   name="mobile"      value=""/>
-      <input type="hidden" id="lead_source" name="lead_source" value=""/>
+      <input type="hidden" id="lead_source" name="lead_source" value="Zurich"/>
 
       <!-- 1: Identificação da Corretora -->
       <div class="form-section">
@@ -205,7 +209,8 @@
         <div class="form-grid single-column">
           <div class="form-group">
             <label for="logradouro">Logradouro *</label>
-            <input id="logradouro" name="street" type="text" readonly required/>
+            <!-- removido name="street" daqui -->
+            <input id="logradouro" type="text" readonly required/>
           </div>
         </div>
         <div class="form-grid two-columns">
@@ -367,8 +372,9 @@
         <div class="form-group">
           <label>Deseja agendar uma reunião?</label>
           <div class="radio-group">
-            <label><input type="radio" name="agendar_reuniao" value="sim" checked/> Sim</label>
-            <label><input type="radio" name="agendar_reuniao" value="nao"/> Não</label>
+            <!-- name alterado para o campo customizado em SFDC -->
+            <label><input type="radio" name="Deseja_Agendar_Reuniao__c" value="Sim" checked/> Sim</label>
+            <label><input type="radio" name="Deseja_Agendar_Reuniao__c" value="Não"/> Não</label>
           </div>
         </div>
         <div id="calendarEmbedContainer" class="calendars-container">
@@ -455,7 +461,7 @@
     ['seguradora_incendio','seguradora_fianca','seguradora_capitalizacao'].forEach(id=>{
       attachOutros(id,id.replace('seguradora_','seg_')+'_outros');
     });
-    const radios=document.querySelectorAll('input[name="agendar_reuniao"]'),
+    const radios=document.querySelectorAll('input[name="Deseja_Agendar_Reuniao__c"]'),
           container=document.getElementById('calendarEmbedContainer'),
           carousel=document.getElementById('carousel'),
           prevBtn=document.getElementById('prevBtn'),
@@ -466,7 +472,7 @@
       nextBtn.disabled=carousel.scrollLeft>=max-1;
     }
     radios.forEach(r=>r.addEventListener('change',()=>{
-      if(r.value==='sim')container.classList.remove('hidden');
+      if(r.value==='Sim')container.classList.remove('hidden');
       else{container.classList.add('hidden');carousel.scrollTo({left:0});}
       setTimeout(updateNavButtons,100);
     }));
@@ -494,7 +500,7 @@
         document.getElementById('salutation').value=document.getElementById('cargo').value;
         document.getElementById('phone_sf').value=document.getElementById('tel_responsavel').value;
         document.getElementById('mobile_sf').value='';
-        document.getElementById('lead_source').value='Site-SegImob';
+        document.getElementById('lead_source').value='Zurich';
         document.getElementById('state_std').value=document.getElementById('estado').value;
       }
       form.addEventListener('submit',function(evt){
