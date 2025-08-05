@@ -4,7 +4,126 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
   <title>Cadastro de Parceiros - Seg Imob</title>
-  <!-- ... SEU CSS ORIGINAL ... -->
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box }
+    body {
+      font-family:"Segoe UI", Roboto, Arial, sans-serif;
+      background: linear-gradient(135deg, #f4f6f9 0%, #e8ecf3 100%); color: #333; min-height: 100vh;
+    }
+    .form-container {
+      width: 100%;
+      margin: 0 auto;
+      background: #fff; border-radius: 16px;
+      padding: 40px; box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+      position: relative;
+      overflow: hidden;
+    }
+    .form-container::before {
+      content: '';
+      position: absolute; top: 0; left: 0; height: 5px; width: 100%;
+      background: linear-gradient(90deg, #0073ff, #00c6ff);
+      border-top-left-radius: 16px; border-top-right-radius: 16px;
+    }
+    .header { text-align: center; margin-bottom: 40px; }
+    .header h1 { font-size:28px; font-weight:700; color:#222; margin-bottom:8px; }
+    .header .subheading { color:#0073ff; font-size:16px; font-weight:500; margin-top:8px; }
+    .form-section {
+      margin-bottom:40px; padding:30px; background:#f8fafc; border-radius:10px;
+    }
+    .section-title {
+      display:flex; align-items:center; gap:10px; font-size:20px; font-weight:600; color:#222;
+      margin-bottom:20px;
+    }
+    .section-icon {
+      width:24px; height:24px; background:#0073ff; border-radius:50%;
+      display:flex; align-items:center; justify-content:center; color:#fff;
+      font-size:12px; font-weight:bold;
+    }
+    .form-grid { display:grid; gap:20px }
+    .form-grid.two-columns { grid-template-columns:1fr 1fr }
+    .form-grid.single-column { grid-template-columns:1fr }
+    .form-group { display:flex; flex-direction:column; min-width:0 }
+    .form-group label {
+      margin-bottom:8px; font-size:14px; font-weight:600; color:#374151;
+    }
+    .form-group input, .form-group select {
+      padding: 14px 16px; border-radius:8px; border:1px solid #e5e7eb;
+      background:#fff; font-size:14px; font-family:inherit;
+      transition:all .3s ease; margin-bottom:13px; appearance:none;
+      -webkit-appearance:none; -moz-appearance:none;
+    }
+    .form-group input[readonly] {
+      background-color:#f3f4f6; color:#6b7280; cursor:not-allowed;
+    }
+    .form-group select {
+      padding-right:40px;
+      background-image:url("data:image/svg+xml,%3Csvg fill='black' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+      background-repeat:no-repeat; background-position:right 16px center; background-size:16px;
+    }
+    .form-group input:focus, .form-group select:focus {
+      outline:none; border-color:#0073ff; box-shadow:0 0 0 3px rgba(0,115,255,0.1);
+    }
+    .radio-group {
+      display:flex; gap:20px; align-items:center; margin-top:10px; flex-wrap:wrap;
+    }
+    .radio-group label {
+      display:flex; align-items:center; gap:8px; padding:8px 12px;
+      border-radius:6px; cursor:pointer; transition:background .2s ease; font-weight:500;
+    }
+    .radio-group label:hover { background:#f3f4f6; }
+    .radio-group input[type="radio"] { width:18px; height:18px; margin:0; }
+    .submit-section {
+      text-align:center; padding-top:30px; border-top:2px solid #e5e7eb;
+    }
+    .submit-button {
+      background:linear-gradient(135deg,#0073ff,#00c6ff);
+      color:#fff; padding:16px 40px; font-size:16px; font-weight:600;
+      border:none; border-radius:8px; cursor:pointer;
+      transition:all .3s ease; box-shadow:0 4px 12px rgba(0,115,255,0.3);
+    }
+    .submit-button:hover {
+      transform:translateY(-2px); box-shadow:0 6px 20px rgba(0,115,255,0.4);
+    }
+    .calendars-container { position:relative; margin-top:20px; overflow:visible; }
+    .calendar-carousel {
+      display:flex; gap:20px; transition:transform .4s ease;
+      overflow-x:auto; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch;
+    }
+    .calendar-card {
+      flex:0 0 50%; background:#fff; border:1px solid #e5e7eb;
+      border-radius:8px; padding:20px; scroll-snap-align:start;
+    }
+    .calendar-title { font-weight:600; color:#374151; margin-bottom:12px; }
+    .calendar-card iframe { width:100%; height:700px; border:none; }
+    .carousel-nav {
+      position:absolute; top:50%; width:100%; display:flex;
+      justify-content:space-between; transform:translateY(-50%);
+    }
+    .carousel-nav button {
+      background:rgba(0,0,0,0.1); border:none; width:36px; height:36px;
+      border-radius:50%; cursor:pointer; display:flex;
+      align-items:center; justify-content:center; transition:background .2s;
+    }
+    .carousel-nav button:hover { background:rgba(0,0,0,0.2); }
+    .carousel-nav svg { width:20px; height:20px; fill:#333; }
+    .scroll-hint { font-size:12px; color:#6b7280; text-align:center; margin-top:8px; }
+    .hidden { display:none; } .loading { opacity:0.6; }
+    @media (max-width:1024px){
+      .form-grid.two-columns{grid-template-columns:1fr;}
+      .calendar-card{flex:0 0 100%;}
+      .header h1{font-size:24px;}
+      .header .subheading{font-size:14px;}
+      .submit-button{width:100%;padding:14px;}
+      .calendar-carousel{gap:16px;}
+    }
+    @media (max-width:768px){
+      body{padding:0;}
+      .form-container{padding:20px;box-shadow:none;}
+      .form-container::before{display:none;}
+      .section-title{font-size:18px;}
+      .calendar-card iframe{height:500px;}
+    }
+  </style>
 </head>
 <body>
 
@@ -23,11 +142,11 @@
       <input type="hidden" name="retURL" value="https://salesforcehenrique.github.io/"/>
       <input type="hidden" id="company" name="company" value=""/>
 
-      <!-- Web-to-Lead padrão -->
+      <!-- Web-to-Lead padrão: estado e país -->
       <input type="hidden" name="state" id="state_std" value=""/>
       <input type="hidden" name="country" value="Brasil"/>
 
-      <!-- Campos ocultos para mapFields -->
+      <!-- Hidden para mapFields -->
       <input type="hidden" id="first_name"  name="first_name"  value=""/>
       <input type="hidden" id="last_name"   name="last_name"   value=""/>
       <input type="hidden" id="email_sf"    name="email"       value=""/>
@@ -39,60 +158,276 @@
       <input type="hidden" id="mobile_sf"   name="mobile"      value=""/>
       <input type="hidden" id="lead_source" name="lead_source" value=""/>
 
-      <!-- ... TODO O RESTANTE DO SEU FORMULÁRIO ORIGINAL ... -->
-
-      <div class="submit-section">
-        <button type="submit" class="submit-button">Enviar Cadastro</button>
+      <!-- 1: Identificação da Corretora -->
+      <div class="form-section">
+        <h3 class="section-title"><span class="section-icon">1</span>Identificação da Corretora</h3>
+        <div class="form-grid single-column">
+          <div class="form-group">
+            <label for="cnpj">CNPJ *</label>
+            <input id="cnpj" name="00NSG00000QKAKR" type="text" maxlength="18"
+                   placeholder="00.000.000/0000-00" required/>
+          </div>
+        </div>
+        <div class="form-grid two-columns">
+          <div class="form-group hidden">
+            <label for="razao_social">Razão Social *</label>
+            <input id="razao_social" name="00NSG00000QKCIz" type="text" readonly required/>
+          </div>
+          <div class="form-group">
+            <label for="fantasia">Nome Fantasia *</label>
+            <input id="fantasia" name="00NIa000000NlQQ" type="text" readonly required/>
+          </div>
+          <div class="form-group">
+            <label for="telefone_corretora">Telefone da Corretora *</label>
+            <input id="telefone_corretora" name="telefone_corretora" type="tel" required/>
+          </div>
+        </div>
       </div>
+
+      <!-- 2: Endereço da Corretora -->
+      <div class="form-section">
+        <h3 class="section-title"><span class="section-icon">2</span>Endereço da Corretora</h3>
+        <div class="form-grid two-columns">
+          <div class="form-group">
+            <label for="cep">CEP *</label>
+            <input id="cep" name="cep" type="text" maxlength="9" placeholder="00000-000" required/>
+          </div>
+          <div class="form-group">
+            <label for="numero">Número *</label>
+            <input id="numero" name="numero" type="text" required/>
+          </div>
+        </div>
+        <div class="form-grid single-column">
+          <div class="form-group">
+            <label for="complemento">Complemento</label>
+            <input id="complemento" name="complemento" type="text" placeholder="Apartamento, sala, bloco etc."/>
+          </div>
+        </div>
+        <div class="form-grid single-column">
+          <div class="form-group">
+            <label for="logradouro">Logradouro *</label>
+            <input id="logradouro" name="street" type="text" readonly required/>
+          </div>
+        </div>
+        <div class="form-grid two-columns">
+          <div class="form-group">
+            <label for="bairro">Bairro *</label>
+            <input id="bairro" name="bairro" type="text" readonly required/>
+          </div>
+          <div class="form-group">
+            <label for="cidade">Cidade *</label>
+            <input id="cidade" name="cidade" type="text" readonly required/>
+          </div>
+          <div class="form-group">
+            <label for="estado">Estado *</label>
+            <input id="estado" name="estado" type="text" readonly required/>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3: Dados do Responsável -->
+      <div class="form-section">
+        <h3 class="section-title"><span class="section-icon">3</span>Dados do Responsável</h3>
+        <div class="form-grid two-columns">
+          <div class="form-group">
+            <label for="cargo">Cargo *</label>
+            <select id="cargo" name="00NSG00000QKGWI" required>
+              <option value="">Selecione</option>
+              <option>Proprietário</option>
+              <option>Diretor</option>
+              <option>Gerente</option>
+              <option>Funcionário</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="responsavel">Nome *</label>
+            <input id="responsavel" name="00NSG00000QKgtm" type="text" required/>
+          </div>
+        </div>
+        <div class="form-grid two-columns">
+          <div class="form-group">
+            <label for="tel_responsavel">Telefone *</label>
+            <input id="tel_responsavel" name="00NSG00000XXXX1" type="tel" required/>
+          </div>
+          <div class="form-group">
+            <label for="email_responsavel">Email *</label>
+            <input id="email_responsavel" name="00NSG00000XXXX2" type="email" required/>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4: Produção -->
+      <div class="form-section">
+        <h3 class="section-title"><span class="section-icon">4</span>Informações de Produção</h3>
+        <div class="form-grid single-column">
+          <div class="form-group">
+            <label for="imobiliarias_parceiras">Quantidade de Imobiliarias Parceiras *</label>
+            <input id="imobiliarias_parceiras" name="00N6A00000NUmQa" type="number" min="1" required/>
+          </div>
+        </div>
+        <div class="form-grid two-columns">
+          <div class="form-group">
+            <label for="incendio">Produção Mensal - Incêndio</label>
+            <input id="incendio" name="00NSG00000QGVKd" type="text"/>
+          </div>
+          <div class="form-group">
+            <label for="seguradora_incendio">Seguradora - Incêndio</label>
+            <select id="seguradora_incendio" name="Seguradora_principal_Incendio__c">
+              <option value="">Selecione</option><option>Alfa/Safra</option><option>Mapfre</option><option>Porto Seguro</option><option>Sancor</option><option>Tokio Marine</option><option>Zurich</option><option value="Outros">Outros</option>
+            </select>
+            <input id="seg_inc_outros" name="Seg_Inc_Outros__c" type="text" class="hidden"/>
+          </div>
+        </div>
+        <div class="form-grid two-columns">
+          <div class="form-group">
+            <label for="fianca">Produção - Fiança</label>
+            <input id="fianca" name="00NSG00000QGgQv" type="text"/>
+          </div>
+          <div class="form-group">
+            <label for="seguradora_fianca">Seguradora - Fiança</label>
+            <select id="seguradora_fianca" name="Seguradora_principal_Fianca__c">
+              <option value="">Selecione</option><option>Porto Seguro</option><option>Pottencial</option><option>Too</option><option>Tokio Marine</option><option value="Outros">Outros</option>
+            </select>
+            <input id="seg_fianca_outros" name="Seg_Fianca_Outros__c" type="text" class="hidden"/>
+          </div>
+        </div>
+        <div class="form-grid two-columns">
+          <div class="form-group">
+            <label for="capitalizacao">Produção - Capitalização</label>
+            <input id="capitalizacao" name="00NSG00000QGe4A" type="text"/>
+          </div>
+          <div class="form-group">
+            <label for="seguradora_capitalizacao">Seguradora - Capitalização</label>
+            <select id="seguradora_capitalizacao" name="Seguradora_principal_Tit_Capitalizacao__c">
+              <option value="">Selecione</option><option>Icatu</option><option>Porto Seguro</option><option value="Outros">Outros</option>
+            </select>
+            <input id="seg_cap_outros" name="Seg_Cap_Outros__c" type="text" class="hidden"/>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5: Tecnologia e Sistemas -->
+      <div class="form-section">
+        <h3 class="section-title"><span class="section-icon">5</span>Tecnologia e Sistemas</h3>
+        <div class="form-grid single-column">
+          <div class="form-group">
+            <label for="plataforma">Possui plataforma própria?</label>
+            <select id="plataforma" name="00NSG00000QGcb4" required><option value="">Selecione</option><option value="Sim">Sim</option><option value="Não">Não</option></select>
+          </div>
+        </div>
+        <div class="form-grid single-column hidden" id="siteField"><div class="form-group"><label for="site">Site</label><input id="site" name="00NSG00000QGcb8" type="url"/></div></div>
+        <div class="form-grid single-column"><div class="form-group"><label for="parceria_erp">Parceria com ERP?</label><select id="parceria_erp" name="00NSG00000QGcb5" required><option value="">Selecione</option><option value="Sim">Sim</option><option value="Não">Não</option></select></div></div>
+        <div class="form-grid two-columns hidden" id="erpFields"><div class="form-group"><label for="erp_utilizado">ERP Utilizado</label><input id="erp_utilizado" name="00NSG00000QGcb6" type="text"/></div><div class="form-group"><label for="erp_seguros">ERP de seguros</label><input id="erp_seguros" name="00NSG00000QGcb7" type="text"/></div></div>
+      </div>
+
+      <!-- 6: Agendamento -->
+      <div class="form-section"><h3 class="section-title"><span class="section-icon">6</span>Agendamento</h3>
+        <div class="form-group"><label>Deseja agendar uma reunião?</label><div class="radio-group"><label><input type="radio" name="agendar_reuniao" value="sim" checked/> Sim</label><label><input type="radio" name="agendar_reuniao" value="nao"/> Não</label></div></div>
+        <div id="calendarEmbedContainer" class="calendars-container"><p style="text-align:center;color:#6b7280;">Escolha um horário:</p><div class="calendar-carousel" id="carousel"><div class="calendar-card"><div class="calendar-title">Agenda Henrique Novaes</div><iframe src="https://calendar.app.google/B54Z6pKjMCbgjTUv9"></iframe></div><div class="calendar-card"><div class="calendar-title">Agenda Satomi</div><iframe src="https://calendar.app.google/U5oztqWefrCVZr6z9"></iframe></div></div><div class="scroll-hint">Arraste para ver mais</div><div class="carousel-nav"><button id="prevBtn"><svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6"/></svg></button><button id="nextBtn"><svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41"/></svg></button></div></div>
+      </div>
+
+      <div class="submit-section"><button type="submit" class="submit-button">Enviar Cadastro</button></div>
     </form>
   </div>
 
-  <!-- Scripts originais (máscaras, lookup, carrossel) -->
+  <!-- Scripts originais -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/imask/6.6.1/imask.min.js"></script>
   <script>
-    // ... seu código de IMask, buscarCNPJ, buscarCEP, show/hide, carousel ...
+    IMask(document.getElementById('cnpj'),{mask:'00.000.000/0000-00'});
+    IMask(document.getElementById('telefone_corretora'),{mask:'(00) 0000-0000'});
+    IMask(document.getElementById('tel_responsavel'),{mask:'(00) 0000-0000'});
+    IMask(document.getElementById('cep'),{mask:'00000-000'});
+    const currencyMaskOptions={mask:'R$ num',blocks:{num:{mask:Number,scale:2,signed:false,thousandsSeparator:'.',padFractionalZeros:true,normalizeZeros:true,radix:',',mapToRadix:['.']}}};
+    IMask(document.getElementById('incendio'),currencyMaskOptions);
+    IMask(document.getElementById('fianca'),currencyMaskOptions);
+    IMask(document.getElementById('capitalizacao'),currencyMaskOptions);
+
+    async function buscarCNPJ(v){
+      const c=v.replace(/\D/g,''); if(c.length!==14) return;
+      try{
+        const res=await fetch(`https://brasilapi.com.br/api/cnpj/v1/${c}`);
+        if(!res.ok) throw '';
+        const d=await res.json();
+        document.getElementById('razao_social').value=d.razao_social||'';
+        document.getElementById('fantasia').value=d.nome_fantasia||'';
+        document.getElementById('company').value=d.razao_social||'';
+      }catch{}
+    }
+    async function buscarCEP(v){
+      const c=v.replace(/\D/g,'');
+      const els=['logradouro','bairro','cidade','estado'].map(id=>document.getElementById(id));
+      if(c.length!==8){els.forEach(e=>e.value='');return;}
+      try{
+        const d=await (await fetch(`https://viacep.com.br/ws/${c}/json/`)).json();
+        if(!d.erro){
+          els[0].value=d.logradouro||'';
+          els[1].value=d.bairro||'';
+          els[2].value=d.localidade||'';
+          els[3].value=d.uf||'';
+        }
+      }catch{}
+    }
+    document.getElementById('cnpj').addEventListener('blur',e=>buscarCNPJ(e.target.value));
+    document.getElementById('cep').addEventListener('blur',e=>buscarCEP(e.target.value));
+    document.getElementById('plataforma').addEventListener('change',function(){
+      document.getElementById('siteField').classList.toggle('hidden',this.value!=='Sim');
+    });
+    document.getElementById('parceria_erp').addEventListener('change',function(){
+      document.getElementById('erpFields').classList.toggle('hidden',this.value!=='Sim');
+    });
+    function attachOutros(s,i){const sel=document.getElementById(s),inp=document.getElementById(i);sel.addEventListener('change',()=>inp.classList.toggle('hidden',sel.value!=='Outros'));};
+    ['seguradora_incendio','seguradora_fianca','seguradora_capitalizacao'].forEach(id=>{
+      attachOutros(id,id.replace('seguradora_','seg_')+'_outros');
+    });
+    const radios=document.querySelectorAll('input[name="agendar_reuniao"]'),
+          container=document.getElementById('calendarEmbedContainer'),
+          carousel=document.getElementById('carousel'),
+          prevBtn=document.getElementById('prevBtn'),
+          nextBtn=document.getElementById('nextBtn');
+    function updateNavButtons(){
+      const max=carousel.scrollWidth-carousel.clientWidth;
+      prevBtn.disabled=carousel.scrollLeft<=0;
+      nextBtn.disabled=carousel.scrollLeft>=max-1;
+    }
+    radios.forEach(r=>r.addEventListener('change',()=>{
+      if(r.value==='sim')container.classList.remove('hidden');
+      else{container.classList.add('hidden');carousel.scrollTo({left:0});}
+      setTimeout(updateNavButtons,100);
+    }));
+    prevBtn.addEventListener('click',()=>carousel.scrollBy({left:- (carousel.querySelector('.calendar-card').offsetWidth + parseFloat(getComputedStyle(carousel).gap)),behavior:'smooth'}));
+    nextBtn.addEventListener('click',()=>carousel.scrollBy({left:+ (carousel.querySelector('.calendar-card').offsetWidth + parseFloat(getComputedStyle(carousel).gap)),behavior:'smooth'}));
+    carousel.addEventListener('scroll',updateNavButtons);
+    window.addEventListener('resize',updateNavButtons);
+    document.addEventListener('DOMContentLoaded',()=>{
+      container.classList.remove('hidden');
+      updateNavButtons();
+    });
   </script>
 
-  <!-- Envio + alerta + notificação via email -->
+  <!-- Submit: popula campos ocultos e exibe alerta -->
   <script>
-    (function(){
-      const form = document.getElementById('leadForm');
+    ;(function(){
+      const form=document.getElementById('leadForm');
       function mapFields(){
-        const parts = document.getElementById('responsavel').value.trim().split(' ');
-        document.getElementById('first_name').value = parts.shift()||'';
-        document.getElementById('last_name').value  = parts.join(' ')||'';
-        document.getElementById('email_sf').value   = document.getElementById('email_responsavel').value;
-        document.getElementById('city_sf').value    = document.getElementById('cidade').value;
-        document.getElementById('street_sf').value  = document.getElementById('logradouro').value;
-        document.getElementById('zip_sf').value     = document.getElementById('cep').value;
-        document.getElementById('salutation').value = document.getElementById('cargo').value;
-        document.getElementById('phone_sf').value   = document.getElementById('tel_responsavel').value;
-        document.getElementById('mobile_sf').value  = '';
-        document.getElementById('lead_source').value= 'Site-SegImob';
-        document.getElementById('state_std').value  = document.getElementById('estado').value;
+        const p=document.getElementById('responsavel').value.trim().split(' ');
+        document.getElementById('first_name').value=p.shift()||'';
+        document.getElementById('last_name').value=p.join(' ')||'';
+        document.getElementById('email_sf').value=document.getElementById('email_responsavel').value;
+        document.getElementById('city_sf').value=document.getElementById('cidade').value;
+        document.getElementById('street_sf').value=document.getElementById('logradouro').value;
+        document.getElementById('zip_sf').value=document.getElementById('cep').value;
+        document.getElementById('salutation').value=document.getElementById('cargo').value;
+        document.getElementById('phone_sf').value=document.getElementById('tel_responsavel').value;
+        document.getElementById('mobile_sf').value='';
+        document.getElementById('lead_source').value='Site-SegImob';
+        document.getElementById('state_std').value=document.getElementById('estado').value;
       }
-
-      form.addEventListener('submit', function(evt){
-        // Preenche os hidden
+      form.addEventListener('submit',e=>{
         mapFields();
-
-        // Exibe alerta de sucesso para o usuário
-        alert('✅ Seu lead está a caminho! Nossa equipe recebeu um email e entrará em contato o mais rápido possível.');
-
-        // Envia email de notificação para henrique
-        const subject = encodeURIComponent('Novo lead Seg Imob');
-        const body    = encodeURIComponent(
-          'CNPJ: ' + document.getElementById('cnpj').value +
-          '\nResponsável: ' + document.getElementById('responsavel').value +
-          '\nEmail: ' + document.getElementById('email_responsavel').value
-        );
-        window.open(`mailto:henrique@cscorp.tec.br?subject=${subject}&body=${body}`, '_blank');
-
-        // Finalmente submete o form ao Salesforce
-        // (não impedimos o comportamento padrão)
+        alert('✅ Seu lead foi enviado com sucesso! Em breve nossa equipe entrará em contato.');
+        // não impede o submit: o navegador manda ao Salesforce
       });
     })();
   </script>
-
 </body>
 </html>
