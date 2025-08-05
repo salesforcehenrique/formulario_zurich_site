@@ -8,30 +8,25 @@
     * { margin: 0; padding: 0; box-sizing: border-box }
     body {
       font-family:"Segoe UI", Roboto, Arial, sans-serif;
-      background: linear-gradient(135deg, #f4f6f9 0%, #e8ecf3 100%);
-      color: #333; min-height: 100vh;
+      background: linear-gradient(135deg, #f4f6f9 0%, #e8ecf3 100%); color: #333; min-height: 100vh;
     }
     .form-container {
       width: 100%; max-width: 900px; margin: 40px auto;
-      background: #fff; border-radius: 16px;
-      padding: 40px; box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-      position: relative; overflow: hidden;
+      background: #fff; border-radius: 16px; padding: 40px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.1); position: relative; overflow: hidden;
     }
     .form-container::before {
-      content: ''; position: absolute; top: 0; left: 0;
-      height: 5px; width: 100%;
+      content: ''; position: absolute; top: 0; left: 0; height: 5px; width: 100%;
       background: linear-gradient(90deg, #0073ff, #00c6ff);
       border-top-left-radius: 16px; border-top-right-radius: 16px;
     }
     .header { text-align: center; margin-bottom: 40px; }
     .header h1 { font-size:28px; font-weight:700; color:#222; margin-bottom:8px; }
     .header .subheading { color:#0073ff; font-size:16px; font-weight:500; margin-top:8px; }
-    .form-section {
-      margin-bottom:40px; padding:30px; background:#f8fafc; border-radius:10px;
-    }
+    .form-section { margin-bottom:40px; padding:30px; background:#f8fafc; border-radius:10px; }
     .section-title {
-      display:flex; align-items:center; gap:10px;
-      font-size:20px; font-weight:600; color:#222; margin-bottom:20px;
+      display:flex; align-items:center; gap:10px; font-size:20px; font-weight:600; color:#222;
+      margin-bottom:20px;
     }
     .section-icon {
       width:24px; height:24px; background:#0073ff; border-radius:50%;
@@ -47,45 +42,40 @@
     }
     .form-group input, .form-group select, .form-group textarea {
       padding: 14px 16px; border-radius:8px; border:1px solid #e5e7eb;
-      background:#fff; font-size:14px; font-family:inherit;
-      transition:all .3s ease; margin-bottom:13px; appearance:none;
-      -webkit-appearance:none; -moz-appearance:none; resize: vertical;
+      background:#fff; font-size:14px; font-family:inherit; transition:all .3s ease;
+      margin-bottom:13px; appearance:none; -webkit-appearance:none; -moz-appearance:none;
     }
     .form-group input[readonly], .form-group textarea[readonly] {
       background-color:#f3f4f6; color:#6b7280; cursor:not-allowed;
     }
     .form-group select {
       padding-right:40px;
-      background-image:url("data:image/svg+xml,%3Csvg fill='black' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+      background-image:url("data:image/svg+xml,%3Csvg fill='black' height='20' viewBox='0 0 24 24' width='20'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
       background-repeat:no-repeat; background-position:right 16px center; background-size:16px;
     }
     .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
       outline:none; border-color:#0073ff; box-shadow:0 0 0 3px rgba(0,115,255,0.1);
     }
-    .radio-group {
-      display:flex; gap:20px; align-items:center; margin-top:10px; flex-wrap:wrap;
-    }
+    .radio-group { display:flex; gap:20px; align-items:center; margin-top:10px; }
     .radio-group label {
       display:flex; align-items:center; gap:8px; padding:8px 12px;
       border-radius:6px; cursor:pointer; transition:background .2s ease; font-weight:500;
     }
     .radio-group label:hover { background:#f3f4f6; }
     .radio-group input[type="radio"] { width:18px; height:18px; margin:0; }
-    .submit-section {
-      text-align:center; padding-top:30px; border-top:2px solid #e5e7eb;
-    }
+    .submit-section { text-align:center; padding-top:30px; border-top:2px solid #e5e7eb; }
     .submit-button {
-      background:linear-gradient(135deg,#0073ff,#00c6ff);
-      color:#fff; padding:16px 40px; font-size:16px; font-weight:600;
-      border:none; border-radius:8px; cursor:pointer;
-      transition:all .3s ease; box-shadow:0 4px 12px rgba(0,115,255,0.3);
+      background:linear-gradient(135deg,#0073ff,#00c6ff); color:#fff;
+      padding:16px 40px; font-size:16px; font-weight:600; border:none;
+      border-radius:8px; cursor:pointer; transition:all .3s ease;
+      box-shadow:0 4px 12px rgba(0,115,255,0.3);
     }
     .submit-button:hover {
       transform:translateY(-2px); box-shadow:0 6px 20px rgba(0,115,255,0.4);
     }
     @media (max-width:768px){
-      .form-grid.two-columns { grid-template-columns:1fr; }
-      .submit-button { width:100%; }
+      .form-grid.two-columns{grid-template-columns:1fr;}
+      .submit-button{width:100%;}
     }
   </style>
 </head>
@@ -103,14 +93,14 @@
 
       <!-- Salesforce hidden fields -->
       <input type="hidden" name="oid" value="00D6A000002ImjZ"/>
-      <input type="hidden" name="retURL" value="https://segimob.com/produto-zurich-formulario/"/>
+      <input type="hidden" name="retURL" value="https://salesforcehenrique.github.io/"/>
 
       <!-- Record Type + Status + Country -->
       <input type="hidden" name="recordType" value="012SG00000iKknhYAC"/>
       <input type="hidden" name="status"     value="Sem Contato"/>
       <input type="hidden" name="country"    value="Brasil"/>
 
-      <!-- Hidden para mapFields -->
+      <!-- mapFields hidden targets -->
       <input type="hidden" id="first_name"  name="first_name"  value=""/>
       <input type="hidden" id="last_name"   name="last_name"   value=""/>
       <input type="hidden" id="email_sf"    name="email"       value=""/>
@@ -123,14 +113,13 @@
       <input type="hidden" id="mobile_sf"   name="mobile"      value=""/>
       <input type="hidden" id="lead_source" name="lead_source" value="Zurich"/>
 
-      <!-- 1: Identificação da Corretora -->
+      <!-- 1. Corretora -->
       <div class="form-section">
         <h3 class="section-title"><span class="section-icon">1</span>Identificação da Corretora</h3>
         <div class="form-grid single-column">
           <div class="form-group">
             <label for="cnpj">CNPJ *</label>
-            <input id="cnpj" name="00NSG000009jfqg" type="text" maxlength="18"
-                   placeholder="00.000.000/0000-00" required/>
+            <input id="cnpj" name="00NSG00000QKAKR" type="text" maxlength="18" placeholder="00.000.000/0000-00" required/>
           </div>
         </div>
         <div class="form-grid two-columns">
@@ -140,22 +129,22 @@
           </div>
           <div class="form-group">
             <label for="razao_social">Razão Social *</label>
-            <input id="razao_social" name="00N6A00000NUFGx" type="text" readonly required/>
+            <input id="razao_social" name="00NSG00000QKCIz" type="text" readonly required/>
           </div>
           <div class="form-group">
-            <label for="telefone_corretora">Telefone da Corretora *</label>
+            <label for="telefone_corretora">Telefone *</label>
             <input id="telefone_corretora" name="telefone_corretora" type="tel" required/>
           </div>
         </div>
       </div>
 
-      <!-- 2: Endereço da Corretora -->
+      <!-- 2. Endereço -->
       <div class="form-section">
         <h3 class="section-title"><span class="section-icon">2</span>Endereço da Corretora</h3>
         <div class="form-grid two-columns">
           <div class="form-group">
-            <label for="zip">CEP *</label>
-            <input id="zip" name="cep" type="text" maxlength="9" placeholder="00000-000" required/>
+            <label for="cep">CEP *</label>
+            <input id="cep" name="cep" type="text" maxlength="9" placeholder="00000-000" required/>
           </div>
           <div class="form-group">
             <label for="numero">Número *</label>
@@ -171,7 +160,7 @@
         <div class="form-grid single-column">
           <div class="form-group">
             <label for="logradouro">Logradouro *</label>
-            <textarea id="logradouro" rows="2" readonly required></textarea>
+            <input id="logradouro" type="text" readonly required/>
           </div>
         </div>
         <div class="form-grid two-columns">
@@ -190,7 +179,7 @@
         </div>
       </div>
 
-      <!-- 3: Dados do Responsável -->
+      <!-- 3. Responsável -->
       <div class="form-section">
         <h3 class="section-title"><span class="section-icon">3</span>Dados do Responsável</h3>
         <div class="form-grid two-columns">
@@ -205,7 +194,7 @@
             </select>
           </div>
           <div class="form-group">
-            <label for="responsavel">Nome Completo *</label>
+            <label for="responsavel">Nome *</label>
             <input id="responsavel" name="00NSG00000QKgtm" type="text" required/>
           </div>
         </div>
@@ -221,117 +210,102 @@
         </div>
       </div>
 
-      <!-- 4: Informações de Produção -->
+      <!-- 4. Produção -->
       <div class="form-section">
         <h3 class="section-title"><span class="section-icon">4</span>Informações de Produção</h3>
         <div class="form-grid single-column">
           <div class="form-group">
-            <label for="00N6A00000NUmQa">Quantidade de Imobiliárias Parceiras *</label>
-            <input id="00N6A00000NUmQa" name="00N6A00000NUmQa" type="number" min="1" placeholder="Número de imobiliárias" required/>
+            <label for="00N6A00000NUmQa">Imobiliárias Parceiras *</label>
+            <input id="00N6A00000NUmQa" name="00N6A00000NUmQa" type="number" min="1" required/>
           </div>
         </div>
         <div class="form-grid two-columns">
           <div class="form-group">
-            <label for="00NSG00000QGVKd">Produção Mensal - Incêndio</label>
-            <input id="00NSG00000QGVKd" name="00NSG00000QGVKd" type="text" placeholder="Valor em R$"/>
+            <label for="incendio">Produção - Incêndio</label>
+            <input id="incendio" name="00NSG00000QGVKd" type="text"/>
           </div>
           <div class="form-group">
-            <label for="seguradora_incendio">Seguradora Principal - Incêndio</label>
+            <label for="seguradora_incendio">Seguradora - Incêndio</label>
             <select id="seguradora_incendio" name="Seguradora_principal_Incendio__c">
-              <option value="">Selecione</option>
-              <option>Alfa/Safra</option>
-              <option>Mapfre</option>
-              <option>Porto Seguro</option>
-              <option>Sancor</option>
-              <option>Tokio Marine</option>
-              <option>Zurich</option>
-              <option value="Outros">Outros</option>
+              <option value="">Selecione</option><option>Alfa/Safra</option><option>Mapfre</option>
+              <option>Porto Seguro</option><option>Sancor</option><option>Tokio Marine</option>
+              <option>Zurich</option><option value="Outros">Outros</option>
             </select>
-            <input id="seg_inc_outros" name="Seg_Inc_Outros__c" type="text" placeholder="Especifique outra seguradora" class="hidden"/>
+            <input id="seg_inc_outros" name="Seg_Inc_Outros__c" type="text" class="hidden" placeholder="Especifique"/>
           </div>
         </div>
         <div class="form-grid two-columns">
           <div class="form-group">
-            <label for="00NSG00000QGgQv">Produção Mensal - Fiança Locatícia</label>
-            <input id="00NSG00000QGgQv" name="00NSG00000QGgQv" type="text" placeholder="Valor em R$"/>
+            <label for="fianca">Produção - Fiança</label>
+            <input id="fianca" name="00NSG00000QGgQv" type="text"/>
           </div>
           <div class="form-group">
-            <label for="seguradora_fianca">Seguradora Principal - Fiança Locatícia</label>
+            <label for="seguradora_fianca">Seguradora - Fiança</label>
             <select id="seguradora_fianca" name="Seguradora_principal_Fianca__c">
-              <option value="">Selecione</option>
-              <option>Porto Seguro</option>
-              <option>Pottencial</option>
-              <option>Too</option>
-              <option>Tokio Marine</option>
-              <option value="Outros">Outros</option>
+              <option value="">Selecione</option><option>Porto Seguro</option><option>Pottencial</option>
+              <option>Too</option><option>Tokio Marine</option><option value="Outros">Outros</option>
             </select>
-            <input id="seg_fianca_outros" name="Seg_Fianca_Outros__c" type="text" placeholder="Especifique outra seguradora" class="hidden"/>
+            <input id="seg_fianca_outros" name="Seg_Fianca_Outros__c" type="text" class="hidden" placeholder="Especifique"/>
           </div>
         </div>
         <div class="form-grid two-columns">
           <div class="form-group">
-            <label for="00NSG00000QGe4A">Produção Mensal - Capitalização</label>
-            <input id="00NSG00000QGe4A" name="00NSG00000QGe4A" type="text" placeholder="Valor em R$"/>
+            <label for="capitalizacao">Produção - Capitalização</label>
+            <input id="capitalizacao" name="00NSG00000QGe4A" type="text"/>
           </div>
           <div class="form-group">
-            <label for="seguradora_capitalizacao">Seguradora Principal - Capitalização</label>
+            <label for="seguradora_capitalizacao">Seguradora - Capitalização</label>
             <select id="seguradora_capitalizacao" name="Seguradora_principal_Tit_Capitalizacao__c">
-              <option value="">Selecione</option>
-              <option>Icatu</option>
-              <option>Porto Seguro</option>
+              <option value="">Selecione</option><option>Icatu</option><option>Porto Seguro</option>
               <option value="Outros">Outros</option>
             </select>
-            <input id="seg_cap_outros" name="Seg_Cap_Outros__c" type="text" placeholder="Especifique outra seguradora" class="hidden"/>
+            <input id="seg_cap_outros" name="Seg_Cap_Outros__c" type="text" class="hidden" placeholder="Especifique"/>
           </div>
         </div>
       </div>
 
-      <!-- 5: Tecnologia e Sistemas -->
+      <!-- 5. Tecnologia -->
       <div class="form-section">
         <h3 class="section-title"><span class="section-icon">5</span>Tecnologia e Sistemas</h3>
         <div class="form-grid single-column">
           <div class="form-group">
-            <label for="00NSG00000QGcb4">Possui plataforma própria?</label>
-            <select id="00NSG00000QGcb4" name="00NSG00000QGcb4" required>
-              <option value="">Selecione</option>
-              <option value="Sim">Sim</option>
-              <option value="Não">Não</option>
+            <label for="plataforma">Plataforma própria?</label>
+            <select id="plataforma" name="00NSG00000QGcb4" required>
+              <option value="">Selecione</option><option value="Sim">Sim</option><option value="Não">Não</option>
             </select>
           </div>
         </div>
         <div class="form-grid single-column hidden" id="siteField">
           <div class="form-group">
-            <label for="00NSG00000QGjlN">Endereço do site</label>
-            <input id="00NSG00000QGjlN" name="00NSG00000QGjlN" type="url" placeholder="https://www.seusite.com"/>
+            <label for="site">Site</label>
+            <input id="site" name="00NSG00000QGcb8" type="url" placeholder="https://"/>
           </div>
         </div>
         <div class="form-grid single-column">
           <div class="form-group">
-            <label for="00NSG00000QGYvd">Parceria com ERP?</label>
-            <select id="00NSG00000QGYvd" name="00NSG00000QGYvd" required>
-              <option value="">Selecione</option>
-              <option value="Sim">Sim</option>
-              <option value="Não">Não</option>
+            <label for="parceria_erp">Parceria ERP?</label>
+            <select id="parceria_erp" name="00NSG00000QGcb5" required>
+              <option value="">Selecione</option><option value="Sim">Sim</option><option value="Não">Não</option>
             </select>
           </div>
         </div>
         <div class="form-grid two-columns hidden" id="erpFields">
           <div class="form-group">
-            <label for="00NSG00000QGkzB">Endereço ERP</label>
-            <input id="00NSG00000QGkzB" name="00NSG00000QGkzB" type="text" placeholder="ERP Utilizado"/>
+            <label for="erp_utilizado">ERP Utilizado</label>
+            <input id="erp_utilizado" name="00NSG00000QGcb6" type="text"/>
           </div>
           <div class="form-group">
-            <label for="00NSG00000QGgKU">ERP p/ gerenciamento de seguros</label>
-            <input id="00NSG00000QGgKU" name="00NSG00000QGgKU" type="text" placeholder="ERP para gestão de seguros"/>
+            <label for="erp_seguros">ERP Seguros</label>
+            <input id="erp_seguros" name="00NSG00000QGcb7" type="text"/>
           </div>
         </div>
       </div>
 
-      <!-- 6: Agendamento -->
+      <!-- 6. Agendamento -->
       <div class="form-section">
         <h3 class="section-title"><span class="section-icon">6</span>Agendamento</h3>
         <div class="form-group">
-          <label>Deseja agendar uma reunião?</label>
+          <label>Deseja agendar reunião?</label>
           <div class="radio-group">
             <label><input type="radio" name="Deseja_agendar_reuniao_SI__c" value="Sim" checked/> Sim</label>
             <label><input type="radio" name="Deseja_agendar_reuniao_SI__c" value="Não"/> Não</label>
@@ -351,89 +325,73 @@
     IMask(document.getElementById('cnpj'),{mask:'00.000.000/0000-00'});
     IMask(document.getElementById('telefone_corretora'),{mask:'(00) 0000-0000'});
     IMask(document.getElementById('tel_responsavel'),{mask:'(00) 0000-0000'});
-    IMask(document.getElementById('zip'),{mask:'00000-000'});
-    const currencyMask = {
-      mask:'R$ num',
-      blocks:{ num:{ mask:Number, scale:2, thousandsSeparator:'.', padFractionalZeros:true, normalizeZeros:true, radix:',', mapToRadix:['.'] }}
-    };
-    IMask(document.getElementById('00NSG00000QGVKd'), currencyMask);
-    IMask(document.getElementById('00NSG00000QGgQv'), currencyMask);
-    IMask(document.getElementById('00NSG00000QGe4A'), currencyMask);
+    IMask(document.getElementById('cep'),{mask:'00000-000'});
+    const currOpts={mask:'R$ num',blocks:{num:{mask:Number,scale:2,thousandsSeparator:'.',padFractionalZeros:true,normalizeZeros:true,radix:',',mapToRadix:['.']}}};
+    IMask(document.getElementById('incendio'),currOpts);
+    IMask(document.getElementById('fianca'),currOpts);
+    IMask(document.getElementById('capitalizacao'),currOpts);
 
-    // Lookup CNPJ
+    // lookup CNPJ
     async function buscarCNPJ(v){
-      const c=v.replace(/\D/g,''); if(c.length!==14) return;
-      try {
-        const res = await fetch(`https://brasilapi.com.br/api/cnpj/v1/${c}`);
-        if(!res.ok) throw '';
-        const d = await res.json();
-        document.getElementById('fantasia').value = d.nome_fantasia||'';
+      const c=v.replace(/\D/g,''); if(c.length!==14)return;
+      try{
+        const d=await (await fetch(`https://brasilapi.com.br/api/cnpj/v1/${c}`)).json();
         document.getElementById('razao_social').value = d.razao_social||'';
-      } catch{}
+        document.getElementById('fantasia').value    = d.nome_fantasia||'';
+      }catch{}
     }
-    document.getElementById('cnpj').addEventListener('blur', e=> buscarCNPJ(e.target.value));
+    document.getElementById('cnpj').addEventListener('blur',e=>buscarCNPJ(e.target.value));
 
-    // Lookup CEP
+    // lookup CEP
     async function buscarCEP(v){
       const c=v.replace(/\D/g,'');
-      if(c.length!==8){
-        document.getElementById('logradouro').value=''; return;
-      }
-      try {
-        const d = await (await fetch(`https://viacep.com.br/ws/${c}/json/`)).json();
+      if(c.length!==8){document.getElementById('logradouro').value='';return;}
+      try{
+        const d=await (await fetch(`https://viacep.com.br/ws/${c}/json/`)).json();
         if(!d.erro){
-          document.getElementById('logradouro').value = d.logradouro||'';
-          document.getElementById('bairro').value    = d.bairro||'';
-          document.getElementById('cidade').value    = d.localidade||'';
-          document.getElementById('estado').value    = d.uf||'';
+          document.getElementById('logradouro').value=d.logradouro||'';
+          document.getElementById('bairro'   ).value=d.bairro     ||'';
+          document.getElementById('cidade'   ).value=d.localidade ||'';
+          document.getElementById('estado'   ).value=d.uf         ||'';
         }
-      } catch{}
+      }catch{}
     }
-    document.getElementById('zip').addEventListener('blur', e=> buscarCEP(e.target.value));
+    document.getElementById('cep').addEventListener('blur',e=>buscarCEP(e.target.value));
 
-    // Dinâmicas de plataforma e ERP
-    document.getElementById('00NSG00000QGcb4').addEventListener('change', function(){
-      document.getElementById('siteField').classList.toggle('hidden', this.value!=='Sim');
+    // dinâmicas
+    document.getElementById('plataforma').addEventListener('change',function(){
+      document.getElementById('siteField').classList.toggle('hidden',this.value!=='Sim');
     });
-    document.getElementById('00NSG00000QGYvd').addEventListener('change', function(){
-      document.getElementById('erpFields').classList.toggle('hidden', this.value!=='Sim');
+    document.getElementById('parceria_erp').addEventListener('change',function(){
+      document.getElementById('erpFields').classList.toggle('hidden',this.value!=='Sim');
     });
-    function attachOutros(selId, inpId){
-      const sel = document.getElementById(selId), inp = document.getElementById(inpId);
-      sel.addEventListener('change', ()=> inp.classList.toggle('hidden', sel.value!=='Outros'));
+    function attachOutros(s,i){
+      const sel=document.getElementById(s),inp=document.getElementById(i);
+      sel.addEventListener('change',()=>inp.classList.toggle('hidden',sel.value!=='Outros'));
     }
-    ['seguradora_incendio','seguradora_fianca','seguradora_capitalizacao'].forEach(id=>{
-      attachOutros(id, id.replace('seguradora_','seg_')+'_outros');
-    });
+    attachOutros('seguradora_incendio','seg_inc_outros');
+    attachOutros('seguradora_fianca','seg_fianca_outros');
+    attachOutros('seguradora_capitalizacao','seg_cap_outros');
 
-    // mapFields e envio
+    // mapFields + submit
     (function(){
-      const form=document.getElementById('leadForm');
+      const f=document.getElementById('leadForm');
       function mapFields(){
-        const parts = document.getElementById('responsavel').value.trim().split(' ');
-        document.getElementById('first_name').value = parts.shift()||'';
-        document.getElementById('last_name').value  = parts.join(' ')||'';
+        const p=document.getElementById('responsavel').value.trim().split(' ');
+        document.getElementById('first_name').value = p.shift()||'';
+        document.getElementById('last_name').value  = p.join(' ')||'';
         document.getElementById('email_sf').value   = document.getElementById('email_responsavel').value;
         document.getElementById('phone_sf').value   = document.getElementById('telefone_corretora').value;
-        document.getElementById('mobile_sf').value  = '';
         document.getElementById('city_sf').value    = document.getElementById('cidade').value;
         document.getElementById('state_std').value  = document.getElementById('estado').value;
         document.getElementById('street_sf').value  = document.getElementById('logradouro').value;
-        document.getElementById('zip_sf').value     = document.getElementById('zip').value;
+        document.getElementById('zip_sf').value     = document.getElementById('cep').value;
         document.getElementById('salutation').value = document.getElementById('cargo').value;
         document.getElementById('lead_source').value= 'Zurich';
       }
-      form.addEventListener('submit', function(evt){
+      f.addEventListener('submit',e=>{
         mapFields();
-        const subj = encodeURIComponent('Novo lead Seg Imob'),
-              body = encodeURIComponent(
-                'CNPJ: '+document.getElementById('cnpj').value+'\n'+
-                'Responsável: '+document.getElementById('responsavel').value+'\n'+
-                'Email: '+document.getElementById('email_responsavel').value
-              );
-        window.open(`mailto:henrique@cscorp.tec.br?subject=${subj}&body=${body}`,'_blank');
-        alert('✅ Seu lead está a caminho! Nossa equipe já foi notificada.');
-        // segue ao Salesforce
+        alert('✅ Seu lead está a caminho!'); // mantém envio normal
       });
     })();
   </script>
